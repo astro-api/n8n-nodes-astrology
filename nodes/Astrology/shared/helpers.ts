@@ -1,4 +1,4 @@
-import type { IDataObject, IExecuteFunctions } from 'n8n-workflow';
+import type { IDataObject, IExecuteFunctions, IHttpRequestOptions } from 'n8n-workflow';
 import type { IBirthData } from '../interfaces/types';
 
 /**
@@ -52,7 +52,7 @@ export async function makeApiRequest(
 	apiKey: string,
 	body?: IDataObject,
 ): Promise<IDataObject> {
-	const options: IDataObject = {
+	const options: IHttpRequestOptions = {
 		method,
 		url: `${baseUrl}${endpoint}`,
 		headers: {

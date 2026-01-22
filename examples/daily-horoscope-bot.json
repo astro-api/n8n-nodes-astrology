@@ -51,8 +51,8 @@
         "operation": "signDailyText",
         "sign": "={{ $json.sign }}",
         "language": "={{ $json.language }}",
-        "tradition": "western",
-        "textFormat": "markdown",
+        "tradition": "universal",
+        "textFormat": "paragraph",
         "emoji": true
       },
       "id": "horoscope-1",

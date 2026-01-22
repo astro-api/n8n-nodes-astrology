@@ -128,7 +128,7 @@ Send to Telegram ────── formatted message
 |-------|-------|
 | sign | aries (or any zodiac sign) |
 | language | en |
-| textFormat | markdown |
+| textFormat | paragraph |
 | emoji | true |
 
 **Note:** Telegram node is disabled by default. Enable and configure with your chat ID.
@@ -171,7 +171,7 @@ Combine Results ──────── both data and text
 | birth_city | Kyiv |
 | birth_country | UA |
 | language | en |
-| tradition | western |
+| tradition | universal |
 
 ---
 

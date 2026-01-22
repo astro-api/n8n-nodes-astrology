@@ -84,7 +84,7 @@
         "city": "={{ $json.birth_city }}",
         "countryCode": "={{ $json.birth_country }}",
         "language": "={{ $json.language }}",
-        "tradition": "western"
+        "tradition": "universal"
       },
       "id": "weekly-1",
       "name": "Weekly Forecast Data",
@@ -105,8 +105,8 @@
         "city": "={{ $('Set Birth Data').item.json.birth_city }}",
         "countryCode": "={{ $('Set Birth Data').item.json.birth_country }}",
         "language": "={{ $('Set Birth Data').item.json.language }}",
-        "tradition": "western",
-        "textFormat": "markdown",
+        "tradition": "universal",
+        "textFormat": "paragraph",
         "emoji": true
       },
       "id": "weekly-text-1",

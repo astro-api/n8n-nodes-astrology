@@ -25,7 +25,7 @@
         "operation": "signDaily",
         "sign": "={{ $json.sign }}",
         "language": "en",
-        "tradition": "western"
+        "tradition": "universal"
       },
       "id": "daily-data-1",
       "name": "Daily Horoscope Data",
@@ -39,8 +39,8 @@
         "operation": "signDailyText",
         "sign": "={{ $('All Zodiac Signs').item.json.sign }}",
         "language": "en",
-        "tradition": "western",
-        "textFormat": "html",
+        "tradition": "universal",
+        "textFormat": "structured",
         "emoji": true
       },
       "id": "daily-text-1",

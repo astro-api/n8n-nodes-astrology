@@ -25,11 +25,39 @@ Access n8n at http://localhost:5678. Configure the API base URL in credentials i
 
 ## Architecture
 
-This follows n8n community node conventions:
+This follows n8n community node conventions with modular structure for scalability:
+
+```
+nodes/Astrology/
+├── Astrology.node.ts       # Main node file with router pattern
+├── astrology.svg           # Node icon
+├── interfaces/             # TypeScript types
+│   ├── index.ts            # Barrel export
+│   └── types.ts            # IBirthData, IHandlerContext, ResourceType, etc.
+├── shared/                 # Reusable field definitions and helpers
+│   ├── index.ts            # Barrel export
+│   ├── birthData.fields.ts # createBirthDataFields()
+│   ├── location.fields.ts  # createLocationFields()
+│   ├── zodiac.fields.ts    # createZodiacSignField(), createTraditionField()
+│   └── helpers.ts          # buildBirthData(), makeApiRequest()
+├── operations/             # UI parameter definitions by resource
+│   ├── index.ts            # Barrel export
+│   ├── resource.options.ts # Resource selector field
+│   ├── data.operation.ts   # Data resource operations
+│   └── horoscope.operation.ts # Horoscope resource operations
+└── handlers/               # Execute logic by resource
+    ├── index.ts            # Barrel export
+    ├── data.handler.ts     # handleDataResource()
+    └── horoscope.handler.ts # handleHoroscopeResource()
+```
+
+### Key Components
 
 - **credentials/** - Credential type definitions. `AstrologyApi.credentials.ts` defines API key and base URL fields.
-- **nodes/Astrology/** - Main node implementation in `Astrology.node.ts` which handles execute logic for all resources.
-- **nodes/Astrology/operations/** - UI parameter definitions organized by resource type (chart, horoscope). These export `INodeProperties[]` arrays that are spread into the main node's properties.
+- **interfaces/** - TypeScript interfaces and types for type safety across the module.
+- **shared/** - Reusable field creators (`createBirthDataFields()`, `createLocationFields()`) to avoid code duplication when adding new resources.
+- **operations/** - UI parameter definitions organized by resource type. These export `INodeProperties[]` arrays that are spread into the main node's properties.
+- **handlers/** - Execute logic separated by resource. The main node uses a router pattern to delegate to the appropriate handler.
 
 ### API Configuration
 
@@ -71,10 +99,22 @@ All POST endpoints require `subject.birth_data` wrapper:
 
 ## n8n Node Structure
 
-The node uses n8n's standard pattern:
+The node uses n8n's standard pattern with router-based architecture:
+
 - `description: INodeTypeDescription` defines UI and metadata
-- `execute()` method processes input items and makes API calls
+- `execute()` method uses a router pattern to delegate to resource handlers
+- Resource handlers are in `handlers/` directory, one per resource type
 - Operations are conditionally shown via `displayOptions.show.resource`
+- Shared fields use factory functions from `shared/` to avoid duplication
+
+### Adding a New Resource
+
+1. Create `operations/newResource.operation.ts` with operation definitions
+2. Create `handlers/newResource.handler.ts` with execute logic
+3. Add resource to `operations/resource.options.ts`
+4. Export from barrel files (`operations/index.ts`, `handlers/index.ts`)
+5. Add handler to `resourceHandlers` map in `Astrology.node.ts`
+6. Use shared field creators for common fields (birthData, location, etc.)
 
 ## Documentation & Best Practices
 

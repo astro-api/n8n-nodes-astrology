@@ -439,10 +439,14 @@ export const horoscopeOperations: INodeProperties[] = [
       },
     },
     options: [
-      { name: 'Western', value: 'western' },
+      { name: 'Universal', value: 'universal' },
+      { name: 'Classical', value: 'classical' },
+      { name: 'Psychological', value: 'psychological' },
+      { name: 'Event Oriented', value: 'event_oriented' },
       { name: 'Vedic', value: 'vedic' },
+      { name: 'Chinese', value: 'chinese' },
     ],
-    default: 'western',
+    default: 'universal',
     description: 'Astrological tradition to use',
   },
 
@@ -458,12 +462,14 @@ export const horoscopeOperations: INodeProperties[] = [
       },
     },
     options: [
-      { name: 'Plain Text', value: 'plain' },
-      { name: 'Markdown', value: 'markdown' },
-      { name: 'HTML', value: 'html' },
+      { name: 'Short', value: 'short' },
+      { name: 'Paragraph', value: 'paragraph' },
+      { name: 'Bullets', value: 'bullets' },
+      { name: 'Structured', value: 'structured' },
+      { name: 'Long', value: 'long' },
     ],
-    default: 'plain',
-    description: 'Output text format',
+    default: 'paragraph',
+    description: 'Text output style',
   },
 
   // Include emoji (for text operations)

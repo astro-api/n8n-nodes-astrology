@@ -49,8 +49,12 @@ export function createZodiacSignField(
  * Tradition options for astrological calculations
  */
 export const traditionOptions: INodeProperties['options'] = [
-	{ name: 'Western', value: 'western' },
+	{ name: 'Universal', value: 'universal' },
+	{ name: 'Classical', value: 'classical' },
+	{ name: 'Psychological', value: 'psychological' },
+	{ name: 'Event Oriented', value: 'event_oriented' },
 	{ name: 'Vedic', value: 'vedic' },
+	{ name: 'Chinese', value: 'chinese' },
 ];
 
 /**
@@ -81,7 +85,7 @@ export function createTraditionField(
 		type: 'options',
 		displayOptions,
 		options: traditionOptions,
-		default: 'western',
+		default: 'universal',
 		description: 'Astrological tradition to use',
 	};
 }
