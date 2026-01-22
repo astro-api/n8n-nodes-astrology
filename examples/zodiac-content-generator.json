@@ -1,0 +1,158 @@
+{
+  "name": "Zodiac Content Generator",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "trigger-1",
+      "name": "When clicking 'Execute workflow'",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [384, 288]
+    },
+    {
+      "parameters": {
+        "jsCode": "return [\n  { sign: 'aries', name: 'Aries', element: 'Fire' },\n  { sign: 'taurus', name: 'Taurus', element: 'Earth' },\n  { sign: 'gemini', name: 'Gemini', element: 'Air' },\n  { sign: 'cancer', name: 'Cancer', element: 'Water' },\n  { sign: 'leo', name: 'Leo', element: 'Fire' },\n  { sign: 'virgo', name: 'Virgo', element: 'Earth' },\n  { sign: 'libra', name: 'Libra', element: 'Air' },\n  { sign: 'scorpio', name: 'Scorpio', element: 'Water' },\n  { sign: 'sagittarius', name: 'Sagittarius', element: 'Fire' },\n  { sign: 'capricorn', name: 'Capricorn', element: 'Earth' },\n  { sign: 'aquarius', name: 'Aquarius', element: 'Air' },\n  { sign: 'pisces', name: 'Pisces', element: 'Water' }\n].map(item => ({ json: item }));"
+      },
+      "id": "code-signs-1",
+      "name": "All Zodiac Signs",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [608, 288]
+    },
+    {
+      "parameters": {
+        "resource": "horoscope",
+        "operation": "signDaily",
+        "sign": "={{ $json.sign }}",
+        "language": "en",
+        "tradition": "western"
+      },
+      "id": "daily-data-1",
+      "name": "Daily Horoscope Data",
+      "type": "CUSTOM.astrology",
+      "typeVersion": 1,
+      "position": [832, 288]
+    },
+    {
+      "parameters": {
+        "resource": "horoscope",
+        "operation": "signDailyText",
+        "sign": "={{ $('All Zodiac Signs').item.json.sign }}",
+        "language": "en",
+        "tradition": "western",
+        "textFormat": "html",
+        "emoji": true
+      },
+      "id": "daily-text-1",
+      "name": "Daily Horoscope Text",
+      "type": "CUSTOM.astrology",
+      "typeVersion": 1,
+      "position": [1056, 288]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "sign",
+              "name": "sign",
+              "value": "={{ $('All Zodiac Signs').item.json.sign }}",
+              "type": "string"
+            },
+            {
+              "id": "name",
+              "name": "name",
+              "value": "={{ $('All Zodiac Signs').item.json.name }}",
+              "type": "string"
+            },
+            {
+              "id": "element",
+              "name": "element",
+              "value": "={{ $('All Zodiac Signs').item.json.element }}",
+              "type": "string"
+            },
+            {
+              "id": "horoscope_data",
+              "name": "horoscope_data",
+              "value": "={{ $('Daily Horoscope Data').item.json }}",
+              "type": "object"
+            },
+            {
+              "id": "horoscope_html",
+              "name": "horoscope_html",
+              "value": "={{ $json.text }}",
+              "type": "string"
+            },
+            {
+              "id": "generated_at",
+              "name": "generated_at",
+              "value": "={{ new Date().toISOString() }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "format-1",
+      "name": "Format Output",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [1280, 288]
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When clicking 'Execute workflow'": {
+      "main": [
+        [
+          {
+            "node": "All Zodiac Signs",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "All Zodiac Signs": {
+      "main": [
+        [
+          {
+            "node": "Daily Horoscope Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Daily Horoscope Data": {
+      "main": [
+        [
+          {
+            "node": "Daily Horoscope Text",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Daily Horoscope Text": {
+      "main": [
+        [
+          {
+            "node": "Format Output",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "meta": {
+    "templateCredsSetupCompleted": false
+  },
+  "tags": []
+}

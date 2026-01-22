@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 60" fill="none">
+  <!-- Outer circle (zodiac wheel) -->
+  <circle cx="30" cy="30" r="28" stroke="#6366f1" stroke-width="2" fill="#eef2ff"/>
+
+  <!-- Inner circle -->
+  <circle cx="30" cy="30" r="20" stroke="#6366f1" stroke-width="1.5" fill="white"/>
+
+  <!-- Sun symbol in center -->
+  <circle cx="30" cy="30" r="8" fill="#f59e0b"/>
+  <circle cx="30" cy="30" r="4" fill="#fbbf24"/>
+
+  <!-- Sun rays -->
+  <g stroke="#f59e0b" stroke-width="2" stroke-linecap="round">
+    <line x1="30" y1="18" x2="30" y2="14"/>
+    <line x1="30" y1="42" x2="30" y2="46"/>
+    <line x1="18" y1="30" x2="14" y2="30"/>
+    <line x1="42" y1="30" x2="46" y2="30"/>
+    <line x1="21.5" y1="21.5" x2="18.7" y2="18.7"/>
+    <line x1="38.5" y1="38.5" x2="41.3" y2="41.3"/>
+    <line x1="21.5" y1="38.5" x2="18.7" y2="41.3"/>
+    <line x1="38.5" y1="21.5" x2="41.3" y2="18.7"/>
+  </g>
+
+  <!-- Stars decoration -->
+  <g fill="#6366f1">
+    <circle cx="12" cy="12" r="2"/>
+    <circle cx="48" cy="12" r="1.5"/>
+    <circle cx="10" cy="48" r="1.5"/>
+    <circle cx="50" cy="50" r="2"/>
+  </g>
+</svg>

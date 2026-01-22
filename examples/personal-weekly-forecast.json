@@ -1,0 +1,200 @@
+{
+  "name": "Personal Weekly Forecast",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "trigger-1",
+      "name": "When clicking 'Execute workflow'",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [384, 288]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "birth_year",
+              "name": "birth_year",
+              "value": 1990,
+              "type": "number"
+            },
+            {
+              "id": "birth_month",
+              "name": "birth_month",
+              "value": 6,
+              "type": "number"
+            },
+            {
+              "id": "birth_day",
+              "name": "birth_day",
+              "value": 15,
+              "type": "number"
+            },
+            {
+              "id": "birth_hour",
+              "name": "birth_hour",
+              "value": 14,
+              "type": "number"
+            },
+            {
+              "id": "birth_minute",
+              "name": "birth_minute",
+              "value": 30,
+              "type": "number"
+            },
+            {
+              "id": "birth_city",
+              "name": "birth_city",
+              "value": "Kyiv",
+              "type": "string"
+            },
+            {
+              "id": "birth_country",
+              "name": "birth_country",
+              "value": "UA",
+              "type": "string"
+            },
+            {
+              "id": "language",
+              "name": "language",
+              "value": "en",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "set-birth-1",
+      "name": "Set Birth Data",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [608, 288]
+    },
+    {
+      "parameters": {
+        "resource": "horoscope",
+        "operation": "personalWeekly",
+        "year": "={{ $json.birth_year }}",
+        "month": "={{ $json.birth_month }}",
+        "day": "={{ $json.birth_day }}",
+        "hour": "={{ $json.birth_hour }}",
+        "minute": "={{ $json.birth_minute }}",
+        "locationType": "city",
+        "city": "={{ $json.birth_city }}",
+        "countryCode": "={{ $json.birth_country }}",
+        "language": "={{ $json.language }}",
+        "tradition": "western"
+      },
+      "id": "weekly-1",
+      "name": "Weekly Forecast Data",
+      "type": "CUSTOM.astrology",
+      "typeVersion": 1,
+      "position": [832, 288]
+    },
+    {
+      "parameters": {
+        "resource": "horoscope",
+        "operation": "personalWeeklyText",
+        "year": "={{ $('Set Birth Data').item.json.birth_year }}",
+        "month": "={{ $('Set Birth Data').item.json.birth_month }}",
+        "day": "={{ $('Set Birth Data').item.json.birth_day }}",
+        "hour": "={{ $('Set Birth Data').item.json.birth_hour }}",
+        "minute": "={{ $('Set Birth Data').item.json.birth_minute }}",
+        "locationType": "city",
+        "city": "={{ $('Set Birth Data').item.json.birth_city }}",
+        "countryCode": "={{ $('Set Birth Data').item.json.birth_country }}",
+        "language": "={{ $('Set Birth Data').item.json.language }}",
+        "tradition": "western",
+        "textFormat": "markdown",
+        "emoji": true
+      },
+      "id": "weekly-text-1",
+      "name": "Weekly Forecast Text",
+      "type": "CUSTOM.astrology",
+      "typeVersion": 1,
+      "position": [1056, 288]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "forecast_data",
+              "name": "forecast_data",
+              "value": "={{ $('Weekly Forecast Data').item.json }}",
+              "type": "object"
+            },
+            {
+              "id": "forecast_text",
+              "name": "forecast_text",
+              "value": "={{ $json.text }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "merge-1",
+      "name": "Combine Results",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [1280, 288]
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When clicking 'Execute workflow'": {
+      "main": [
+        [
+          {
+            "node": "Set Birth Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set Birth Data": {
+      "main": [
+        [
+          {
+            "node": "Weekly Forecast Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Weekly Forecast Data": {
+      "main": [
+        [
+          {
+            "node": "Weekly Forecast Text",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Weekly Forecast Text": {
+      "main": [
+        [
+          {
+            "node": "Combine Results",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "meta": {
+    "templateCredsSetupCompleted": false
+  },
+  "tags": []
+}

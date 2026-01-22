@@ -1,0 +1,170 @@
+{
+  "name": "Chinese Bazi Reading",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "trigger-1",
+      "name": "When clicking 'Execute workflow'",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [384, 288]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "birth_year",
+              "name": "birth_year",
+              "value": 1988,
+              "type": "number"
+            },
+            {
+              "id": "birth_month",
+              "name": "birth_month",
+              "value": 3,
+              "type": "number"
+            },
+            {
+              "id": "birth_day",
+              "name": "birth_day",
+              "value": 21,
+              "type": "number"
+            },
+            {
+              "id": "birth_hour",
+              "name": "birth_hour",
+              "value": 10,
+              "type": "number"
+            },
+            {
+              "id": "birth_minute",
+              "name": "birth_minute",
+              "value": 0,
+              "type": "number"
+            },
+            {
+              "id": "birth_city",
+              "name": "birth_city",
+              "value": "Beijing",
+              "type": "string"
+            },
+            {
+              "id": "birth_country",
+              "name": "birth_country",
+              "value": "CN",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "set-birth-1",
+      "name": "Set Birth Data",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [608, 288]
+    },
+    {
+      "parameters": {
+        "resource": "horoscope",
+        "operation": "chineseBazi",
+        "year": "={{ $json.birth_year }}",
+        "month": "={{ $json.birth_month }}",
+        "day": "={{ $json.birth_day }}",
+        "hour": "={{ $json.birth_hour }}",
+        "minute": "={{ $json.birth_minute }}",
+        "locationType": "city",
+        "city": "={{ $json.birth_city }}",
+        "countryCode": "={{ $json.birth_country }}",
+        "baziYear": "={{ new Date().getFullYear() }}",
+        "language": "en"
+      },
+      "id": "bazi-1",
+      "name": "Chinese Bazi Reading",
+      "type": "CUSTOM.astrology",
+      "typeVersion": 1,
+      "position": [832, 288]
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Analyze this Chinese Bazi (Four Pillars) reading and provide insights:\n\n{{ JSON.stringify($json, null, 2) }}\n\nExplain:\n1. The person's Day Master element and its strength\n2. Key personality traits based on the chart\n3. Favorable and unfavorable elements\n4. Career and relationship tendencies\n5. Forecast for the current year",
+        "options": {
+          "systemMessage": "You are an expert in Chinese astrology and Bazi (Four Pillars of Destiny). Provide clear, insightful interpretations that are practical and easy to understand. Avoid overly technical jargon unless necessary."
+        }
+      },
+      "id": "ai-interpret-1",
+      "name": "AI Interpretation",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.7,
+      "position": [1056, 288]
+    },
+    {
+      "parameters": {
+        "model": "gpt-4o",
+        "options": {}
+      },
+      "id": "openai-1",
+      "name": "OpenAI Chat Model",
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1,
+      "position": [1056, 512]
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When clicking 'Execute workflow'": {
+      "main": [
+        [
+          {
+            "node": "Set Birth Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set Birth Data": {
+      "main": [
+        [
+          {
+            "node": "Chinese Bazi Reading",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Chinese Bazi Reading": {
+      "main": [
+        [
+          {
+            "node": "AI Interpretation",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Interpretation",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "meta": {
+    "templateCredsSetupCompleted": false
+  },
+  "tags": []
+}

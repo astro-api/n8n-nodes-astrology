@@ -1,0 +1,195 @@
+{
+  "name": "Cosmic Tarot Reading",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "trigger-1",
+      "name": "When clicking 'Execute workflow'",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        384,
+        288
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "question",
+              "name": "question",
+              "value": "What should I focus on in my career?",
+              "type": "string"
+            },
+            {
+              "id": "spread_type",
+              "name": "spread_type",
+              "value": "three_cards",
+              "type": "string"
+            },
+            {
+              "id": "deck_style",
+              "name": "deck_style",
+              "value": "Rider-Waite",
+              "type": "string"
+            },
+            {
+              "id": "language",
+              "name": "language",
+              "value": "English",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "set-question-1",
+      "name": "Set Reading Intent",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        608,
+        288
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "data",
+        "year": "={{ new Date().getFullYear() }}",
+        "month": "={{ new Date().getMonth() + 1 }}",
+        "day": "={{ new Date().getDate() }}",
+        "hour": "={{ new Date().getHours() }}",
+        "minute": "={{ new Date().getMinutes() }}",
+        "city": "London",
+        "countryCode": "GB"
+      },
+      "type": "CUSTOM.astrology",
+      "typeVersion": 1,
+      "position": [
+        832,
+        288
+      ],
+      "id": "positions-1",
+      "name": "Current Planetary Energy"
+    },
+    {
+      "parameters": {
+        "resource": "data",
+        "operation": "lunarMetrics",
+        "year": "={{ new Date().getFullYear() }}",
+        "month": "={{ new Date().getMonth() + 1 }}",
+        "day": "={{ new Date().getDate() }}",
+        "hour": "={{ new Date().getHours() }}",
+        "minute": "={{ new Date().getMinutes() }}",
+        "city": "London",
+        "countryCode": "GB"
+      },
+      "type": "CUSTOM.astrology",
+      "typeVersion": 1,
+      "position": [
+        1040,
+        288
+      ],
+      "id": "lunar-1",
+      "name": "Moon Phase"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=## Reading Request\n- Question: {{ $('Set Reading Intent').item.json.question }}\n- Spread Type: {{ $('Set Reading Intent').item.json.spread_type }}\n- Deck Style: {{ $('Set Reading Intent').item.json.deck_style }}\n- Language: {{ $('Set Reading Intent').item.json.language }}\n\n## Current Cosmic Energy\n{{ $('Current Planetary Energy').item.json.data.positions.toJsonString() }}\n\n## Moon Phase\n{{ $json.data.toJsonString() }}\n\nPerform a tarot reading based on this cosmic context. Draw cards that resonate with the current planetary alignments and moon phase.",
+        "options": {
+          "systemMessage": "=You are a mystical tarot reader who combines traditional tarot wisdom with astrological insights. You perform readings that are influenced by the current cosmic energies.\n\n## CRITICAL INSTRUCTIONS\n\n1. **LANGUAGE**: Write the ENTIRE response in the specified language\n\n2. **SPREAD TYPES**:\n   - **single_card**: Draw ONE card for a quick answer or daily guidance\n   - **three_cards**: Draw THREE cards for Past/Present/Future or Situation/Challenge/Advice\n   - **celtic_cross**: Draw TEN cards for a comprehensive reading\n   - **love_spread**: Draw FIVE cards focused on relationships\n   - **career_spread**: Draw FIVE cards focused on work/career\n\n## Your Reading Process\n\n### Step 1: Attune to Cosmic Energy\nAnalyze the current planetary positions and moon phase. Note:\n- Which planets are prominent (early degrees = stronger influence)\n- Moon phase energy (New=beginnings, Full=culmination, Waning=release)\n- Any notable alignments that affect the reading\n\n### Step 2: Draw Cards\nBased on the cosmic energy and the question, intuitively select cards from the deck. For each card:\n- Name the card (e.g., \"The Fool\", \"Three of Cups\")\n- State if it appears upright or reversed\n- The reversal should be influenced by challenging planetary aspects\n\n### Step 3: Interpret Each Card\nFor each position in the spread:\n1. Card name and orientation\n2. Traditional meaning\n3. How current cosmic energy modifies this meaning\n4. Specific guidance for the querent's question\n\n### Step 4: Synthesis\nWeave all cards together into a cohesive narrative that answers the question.\n\n## Deck Styles\n- **Rider-Waite**: Classic imagery, traditional interpretations\n- **Thoth**: Aleister Crowley's deck, more esoteric\n- **Marseille**: French traditional, pip cards\n- **Modern**: Contemporary interpretations\n\n## Major Arcana (22 cards)\n0-The Fool, I-The Magician, II-The High Priestess, III-The Empress, IV-The Emperor, V-The Hierophant, VI-The Lovers, VII-The Chariot, VIII-Strength, IX-The Hermit, X-Wheel of Fortune, XI-Justice, XII-The Hanged Man, XIII-Death, XIV-Temperance, XV-The Devil, XVI-The Tower, XVII-The Star, XVIII-The Moon, XIX-The Sun, XX-Judgement, XXI-The World\n\n## Minor Arcana\n- Wands (Fire): Action, creativity, passion\n- Cups (Water): Emotions, relationships, intuition\n- Swords (Air): Thoughts, conflict, truth\n- Pentacles (Earth): Material, career, health\n\n## Planetary Correspondences\n- Sun → The Sun card, success themes\n- Moon → The High Priestess, The Moon, intuition\n- Mercury → The Magician, communication cards\n- Venus → The Empress, Cups suit\n- Mars → The Tower, Wands suit\n- Jupiter → Wheel of Fortune, expansion\n- Saturn → The World, limitation/structure\n\n## Output Format\n\n### 🌙 Cosmic Context\n[Brief description of current planetary energy and how it affects the reading]\n\n### 🃏 The Cards\n[For each card drawn, provide position, card name, orientation, and interpretation]\n\n### ✨ The Message\n[Overall synthesis and answer to the question]\n\n### 🔮 Guidance\n[Practical advice based on the reading]\n\nWrite in a mystical yet accessible tone. Be specific and helpful."
+        }
+      },
+      "id": "ai-tarot-1",
+      "name": "AI Tarot Reader",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.7,
+      "position": [
+        1264,
+        288
+      ]
+    },
+    {
+      "parameters": {
+        "model": "gpt-4o",
+        "options": {}
+      },
+      "id": "openai-1",
+      "name": "OpenAI Chat Model",
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1,
+      "position": [
+        1264,
+        512
+      ]
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When clicking 'Execute workflow'": {
+      "main": [
+        [
+          {
+            "node": "Set Reading Intent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set Reading Intent": {
+      "main": [
+        [
+          {
+            "node": "Current Planetary Energy",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Current Planetary Energy": {
+      "main": [
+        [
+          {
+            "node": "Moon Phase",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Moon Phase": {
+      "main": [
+        [
+          {
+            "node": "AI Tarot Reader",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Tarot Reader",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "meta": {
+    "templateCredsSetupCompleted": false
+  },
+  "tags": []
+}

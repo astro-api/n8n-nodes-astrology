@@ -1,0 +1,40 @@
+{
+  "name": "n8n-nodes-astrology",
+  "version": "0.1.0",
+  "description": "n8n community node for Astrology API (charts and horoscopes)",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc && cp nodes/Astrology/*.svg dist/nodes/Astrology/",
+    "lint": "eslint \"{nodes,credentials}/**/*.ts\"",
+    "dev": "tsc --watch"
+  },
+  "keywords": [
+    "n8n-community-node-package",
+    "astrology",
+    "horoscope"
+  ],
+  "author": "",
+  "license": "MIT",
+  "type": "commonjs",
+  "n8n": {
+    "n8nNodesApiVersion": 1,
+    "credentials": [
+      "dist/credentials/AstrologyApi.credentials.js"
+    ],
+    "nodes": [
+      "dist/nodes/Astrology/Astrology.node.js"
+    ]
+  },
+  "peerDependencies": {
+    "n8n-workflow": "1.55.0"
+  },
+  "devDependencies": {
+    "@types/node": "20.17.3",
+    "eslint": "9.15.0",
+    "n8n-workflow": "1.55.0",
+    "prettier": "3.4.1",
+    "typescript": "5.5.4",
+    "@typescript-eslint/eslint-plugin": "8.16.0",
+    "@typescript-eslint/parser": "8.16.0"
+  }
+}

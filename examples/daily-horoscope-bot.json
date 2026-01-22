@@ -1,0 +1,124 @@
+{
+  "name": "Daily Horoscope Bot",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "hours",
+              "hoursInterval": 24,
+              "triggerAtHour": 8
+            }
+          ]
+        }
+      },
+      "id": "schedule-1",
+      "name": "Every Morning at 8 AM",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [384, 288]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "sign",
+              "name": "sign",
+              "value": "aries",
+              "type": "string"
+            },
+            {
+              "id": "language",
+              "name": "language",
+              "value": "en",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "set-config-1",
+      "name": "Set Zodiac Sign",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [608, 288]
+    },
+    {
+      "parameters": {
+        "resource": "horoscope",
+        "operation": "signDailyText",
+        "sign": "={{ $json.sign }}",
+        "language": "={{ $json.language }}",
+        "tradition": "western",
+        "textFormat": "markdown",
+        "emoji": true
+      },
+      "id": "horoscope-1",
+      "name": "Get Daily Horoscope",
+      "type": "CUSTOM.astrology",
+      "typeVersion": 1,
+      "position": [832, 288]
+    },
+    {
+      "parameters": {
+        "chatId": "YOUR_CHAT_ID",
+        "text": "={{ $json.text }}",
+        "additionalFields": {
+          "parse_mode": "Markdown"
+        }
+      },
+      "id": "telegram-1",
+      "name": "Send to Telegram",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [1056, 288],
+      "disabled": true
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Every Morning at 8 AM": {
+      "main": [
+        [
+          {
+            "node": "Set Zodiac Sign",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set Zodiac Sign": {
+      "main": [
+        [
+          {
+            "node": "Get Daily Horoscope",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Daily Horoscope": {
+      "main": [
+        [
+          {
+            "node": "Send to Telegram",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "meta": {
+    "templateCredsSetupCompleted": false
+  },
+  "tags": []
+}

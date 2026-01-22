@@ -1,0 +1,288 @@
+{
+  "name": "Personal Horoscope with Transits",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "ea2726c2-eb63-4d07-be43-f37b7e54f8f2",
+      "name": "When clicking 'Execute workflow'",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        384,
+        288
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "birth_year",
+              "name": "birth_year",
+              "value": 1990,
+              "type": "number"
+            },
+            {
+              "id": "birth_month",
+              "name": "birth_month",
+              "value": 1,
+              "type": "number"
+            },
+            {
+              "id": "birth_day",
+              "name": "birth_day",
+              "value": 1,
+              "type": "number"
+            },
+            {
+              "id": "birth_hour",
+              "name": "birth_hour",
+              "value": 12,
+              "type": "number"
+            },
+            {
+              "id": "birth_minute",
+              "name": "birth_minute",
+              "value": 0,
+              "type": "number"
+            },
+            {
+              "id": "birth_city",
+              "name": "birth_city",
+              "value": "London",
+              "type": "string"
+            },
+            {
+              "id": "birth_country",
+              "name": "birth_country",
+              "value": "GB",
+              "type": "string"
+            },
+            {
+              "id": "language",
+              "name": "language",
+              "value": "English",
+              "type": "string"
+            },
+            {
+              "id": "horoscope_type",
+              "name": "horoscope_type",
+              "value": "day",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "d6915eac-b54b-479d-b2ee-fb708def71a6",
+      "name": "Set Birth Data",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        608,
+        288
+      ]
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=## Settings\n- Language: {{ $('Set Birth Data').item.json.language }}\n- Horoscope Type: {{ $('Set Birth Data').item.json.horoscope_type }}\n\n## Person's Birth Data\n{{ $('Set Birth Data').item.json.toJsonString() }}\n\n## Natal Chart Positions\n{{ $('Natal Positions').item.json.data.positions.toJsonString() }}\n\n## Natal Aspects\n{{ $('Natal Aspects').item.json.data.aspects.toJsonString() }}\n\n## Current Planetary Transits (Today)\n{{ $('Current Transits').item.json.data.positions.toJsonString() }}\n\n## Current Lunar Data\n{{ $json.data.toJsonString()}}\n\nGenerate a personalized horoscope forecast based on this data. Write in the specified language and focus on the specified time period.",
+        "options": {
+          "systemMessage": "=You are an expert astrologer creating personalized transit forecasts. Analyze how current planetary positions (transits) interact with the person's natal chart.\n\n## CRITICAL INSTRUCTIONS\n\n1. **LANGUAGE**: Write the ENTIRE response in the language specified (e.g., English, Ukrainian, Russian, Spanish, etc.)\n\n2. **HOROSCOPE TYPE** - Focus your forecast on the specified period:\n   - **day**: Focus on TODAY only. Detailed hour-by-hour energy if relevant. ~400-600 words.\n   - **week**: Focus on the next 7 DAYS. Day-by-day highlights. ~600-800 words.\n   - **month**: Focus on the next 30 DAYS. Weekly themes and key dates. ~800-1000 words.\n   - **year**: Focus on the next 12 MONTHS. Monthly themes and major transits. ~1000-1500 words.\n\n## Your Task\n\n### Step 1: Identify Active Transits\nCompare each transit planet to natal planets. Find conjunctions (0°), oppositions (180°), squares (90°), trines (120°), sextiles (60°) with orb < 5°.\n\n### Step 2: Generate Forecast Structure\n\n**For DAY type:**\n- Morning/Afternoon/Evening energy\n- Best activities today\n- What to avoid\n- Key advice\n\n**For WEEK type:**\n- Overall week theme\n- Day-by-day highlights (Mon-Sun)\n- Best days for important activities\n- Challenges to watch\n\n**For MONTH type:**\n- Monthly theme\n- Week 1-4 overviews\n- Key dates to mark\n- Areas of growth and caution\n\n**For YEAR type:**\n- Yearly theme\n- Quarter-by-quarter overview\n- Most significant months\n- Major life areas affected\n- Long-term advice\n\n## Transit Meanings\n- Saturn: Discipline, structure, lessons\n- Jupiter: Expansion, luck, opportunities\n- Mars: Energy, action, conflicts\n- Venus: Love, beauty, finances\n- Mercury: Communication, travel, learning\n- Uranus: Sudden changes, innovation\n- Neptune: Intuition, dreams, confusion\n- Pluto: Transformation, power, rebirth\n\n## Zodiac Abbreviations\nAri=Aries, Tau=Taurus, Gem=Gemini, Can=Cancer, Leo=Leo, Vir=Virgo, Lib=Libra, Sco=Scorpio, Sag=Sagittarius, Cap=Capricorn, Aqu=Aquarius, Pis=Pisces\n\nWrite in a warm, personal tone. Address the person directly as 'you'."
+        }
+      },
+      "id": "f71945aa-3ef4-4f0c-898b-3bdddf6accbf",
+      "name": "AI Horoscope Generator",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.7,
+      "position": [
+        1584,
+        288
+      ]
+    },
+    {
+      "parameters": {
+        "model": "gpt-5.1",
+        "options": {}
+      },
+      "id": "6ea9a2c4-86b5-4667-b2e3-3a080834f3af",
+      "name": "OpenAI Chat Model",
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1,
+      "position": [
+        1584,
+        512
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "data",
+        "year": "={{ $json.birth_year }}",
+        "month": "={{ $json.birth_month }}",
+        "day": "={{ $json.birth_day }}",
+        "hour": "={{ $json.birth_hour }}",
+        "minute": "={{ $json.birth_minute }}",
+        "city": "={{ $json.birth_city }}",
+        "countryCode": "={{ $json.birth_country }}"
+      },
+      "type": "CUSTOM.astrology",
+      "typeVersion": 1,
+      "position": [
+        832,
+        288
+      ],
+      "id": "b275ddb8-34c7-4090-8438-12b26090476d",
+      "name": "Natal Positions"
+    },
+    {
+      "parameters": {
+        "resource": "data",
+        "operation": "aspects",
+        "year": "={{ $('Set Birth Data').item.json.birth_year }}",
+        "month": "={{ $('Set Birth Data').item.json.birth_month }}",
+        "day": "={{ $('Set Birth Data').item.json.birth_day }}",
+        "hour": "={{$('Set Birth Data').item.json.birth_hour }}",
+        "minute": "={{ $('Set Birth Data').item.json.birth_minute }}",
+        "city": "={{ $('Set Birth Data').item.json.birth_city }}",
+        "countryCode": "={{ $('Set Birth Data').item.json.birth_country }}"
+      },
+      "type": "CUSTOM.astrology",
+      "typeVersion": 1,
+      "position": [
+        1040,
+        288
+      ],
+      "id": "1b3f73f1-0f77-4ffd-a0f5-19fc4cac9258",
+      "name": "Natal Aspects"
+    },
+    {
+      "parameters": {
+        "resource": "data",
+        "year": "={{ new Date().getFullYear() }}",
+        "month": "={{ new Date().getMonth() + 1 }}",
+        "day": "={{ new Date().getDate() }}",
+        "hour": "={{ new Date().getHours() }}",
+        "minute": "={{ new Date().getMinutes() }}",
+        "city": "={{ $('Set Birth Data').item.json.birth_city }}",
+        "countryCode": "={{ $('Set Birth Data').item.json.birth_country }}"
+      },
+      "type": "CUSTOM.astrology",
+      "typeVersion": 1,
+      "position": [
+        1216,
+        288
+      ],
+      "id": "e26c6516-37fc-4e8b-99f5-214f27a40513",
+      "name": "Current Transits"
+    },
+    {
+      "parameters": {
+        "resource": "data",
+        "operation": "lunarMetrics",
+        "year": "={{ new Date().getFullYear() }}",
+        "month": "={{ new Date().getMonth() + 1 }}",
+        "day": "={{ new Date().getDate() }}",
+        "hour": "={{ new Date().getHours() }}",
+        "minute": "={{ new Date().getMinutes() }}",
+        "city": "={{ $('Set Birth Data').item.json.birth_city }}",
+        "countryCode": "={{ $('Set Birth Data').item.json.birth_country }}"
+      },
+      "type": "CUSTOM.astrology",
+      "typeVersion": 1,
+      "position": [
+        1408,
+        288
+      ],
+      "id": "14774d83-74bb-468e-94ac-0bb48b235972",
+      "name": "Lunar Metrics"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When clicking 'Execute workflow'": {
+      "main": [
+        [
+          {
+            "node": "Set Birth Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set Birth Data": {
+      "main": [
+        [
+          {
+            "node": "Natal Positions",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Horoscope Generator",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Natal Positions": {
+      "main": [
+        [
+          {
+            "node": "Natal Aspects",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Natal Aspects": {
+      "main": [
+        [
+          {
+            "node": "Current Transits",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Current Transits": {
+      "main": [
+        [
+          {
+            "node": "Lunar Metrics",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Lunar Metrics": {
+      "main": [
+        [
+          {
+            "node": "AI Horoscope Generator",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "meta": {
+    "templateCredsSetupCompleted": false
+  },
+  "tags": []
+}
