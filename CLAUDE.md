@@ -4,7 +4,9 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-This is an n8n community node package that integrates with the Astrology API. It provides astrological calculations: planetary positions, house cusps, aspects, and lunar metrics.
+**Package:** `@astroapi/n8n-nodes-astrology`
+
+This is an official n8n community node package that integrates with the [Astrology API](https://astrology-api.io). It provides professional astrological calculations: planetary positions, house cusps, aspects, lunar metrics, horoscopes, and chart generation.
 
 ## Commands
 
@@ -44,11 +46,13 @@ nodes/Astrology/
 │   ├── index.ts            # Barrel export
 │   ├── resource.options.ts # Resource selector field
 │   ├── data.operation.ts   # Data resource operations
-│   └── horoscope.operation.ts # Horoscope resource operations
+│   ├── horoscope.operation.ts # Horoscope resource operations
+│   └── charts.operation.ts # Charts resource operations
 └── handlers/               # Execute logic by resource
     ├── index.ts            # Barrel export
     ├── data.handler.ts     # handleDataResource()
-    └── horoscope.handler.ts # handleHoroscopeResource()
+    ├── horoscope.handler.ts # handleHoroscopeResource()
+    └── charts.handler.ts   # handleChartsResource()
 ```
 
 ### Key Components

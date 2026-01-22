@@ -1,20 +1,46 @@
 {
-  "name": "n8n-nodes-astrology",
+  "name": "@astroapi/n8n-nodes-astrology",
   "version": "0.1.0",
-  "description": "n8n community node for Astrology API (charts and horoscopes)",
+  "description": "n8n community node for Astrology API - professional astrological calculations, charts, horoscopes, and interpretations",
   "main": "dist/index.js",
   "scripts": {
     "build": "tsc && cp nodes/Astrology/*.svg dist/nodes/Astrology/",
     "lint": "eslint \"{nodes,credentials}/**/*.ts\"",
-    "dev": "tsc --watch"
+    "dev": "tsc --watch",
+    "prepublishOnly": "npm run build"
   },
   "keywords": [
     "n8n-community-node-package",
+    "n8n",
     "astrology",
-    "horoscope"
+    "astrology-api",
+    "horoscope",
+    "natal-chart",
+    "birth-chart",
+    "zodiac",
+    "planetary-positions",
+    "synastry",
+    "transit",
+    "vedic-astrology",
+    "chinese-astrology",
+    "bazi",
+    "swiss-ephemeris"
   ],
-  "author": "",
+  "author": "Astrology API <support@astrology-api.io>",
+  "homepage": "https://astrology-api.io",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/astroapi/n8n-nodes-astrology"
+  },
+  "bugs": {
+    "url": "https://github.com/astroapi/n8n-nodes-astrology/issues"
+  },
   "license": "MIT",
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
   "type": "commonjs",
   "n8n": {
     "n8nNodesApiVersion": 1,

@@ -11,6 +11,11 @@ export const resourceField: INodeProperties = {
 	noDataExpression: true,
 	options: [
 		{
+			name: 'Charts',
+			value: 'charts',
+			description: 'Generate astrological charts (natal, transit, etc.)',
+		},
+		{
 			name: 'Data',
 			value: 'data',
 			description: 'Astrological data calculations',

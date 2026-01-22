@@ -4,6 +4,7 @@ export type {
 	ResourceType,
 	DataOperation,
 	HoroscopeOperation,
+	ChartsOperation,
 	IHandlerContext,
 	ResourceHandler,
 	ZodiacSign,

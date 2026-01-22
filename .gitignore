@@ -10,3 +10,4 @@ docker/.env.local
 *.tgz
 
 docker/data
+docs/openapi.json

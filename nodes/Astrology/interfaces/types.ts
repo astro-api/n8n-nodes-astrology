@@ -28,7 +28,7 @@ export interface ISubjectRequest {
 /**
  * Resource types available in the node
  */
-export type ResourceType = 'data' | 'horoscope';
+export type ResourceType = 'data' | 'horoscope' | 'charts';
 
 /**
  * Data resource operations
@@ -56,6 +56,11 @@ export type HoroscopeOperation =
 	| 'personalYearly'
 	| 'personalYearlyText'
 	| 'chineseBazi';
+
+/**
+ * Charts resource operations
+ */
+export type ChartsOperation = 'natal';
 
 /**
  * Handler context passed to resource handlers

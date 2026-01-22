@@ -6,8 +6,8 @@ import type {
 	INodeTypeDescription,
 } from 'n8n-workflow';
 
-import { resourceField, dataOperations, horoscopeOperations } from './operations';
-import { handleDataResource, handleHoroscopeResource } from './handlers';
+import { resourceField, dataOperations, horoscopeOperations, chartsOperations } from './operations';
+import { handleDataResource, handleHoroscopeResource, handleChartsResource } from './handlers';
 import type { IHandlerContext, ResourceType } from './interfaces';
 
 const DEFAULT_API_BASE_URL = 'https://api.astrology-api.io';
@@ -26,6 +26,7 @@ function getBaseUrl(credentials: IDataObject | undefined): string {
 const resourceHandlers: Record<ResourceType, typeof handleDataResource> = {
 	data: handleDataResource,
 	horoscope: handleHoroscopeResource,
+	charts: handleChartsResource,
 };
 
 export class Astrology implements INodeType {
@@ -48,7 +49,7 @@ export class Astrology implements INodeType {
         required: true,
       },
     ],
-    properties: [resourceField, ...dataOperations, ...horoscopeOperations],
+    properties: [resourceField, ...dataOperations, ...horoscopeOperations, ...chartsOperations],
   };
 
 	async execute(this: IExecuteFunctions): Promise<INodeExecutionData[][]> {
