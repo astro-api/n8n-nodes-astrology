@@ -140,6 +140,20 @@ npm install
 npm run build
 ```
 
+### Code Quality
+
+Pre-commit hooks automatically run on staged files:
+- **ESLint** — linting with auto-fix
+- **Prettier** — code formatting
+
+Available scripts:
+```bash
+npm run lint         # Check for lint errors
+npm run lint:fix     # Fix lint errors
+npm run format       # Format code
+npm run format:check # Check formatting
+```
+
 ### Testing with Docker
 
 ```bash

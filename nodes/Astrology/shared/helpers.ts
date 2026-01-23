@@ -1,5 +1,9 @@
-import type { IDataObject, IExecuteFunctions, IHttpRequestOptions } from 'n8n-workflow';
-import type { IBirthData } from '../interfaces/types';
+import type {
+  IDataObject,
+  IExecuteFunctions,
+  IHttpRequestOptions,
+} from "n8n-workflow";
+import type { IBirthData } from "../interfaces/types";
 
 /**
  * Builds birth data object from node parameters
@@ -9,28 +13,43 @@ import type { IBirthData } from '../interfaces/types';
  * @returns Birth data object for API requests
  */
 export function buildBirthData(
-	executeFunctions: IExecuteFunctions,
-	itemIndex: number,
+  executeFunctions: IExecuteFunctions,
+  itemIndex: number,
 ): IBirthData {
-	const birthData: IBirthData = {
-		year: executeFunctions.getNodeParameter('year', itemIndex) as number,
-		month: executeFunctions.getNodeParameter('month', itemIndex) as number,
-		day: executeFunctions.getNodeParameter('day', itemIndex) as number,
-		hour: executeFunctions.getNodeParameter('hour', itemIndex) as number,
-		minute: executeFunctions.getNodeParameter('minute', itemIndex) as number,
-	};
+  const birthData: IBirthData = {
+    year: executeFunctions.getNodeParameter("year", itemIndex) as number,
+    month: executeFunctions.getNodeParameter("month", itemIndex) as number,
+    day: executeFunctions.getNodeParameter("day", itemIndex) as number,
+    hour: executeFunctions.getNodeParameter("hour", itemIndex) as number,
+    minute: executeFunctions.getNodeParameter("minute", itemIndex) as number,
+  };
 
-	const locationType = executeFunctions.getNodeParameter('locationType', itemIndex) as string;
+  const locationType = executeFunctions.getNodeParameter(
+    "locationType",
+    itemIndex,
+  ) as string;
 
-	if (locationType === 'city') {
-		birthData.city = executeFunctions.getNodeParameter('city', itemIndex) as string;
-		birthData.country_code = executeFunctions.getNodeParameter('countryCode', itemIndex) as string;
-	} else {
-		birthData.latitude = executeFunctions.getNodeParameter('latitude', itemIndex) as number;
-		birthData.longitude = executeFunctions.getNodeParameter('longitude', itemIndex) as number;
-	}
+  if (locationType === "city") {
+    birthData.city = executeFunctions.getNodeParameter(
+      "city",
+      itemIndex,
+    ) as string;
+    birthData.country_code = executeFunctions.getNodeParameter(
+      "countryCode",
+      itemIndex,
+    ) as string;
+  } else {
+    birthData.latitude = executeFunctions.getNodeParameter(
+      "latitude",
+      itemIndex,
+    ) as number;
+    birthData.longitude = executeFunctions.getNodeParameter(
+      "longitude",
+      itemIndex,
+    ) as number;
+  }
 
-	return birthData;
+  return birthData;
 }
 
 /**
@@ -45,27 +64,27 @@ export function buildBirthData(
  * @returns API response data
  */
 export async function makeApiRequest(
-	executeFunctions: IExecuteFunctions,
-	method: 'GET' | 'POST',
-	baseUrl: string,
-	endpoint: string,
-	apiKey: string,
-	body?: IDataObject,
+  executeFunctions: IExecuteFunctions,
+  method: "GET" | "POST",
+  baseUrl: string,
+  endpoint: string,
+  apiKey: string,
+  body?: IDataObject,
 ): Promise<IDataObject> {
-	const options: IHttpRequestOptions = {
-		method,
-		url: `${baseUrl}${endpoint}`,
-		headers: {
-			Authorization: `Bearer ${apiKey}`,
-		},
-		json: true,
-	};
+  const options: IHttpRequestOptions = {
+    method,
+    url: `${baseUrl}${endpoint}`,
+    headers: {
+      Authorization: `Bearer ${apiKey}`,
+    },
+    json: true,
+  };
 
-	if (body) {
-		options.body = body;
-	}
+  if (body) {
+    options.body = body;
+  }
 
-	return await executeFunctions.helpers.httpRequest(options);
+  return await executeFunctions.helpers.httpRequest(options);
 }
 
 /**
@@ -76,13 +95,13 @@ export async function makeApiRequest(
  * @returns Request body with subject wrapper
  */
 export function createSubjectRequest(
-	birthData: IBirthData,
-	additionalFields?: IDataObject,
+  birthData: IBirthData,
+  additionalFields?: IDataObject,
 ): IDataObject {
-	return {
-		subject: {
-			birth_data: birthData,
-		},
-		...additionalFields,
-	};
+  return {
+    subject: {
+      birth_data: birthData,
+    },
+    ...additionalFields,
+  };
 }

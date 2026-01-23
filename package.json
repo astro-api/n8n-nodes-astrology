@@ -6,9 +6,19 @@
   "scripts": {
     "build": "tsc && cp nodes/Astrology/*.svg dist/nodes/Astrology/",
     "lint": "eslint \"{nodes,credentials}/**/*.ts\"",
+    "lint:fix": "eslint \"{nodes,credentials}/**/*.ts\" --fix",
+    "format": "prettier --write \"{nodes,credentials}/**/*.ts\"",
+    "format:check": "prettier --check \"{nodes,credentials}/**/*.ts\"",
     "dev": "tsc --watch",
     "prepublishOnly": "npm run build",
-    "changeset": "changeset"
+    "changeset": "changeset",
+    "prepare": "husky"
+  },
+  "lint-staged": {
+    "{nodes,credentials}/**/*.ts": [
+      "eslint --fix",
+      "prettier --write"
+    ]
   },
   "keywords": [
     "n8n-community-node-package",
@@ -64,6 +74,8 @@
     "@typescript-eslint/eslint-plugin": "8.16.0",
     "@typescript-eslint/parser": "8.16.0",
     "eslint": "9.15.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.2.7",
     "n8n-workflow": "1.55.0",
     "prettier": "3.4.1",
     "typescript": "5.5.4"

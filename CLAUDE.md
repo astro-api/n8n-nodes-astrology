@@ -11,11 +11,24 @@ This is an official n8n community node package that integrates with the [Astrolo
 ## Commands
 
 ```bash
-npm run build     # Compile TypeScript to dist/
-npm run lint      # Run ESLint on nodes/ and credentials/
-npm run dev       # Watch mode for development
-npm run changeset # Create a changeset for versioning
+npm run build        # Compile TypeScript to dist/
+npm run lint         # Run ESLint on nodes/ and credentials/
+npm run lint:fix     # Run ESLint with auto-fix
+npm run format       # Format code with Prettier
+npm run format:check # Check formatting without changes
+npm run dev          # Watch mode for development
+npm run changeset    # Create a changeset for versioning
 ```
+
+## Pre-commit Hooks
+
+The project uses **husky** and **lint-staged** for automatic code quality checks on commit.
+
+When you commit, the following runs automatically on staged `.ts` files:
+1. ESLint with auto-fix
+2. Prettier formatting
+
+If there are unfixable lint errors, the commit will be blocked.
 
 ## Testing with Docker
 
