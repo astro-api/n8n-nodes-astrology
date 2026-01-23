@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-**Package:** `@astroapi/n8n-nodes-astrology`
+**Package:** `@astro-api/n8n-nodes-astrology`
 
 This is an official n8n community node package that integrates with the [Astrology API](https://astrology-api.io). It provides professional astrological calculations: planetary positions, house cusps, aspects, lunar metrics, horoscopes, and chart generation.
 

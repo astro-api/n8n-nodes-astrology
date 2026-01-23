@@ -1,6 +1,6 @@
-# @astroapi/n8n-nodes-astrology
+# @astro-api/n8n-nodes-astrology
 
-[![npm version](https://badge.fury.io/js/@astroapi%2Fn8n-nodes-astrology.svg)](https://www.npmjs.com/package/@astroapi/n8n-nodes-astrology)
+[![npm version](https://badge.fury.io/js/@astro-api%2Fn8n-nodes-astrology.svg)](https://www.npmjs.com/package/@astro-api/n8n-nodes-astrology)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 Official n8n community node for [Astrology API](https://astrology-api.io) — professional astrological calculations powered by Swiss Ephemeris.
@@ -36,13 +36,13 @@ Official n8n community node for [Astrology API](https://astrology-api.io) — pr
 1. Open your n8n instance
 2. Go to **Settings** → **Community Nodes**
 3. Select **Install**
-4. Enter `@astroapi/n8n-nodes-astrology`
+4. Enter `@astro-api/n8n-nodes-astrology`
 5. Click **Install**
 
 ### Manual Installation
 
 ```bash
-npm install @astroapi/n8n-nodes-astrology
+npm install @astro-api/n8n-nodes-astrology
 ```
 
 For Docker deployments, mount the package or use `N8N_CUSTOM_EXTENSIONS`.
@@ -134,7 +134,7 @@ Full API documentation is available at:
 ### Setup
 
 ```bash
-git clone https://github.com/astroapi/n8n-nodes-astrology.git
+git clone https://github.com/astro-api/n8n-nodes-astrology.git
 cd n8n-nodes-astrology
 npm install
 npm run build
@@ -168,7 +168,7 @@ Contributions are welcome! Please read our contributing guidelines before submit
 ## Support
 
 - **Documentation**: [astrology-api.io/docs](https://astrology-api.io/docs)
-- **Issues**: [GitHub Issues](https://github.com/astroapi/n8n-nodes-astrology/issues)
+- **Issues**: [GitHub Issues](https://github.com/astro-api/n8n-nodes-astrology/issues)
 - **Email**: support@astrology-api.io
 
 ## License

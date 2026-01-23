@@ -1,5 +1,5 @@
 {
-  "name": "@astroapi/n8n-nodes-astrology",
+  "name": "@astro-api/n8n-nodes-astrology",
   "version": "0.1.0",
   "description": "n8n community node for Astrology API - professional astrological calculations, charts, horoscopes, and interpretations",
   "main": "dist/index.js",
@@ -30,10 +30,10 @@
   "homepage": "https://astrology-api.io",
   "repository": {
     "type": "git",
-    "url": "https://github.com/astroapi/n8n-nodes-astrology"
+    "url": "https://github.com/astro-api/n8n-nodes-astrology"
   },
   "bugs": {
-    "url": "https://github.com/astroapi/n8n-nodes-astrology/issues"
+    "url": "https://github.com/astro-api/n8n-nodes-astrology/issues"
   },
   "license": "MIT",
   "files": [
