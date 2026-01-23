@@ -41,7 +41,7 @@
   "homepage": "https://astrology-api.io",
   "repository": {
     "type": "git",
-    "url": "https://github.com/astro-api/n8n-nodes-astrology"
+    "url": "git+https://github.com/astro-api/n8n-nodes-astrology.git"
   },
   "bugs": {
     "url": "https://github.com/astro-api/n8n-nodes-astrology/issues"
