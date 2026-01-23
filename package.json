@@ -5,16 +5,20 @@
   "main": "dist/index.js",
   "scripts": {
     "build": "tsc && cp nodes/Astrology/*.svg dist/nodes/Astrology/",
-    "lint": "eslint \"{nodes,credentials}/**/*.ts\"",
-    "lint:fix": "eslint \"{nodes,credentials}/**/*.ts\" --fix",
-    "format": "prettier --write \"{nodes,credentials}/**/*.ts\"",
-    "format:check": "prettier --check \"{nodes,credentials}/**/*.ts\"",
+    "lint": "eslint \"index.ts\" \"{nodes,credentials}/**/*.ts\"",
+    "lint:fix": "eslint \"index.ts\" \"{nodes,credentials}/**/*.ts\" --fix",
+    "format": "prettier --write \"index.ts\" \"{nodes,credentials}/**/*.ts\"",
+    "format:check": "prettier --check \"index.ts\" \"{nodes,credentials}/**/*.ts\"",
     "dev": "tsc --watch",
     "prepublishOnly": "npm run build",
     "changeset": "changeset",
     "prepare": "husky"
   },
   "lint-staged": {
+    "index.ts": [
+      "eslint --fix",
+      "prettier --write"
+    ],
     "{nodes,credentials}/**/*.ts": [
       "eslint --fix",
       "prettier --write"
