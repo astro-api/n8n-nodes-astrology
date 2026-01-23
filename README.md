@@ -165,6 +165,39 @@ Access n8n at `http://localhost:5678`
 
 Contributions are welcome! Please read our contributing guidelines before submitting PRs.
 
+### Creating a Changeset
+
+When you make changes that should be included in a release:
+
+```bash
+npx changeset
+```
+
+Select the change type:
+- **patch** (0.1.0 → 0.1.1) — bug fixes
+- **minor** (0.1.0 → 0.2.0) — new features
+- **major** (0.1.0 → 1.0.0) — breaking changes
+
+Commit the generated changeset file along with your code.
+
+## Release Process
+
+This project uses [Changesets](https://github.com/changesets/changesets) for version management and [GitHub Actions](https://github.com/features/actions) for CI/CD.
+
+### Automated Pipeline
+
+| Workflow | Trigger | Actions |
+|----------|---------|---------|
+| **CI** | Push/PR to `master` | Lint, Build, Verify dist |
+| **Release** | Push to `master` | Create release PR or publish to npm |
+
+### How Releases Work
+
+1. **Development**: Create PR with code changes + changeset file
+2. **Merge to master**: CI validates, then Release workflow creates a "chore: release package" PR
+3. **Release PR**: Contains version bump + CHANGELOG update
+4. **Merge Release PR**: Triggers npm publish + GitHub Release creation
+
 ## Support
 
 - **Documentation**: [astrology-api.io/docs](https://astrology-api.io/docs)

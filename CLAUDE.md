@@ -14,6 +14,7 @@ This is an official n8n community node package that integrates with the [Astrolo
 npm run build     # Compile TypeScript to dist/
 npm run lint      # Run ESLint on nodes/ and credentials/
 npm run dev       # Watch mode for development
+npm run changeset # Create a changeset for versioning
 ```
 
 ## Testing with Docker
@@ -135,4 +136,35 @@ See the `examples/` folder for ready-to-use n8n workflows:
 
 - **personal-horoscope-workflow.json** - Generates personalized horoscopes (day/week/month/year) by comparing natal chart with current transits. Includes AI interpretation.
 - **tarot-reading-workflow.json** - Performs tarot card readings influenced by current planetary positions and moon phase. Supports multiple spread types.
+
+## CI/CD & Releases
+
+The project uses **Changesets** for version management and **GitHub Actions** for CI/CD.
+
+### Workflows
+
+| File | Trigger | Purpose |
+|------|---------|---------|
+| `.github/workflows/ci.yml` | Push/PR to master | Lint, build, verify dist |
+| `.github/workflows/release.yml` | Push to master | Create release PR or publish |
+
+### Release Process
+
+1. **Make changes** to code
+2. **Create changeset**: `npx changeset`
+   - Select type: `patch` (bugfix), `minor` (feature), `major` (breaking)
+   - Write description
+3. **Commit** changeset file with your code
+4. **Merge PR** to master
+5. **Changesets bot** creates "chore: release package" PR
+6. **Merge release PR** → publishes to npm + creates GitHub Release
+
+### Configuration Files
+
+- `.changeset/config.json` - Changesets configuration (baseBranch: master, access: public)
+- `package.json` has `publishConfig.access: "public"` for scoped package
+
+### Required Secrets (GitHub)
+
+- `NPM_TOKEN` - npm automation token for publishing (Settings → Secrets → Actions)
 
