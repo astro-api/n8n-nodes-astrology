@@ -158,8 +158,8 @@ The project uses **Changesets** for version management and **GitHub Actions** fo
 
 | File | Trigger | Purpose |
 |------|---------|---------|
-| `.github/workflows/ci.yml` | Push/PR to master | Lint, build, verify dist |
-| `.github/workflows/release.yml` | Push to master | Create release PR or publish |
+| `.github/workflows/ci.yml` | Push/PR to main | Lint, build, verify dist |
+| `.github/workflows/release.yml` | Push to main | Create release PR or publish |
 
 ### Release Process
 
@@ -168,16 +168,18 @@ The project uses **Changesets** for version management and **GitHub Actions** fo
    - Select type: `patch` (bugfix), `minor` (feature), `major` (breaking)
    - Write description
 3. **Commit** changeset file with your code
-4. **Merge PR** to master
+4. **Merge PR** to main
 5. **Changesets bot** creates "chore: release package" PR
 6. **Merge release PR** → publishes to npm + creates GitHub Release
 
 ### Configuration Files
 
-- `.changeset/config.json` - Changesets configuration (baseBranch: master, access: public)
+- `.changeset/config.json` - Changesets configuration (baseBranch: main, access: public)
 - `package.json` has `publishConfig.access: "public"` for scoped package
 
-### Required Secrets (GitHub)
+### npm Publishing (OIDC Trusted Publishing)
 
-- `NPM_TOKEN` - npm automation token for publishing (Settings → Secrets → Actions)
+Publishing uses OIDC authentication — no npm tokens required. Configure trusted publisher on npmjs.com:
+1. Go to package Settings → Access → Trusted Publishers
+2. Add GitHub Actions with: repository owner, repository name, workflow: `release.yml`
 
