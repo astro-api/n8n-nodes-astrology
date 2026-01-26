@@ -76,15 +76,24 @@ export async function makeApiRequest(
     url: `${baseUrl}${endpoint}`,
     headers: {
       Authorization: `Bearer ${apiKey}`,
+      "Content-Type": "application/json",
     },
     json: true,
+    returnFullResponse: false,
   };
 
   if (body) {
     options.body = body;
   }
 
-  return await executeFunctions.helpers.httpRequest(options);
+  const response = await executeFunctions.helpers.httpRequest(options);
+
+  // Ensure we return only serializable data (no circular references)
+  if (typeof response === "object" && response !== null) {
+    return JSON.parse(JSON.stringify(response)) as IDataObject;
+  }
+
+  return response as IDataObject;
 }
 
 /**
