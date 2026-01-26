@@ -1,4 +1,9 @@
-import { ICredentialType, INodeProperties } from "n8n-workflow";
+import type {
+  IAuthenticateGeneric,
+  ICredentialTestRequest,
+  ICredentialType,
+  INodeProperties,
+} from "n8n-workflow";
 
 export class AstrologyApi implements ICredentialType {
   name = "astrologyApi";
@@ -26,4 +31,21 @@ export class AstrologyApi implements ICredentialType {
         "Astrology API server URL (change only if using custom server)",
     },
   ];
+
+  authenticate: IAuthenticateGeneric = {
+    type: "generic",
+    properties: {
+      headers: {
+        Authorization: "=Bearer {{$credentials.apiKey}}",
+      },
+    },
+  };
+
+  test: ICredentialTestRequest = {
+    request: {
+      baseURL: "={{$credentials.baseUrl}}",
+      url: "/api/v3/data/now",
+      method: "GET",
+    },
+  };
 }
