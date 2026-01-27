@@ -35,6 +35,7 @@ export function createBirthDataFields(
       type: "number",
       displayOptions: { ...baseDisplayOptions },
       default: 1990,
+      placeholder: "e.g. 1990",
       description: "Birth year",
       required: true,
     },
@@ -44,6 +45,7 @@ export function createBirthDataFields(
       type: "number",
       displayOptions: { ...baseDisplayOptions },
       default: 1,
+      placeholder: "e.g. 6",
       typeOptions: {
         minValue: 1,
         maxValue: 12,
@@ -57,6 +59,7 @@ export function createBirthDataFields(
       type: "number",
       displayOptions: { ...baseDisplayOptions },
       default: 1,
+      placeholder: "e.g. 15",
       typeOptions: {
         minValue: 1,
         maxValue: 31,
@@ -70,6 +73,7 @@ export function createBirthDataFields(
       type: "number",
       displayOptions: { ...baseDisplayOptions },
       default: 12,
+      placeholder: "e.g. 14",
       typeOptions: {
         minValue: 0,
         maxValue: 23,
@@ -83,6 +87,7 @@ export function createBirthDataFields(
       type: "number",
       displayOptions: { ...baseDisplayOptions },
       default: 0,
+      placeholder: "e.g. 30",
       typeOptions: {
         minValue: 0,
         maxValue: 59,

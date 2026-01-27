@@ -200,6 +200,7 @@ export const horoscopeOperations: INodeProperties[] = [
       },
     },
     default: 1990,
+    placeholder: "e.g. 1990",
     description: "Birth year",
     required: true,
   },
@@ -214,6 +215,7 @@ export const horoscopeOperations: INodeProperties[] = [
       },
     },
     default: 1,
+    placeholder: "e.g. 6",
     typeOptions: {
       minValue: 1,
       maxValue: 12,
@@ -232,6 +234,7 @@ export const horoscopeOperations: INodeProperties[] = [
       },
     },
     default: 1,
+    placeholder: "e.g. 15",
     typeOptions: {
       minValue: 1,
       maxValue: 31,
@@ -250,6 +253,7 @@ export const horoscopeOperations: INodeProperties[] = [
       },
     },
     default: 12,
+    placeholder: "e.g. 14",
     typeOptions: {
       minValue: 0,
       maxValue: 23,
@@ -268,6 +272,7 @@ export const horoscopeOperations: INodeProperties[] = [
       },
     },
     default: 0,
+    placeholder: "e.g. 30",
     typeOptions: {
       minValue: 0,
       maxValue: 59,
@@ -351,6 +356,7 @@ export const horoscopeOperations: INodeProperties[] = [
       },
     },
     default: 0,
+    placeholder: "e.g. 50.45",
     typeOptions: {
       minValue: -90,
       maxValue: 90,
@@ -370,6 +376,7 @@ export const horoscopeOperations: INodeProperties[] = [
       },
     },
     default: 0,
+    placeholder: "e.g. 30.52",
     typeOptions: {
       minValue: -180,
       maxValue: 180,

@@ -65,58 +65,51 @@ For Docker deployments, mount the package or use `N8N_CUSTOM_EXTENSIONS`.
 
 ## Usage Examples
 
-### Get Planetary Positions
+### Quick Start
 
-```json
-{
-  "resource": "data",
-  "operation": "positions",
-  "year": 1990,
-  "month": 6,
-  "day": 15,
-  "hour": 14,
-  "minute": 30,
-  "locationType": "city",
-  "city": "Kyiv",
-  "countryCode": "UA"
-}
-```
+1. Install the node via **Settings → Community Nodes** → `@astro-api/n8n-nodes-astrology`
+2. Add **Astrology API** credentials with your API key from [astrology-api.io](https://astrology-api.io)
+3. Add the **Astrology** node to your workflow
+4. Select a resource and operation from the table below
+5. Configure the required parameters and execute
 
-### Get Daily Horoscope
+### Operations Overview
 
-```json
-{
-  "resource": "horoscope",
-  "operation": "signDaily",
-  "sign": "aries",
-  "language": "en",
-  "tradition": "universal"
-}
-```
+| Use Case | Resource | Operation | What You Get |
+|----------|----------|-----------|--------------|
+| Planet positions | Data | Positions | Zodiac signs, degrees, retrograde status for each planet |
+| House boundaries | Data | House Cusps | Astrological house boundaries (23+ house systems) |
+| Planetary aspects | Data | Aspects | Angular relationships between celestial bodies |
+| Moon data | Data | Lunar Metrics | Moon phase, illumination, void-of-course periods |
+| Current sky | Data | Current Time | Real-time astrological data for the current moment |
+| Daily horoscope | Horoscope | Sign Daily | Daily prediction for any zodiac sign |
+| Weekly horoscope | Horoscope | Sign Weekly | Weekly prediction for any zodiac sign |
+| Monthly horoscope | Horoscope | Sign Monthly | Monthly prediction for any zodiac sign |
+| Yearly horoscope | Horoscope | Sign Yearly | Yearly prediction for any zodiac sign |
+| Personal forecast | Horoscope | Personal Daily/Weekly/Monthly/Yearly | Birth chart-based personalized predictions |
+| Chinese astrology | Horoscope | Chinese Bazi | Four Pillars of Destiny analysis |
+| Birth chart | Charts | Natal | SVG natal chart with configurable house system |
 
-### Generate Natal Chart
+### Common Use Cases
 
-```json
-{
-  "resource": "charts",
-  "operation": "natal",
-  "year": 1990,
-  "month": 6,
-  "day": 15,
-  "hour": 14,
-  "minute": 30,
-  "city": "London",
-  "countryCode": "GB"
-}
-```
+**Planetary Positions & Birth Data**
+Configure **Data → Positions** to calculate planetary positions for any date and location. Returns zodiac signs, degrees, minutes, and retrograde status. Supports both city-based and coordinate-based location input.
 
-## Resources & Operations
+**Horoscopes in Multiple Languages**
+Use **Horoscope → Sign Daily/Weekly/Monthly/Yearly** for zodiac sign predictions. Supports multiple languages (EN, RU, UK, ES, DE, FR) and traditions (Western, Vedic, Chinese).
 
-| Resource | Operations |
-|----------|------------|
-| **Data** | Current Time, Planetary Positions, House Cusps, Aspects, Lunar Metrics |
-| **Horoscope** | Sign Daily/Weekly/Monthly/Yearly, Personal Daily/Weekly/Monthly/Yearly, Chinese Bazi |
-| **Charts** | Natal Chart (more coming soon) |
+**Personal Horoscopes**
+Use **Horoscope → Personal Daily/Weekly/Monthly/Yearly** for customized predictions based on birth chart data. Combines natal positions with current transits for personalized forecasts.
+
+**Natal Chart Generation**
+Generate SVG birth charts with **Charts → Natal**. Supports 23+ house systems including Placidus, Koch, Equal, and Whole Sign.
+
+### Ready-to-Use Workflows
+
+Import complete workflow examples from the [`examples/`](examples/) folder:
+
+- **[Personal Horoscope Workflow](examples/personal-horoscope-workflow.json)** — Generates personalized horoscopes (day/week/month/year) by comparing natal chart with current transits. Includes AI interpretation.
+- **[Tarot Reading Workflow](examples/tarot-reading-workflow.json)** — Performs tarot card readings influenced by current planetary positions and moon phase. Supports multiple spread types.
 
 ## API Documentation
 

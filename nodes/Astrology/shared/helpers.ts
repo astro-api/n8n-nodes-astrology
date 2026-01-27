@@ -114,3 +114,26 @@ export function createSubjectRequest(
     ...additionalFields,
   };
 }
+
+/**
+ * Simplifies a response object by keeping only top-level keys
+ * (max 10 fields). Nested objects are flattened one level deep.
+ *
+ * @param data - The full API response
+ * @param maxFields - Maximum number of fields to return (default 10)
+ * @returns Simplified data object
+ */
+export function simplifyResponse(
+  data: IDataObject,
+  maxFields = 10,
+): IDataObject {
+  const keys = Object.keys(data);
+  if (keys.length <= maxFields) {
+    return data;
+  }
+  const simplified: IDataObject = {};
+  for (let i = 0; i < maxFields; i++) {
+    simplified[keys[i]] = data[keys[i]];
+  }
+  return simplified;
+}
