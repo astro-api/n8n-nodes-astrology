@@ -16,17 +16,16 @@ const dataOperationField: INodeProperties = {
   },
   options: [
     {
+      name: "Aspects",
+      value: "aspects",
+      description: "Calculate angular relationships between celestial bodies",
+      action: "Get aspects data",
+    },
+    {
       name: "Current Time",
       value: "now",
       description: "Get current UTC time data for astrological calculations",
       action: "Get current time data",
-    },
-    {
-      name: "Planetary Positions",
-      value: "positions",
-      description:
-        "Calculate planetary positions with zodiac signs and degrees",
-      action: "Get planetary positions data",
     },
     {
       name: "House Cusps",
@@ -35,16 +34,17 @@ const dataOperationField: INodeProperties = {
       action: "Get house cusps data",
     },
     {
-      name: "Aspects",
-      value: "aspects",
-      description: "Calculate angular relationships between celestial bodies",
-      action: "Get aspects data",
-    },
-    {
       name: "Lunar Metrics",
       value: "lunarMetrics",
       description: "Calculate moon phase cycles and illumination",
       action: "Get lunar metrics data",
+    },
+    {
+      name: "Planetary Positions",
+      value: "positions",
+      description:
+        "Calculate planetary positions with zodiac signs and degrees",
+      action: "Get planetary positions data",
     },
   ],
   default: "positions",

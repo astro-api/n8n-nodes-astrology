@@ -217,14 +217,9 @@ const activePointsPresetField: INodeProperties = {
         "Sun, Moon, Mercury, Venus, Mars, Jupiter, Saturn, Ascendant, MC",
     },
     {
-      name: "Modern (12 Points)",
-      value: "modern",
-      description: "Basic + Uranus, Neptune, Pluto",
-    },
-    {
-      name: "Traditional (11 Points)",
-      value: "traditional",
-      description: "Classical planets + lunar nodes, Part of Fortune",
+      name: "Custom",
+      value: "custom",
+      description: "Select specific points manually",
     },
     {
       name: "Full (54 Points)",
@@ -233,9 +228,14 @@ const activePointsPresetField: INodeProperties = {
         "All available celestial bodies including asteroids and fixed stars",
     },
     {
-      name: "Custom",
-      value: "custom",
-      description: "Select specific points manually",
+      name: "Modern (12 Points)",
+      value: "modern",
+      description: "Basic + Uranus, Neptune, Pluto",
+    },
+    {
+      name: "Traditional (11 Points)",
+      value: "traditional",
+      description: "Classical planets + lunar nodes, Part of Fortune",
     },
   ],
   default: "modern",
