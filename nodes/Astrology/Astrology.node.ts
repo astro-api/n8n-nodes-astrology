@@ -109,9 +109,9 @@ export class Astrology implements INodeType {
       } catch (error) {
         if (this.continueOnFail()) {
           returnData.push({
-            json: { error: (error as Error).message },
-            pairedItem: { item: itemIndex },
-          } as unknown as IDataObject);
+            error: (error as Error).message,
+            itemIndex,
+          });
           continue;
         }
         throw error;

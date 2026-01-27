@@ -117,10 +117,12 @@ export function createSubjectRequest(
 
 /**
  * Simplifies a response object by keeping only top-level keys
- * (max 10 fields). Nested objects are flattened one level deep.
+ * up to the specified maximum number of fields.
+ *
+ * Note: Nested objects are returned as-is; no flattening is performed.
  *
  * @param data - The full API response
- * @param maxFields - Maximum number of fields to return (default 10)
+ * @param maxFields - Maximum number of top-level fields to return (default 10)
  * @returns Simplified data object
  */
 export function simplifyResponse(
