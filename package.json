@@ -1,6 +1,6 @@
 {
   "name": "@astro-api/n8n-nodes-astrology",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "n8n community node for Astrology API - professional astrological calculations, charts, horoscopes, and interpretations",
   "main": "dist/index.js",
   "scripts": {

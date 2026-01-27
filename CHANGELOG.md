@@ -1,5 +1,11 @@
 # @astro-api/n8n-nodes-astrology
 
+## 0.1.4
+
+### Patch Changes
+
+- 7a76048: Update node icon to match brand logo
+
 ## 0.1.3
 
 ### Patch Changes
