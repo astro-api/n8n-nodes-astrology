@@ -41,7 +41,7 @@
     "bazi",
     "swiss-ephemeris"
   ],
-  "author": "Astrology API <support@astrology-api.io>",
+  "author": "Astrology API <dev@astrology-api.io>",
   "homepage": "https://astrology-api.io",
   "repository": {
     "type": "git",
