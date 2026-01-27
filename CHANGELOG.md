@@ -1,5 +1,11 @@
 # @astro-api/n8n-nodes-astrology
 
+## 0.1.5
+
+### Patch Changes
+
+- 39b5ea7: Update author email to dev@astrology-api.io
+
 ## 0.1.4
 
 ### Patch Changes
