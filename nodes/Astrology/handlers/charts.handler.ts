@@ -1,6 +1,6 @@
 import type { IDataObject } from "n8n-workflow";
 import type { IHandlerContext, ChartsOperation } from "../interfaces/types";
-import { buildBirthData, makeApiRequest } from "../shared";
+import { buildBirthData, makeApiRequest, simplifyResponse } from "../shared";
 
 /**
  * Active points presets mapping
@@ -129,7 +129,7 @@ export async function handleChartsResource(
   }
 
   throw new Error(
-    `Operation "${operation}" is not supported for charts resource`,
+    `The operation '${operation}' is not supported for the charts resource`,
   );
 }
 
@@ -270,7 +270,7 @@ async function handleNatalChart(
     options,
   };
 
-  return await makeApiRequest(
+  const responseData = await makeApiRequest(
     executeFunctions,
     "POST",
     baseUrl,
@@ -278,4 +278,12 @@ async function handleNatalChart(
     apiKey,
     body,
   );
+
+  const simplify = executeFunctions.getNodeParameter(
+    "simplify",
+    itemIndex,
+    true,
+  ) as boolean;
+
+  return simplify ? simplifyResponse(responseData) : responseData;
 }

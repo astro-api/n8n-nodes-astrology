@@ -4,6 +4,7 @@ import {
   buildBirthData,
   makeApiRequest,
   createSubjectRequest,
+  simplifyResponse,
 } from "../shared";
 
 /**
@@ -47,7 +48,7 @@ export async function handleDataResource(
   const body = createSubjectRequest(birthData);
   const endpoint = DATA_ENDPOINTS[op] || DATA_ENDPOINTS.positions;
 
-  return await makeApiRequest(
+  const responseData = await makeApiRequest(
     executeFunctions,
     "POST",
     baseUrl,
@@ -55,4 +56,12 @@ export async function handleDataResource(
     apiKey,
     body,
   );
+
+  const simplify = executeFunctions.getNodeParameter(
+    "simplify",
+    itemIndex,
+    true,
+  ) as boolean;
+
+  return simplify ? simplifyResponse(responseData) : responseData;
 }

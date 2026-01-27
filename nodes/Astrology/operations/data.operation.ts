@@ -24,26 +24,27 @@ const dataOperationField: INodeProperties = {
     {
       name: "Planetary Positions",
       value: "positions",
-      description: "Get planetary positions with zodiac signs and degrees",
-      action: "Get planetary positions",
+      description:
+        "Calculate planetary positions with zodiac signs and degrees",
+      action: "Get planetary positions data",
     },
     {
       name: "House Cusps",
       value: "houseCusps",
-      description: "Get astrological house boundaries",
-      action: "Get house cusps",
+      description: "Calculate astrological house boundaries",
+      action: "Get house cusps data",
     },
     {
       name: "Aspects",
       value: "aspects",
-      description: "Get angular relationships between celestial bodies",
-      action: "Get aspects",
+      description: "Calculate angular relationships between celestial bodies",
+      action: "Get aspects data",
     },
     {
       name: "Lunar Metrics",
       value: "lunarMetrics",
-      description: "Get moon phase cycles and illumination data",
-      action: "Get lunar metrics",
+      description: "Calculate moon phase cycles and illumination",
+      action: "Get lunar metrics data",
     },
   ],
   default: "positions",
@@ -53,6 +54,26 @@ const dataOperationField: INodeProperties = {
  * All properties for the data resource
  * Uses shared field creators to avoid duplication
  */
+/**
+ * Simplify output toggle for data resource
+ */
+const simplifyField: INodeProperties = {
+  displayName: "Simplify",
+  name: "simplify",
+  type: "boolean",
+  displayOptions: {
+    show: {
+      resource: ["data"],
+    },
+    hide: {
+      operation: ["now"],
+    },
+  },
+  default: true,
+  description:
+    "Whether to return a simplified version of the response instead of the raw data",
+};
+
 export const dataOperations: INodeProperties[] = [
   // Operation selector
   dataOperationField,
@@ -62,4 +83,7 @@ export const dataOperations: INodeProperties[] = [
 
   // Location fields (hidden for 'now' operation)
   ...createLocationFields("data", undefined, ["now"]),
+
+  // Simplify output (hidden for 'now' operation)
+  simplifyField,
 ];

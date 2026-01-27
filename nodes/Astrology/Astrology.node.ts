@@ -5,6 +5,7 @@ import type {
   INodeType,
   INodeTypeDescription,
 } from "n8n-workflow";
+import { NodeOperationError } from "n8n-workflow";
 
 import {
   resourceField,
@@ -75,28 +76,46 @@ export class Astrology implements INodeType {
     const apiKey = credentials.apiKey as string;
 
     for (let itemIndex = 0; itemIndex < items.length; itemIndex += 1) {
-      const resource = this.getNodeParameter(
-        "resource",
-        itemIndex,
-      ) as ResourceType;
-      const operation = this.getNodeParameter("operation", itemIndex) as string;
+      try {
+        const resource = this.getNodeParameter(
+          "resource",
+          itemIndex,
+        ) as ResourceType;
+        const operation = this.getNodeParameter(
+          "operation",
+          itemIndex,
+        ) as string;
 
-      // Build handler context
-      const context: IHandlerContext = {
-        executeFunctions: this,
-        itemIndex,
-        baseUrl,
-        apiKey,
-      };
+        // Build handler context
+        const context: IHandlerContext = {
+          executeFunctions: this,
+          itemIndex,
+          baseUrl,
+          apiKey,
+        };
 
-      // Route to appropriate handler
-      const handler = resourceHandlers[resource];
-      if (!handler) {
-        throw new Error(`Resource "${resource}" is not supported`);
+        // Route to appropriate handler
+        const handler = resourceHandlers[resource];
+        if (!handler) {
+          throw new NodeOperationError(
+            this.getNode(),
+            `The resource '${resource}' is not supported`,
+            { itemIndex },
+          );
+        }
+
+        const responseData = await handler(context, operation);
+        returnData.push(responseData);
+      } catch (error) {
+        if (this.continueOnFail()) {
+          returnData.push({
+            error: (error as Error).message,
+            itemIndex,
+          });
+          continue;
+        }
+        throw error;
       }
-
-      const responseData = await handler(context, operation);
-      returnData.push(responseData);
     }
 
     return [this.helpers.returnJsonArray(returnData)];

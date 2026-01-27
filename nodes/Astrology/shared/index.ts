@@ -13,4 +13,5 @@ export {
   buildBirthData,
   makeApiRequest,
   createSubjectRequest,
+  simplifyResponse,
 } from "./helpers";

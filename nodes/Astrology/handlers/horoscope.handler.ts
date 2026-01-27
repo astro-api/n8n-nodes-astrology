@@ -32,7 +32,9 @@ export async function handleHoroscopeResource(
     return await handleChineseBaziOperation(context);
   }
 
-  throw new Error(`Operation "${operation}" is not supported for horoscope`);
+  throw new Error(
+    `The operation '${operation}' is not supported for the horoscope resource`,
+  );
 }
 
 /**

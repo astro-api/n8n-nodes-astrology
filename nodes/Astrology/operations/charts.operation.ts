@@ -457,6 +457,23 @@ const useCacheField: INodeProperties = {
 };
 
 /**
+ * Simplify output toggle for charts resource
+ */
+const simplifyField: INodeProperties = {
+  displayName: "Simplify",
+  name: "simplify",
+  type: "boolean",
+  displayOptions: {
+    show: {
+      resource: ["charts"],
+    },
+  },
+  default: true,
+  description:
+    "Whether to return a simplified version of the response instead of the raw data",
+};
+
+/**
  * Combined charts operations export
  */
 export const chartsOperations: INodeProperties[] = [
@@ -471,6 +488,7 @@ export const chartsOperations: INodeProperties[] = [
   customActivePointsField,
   perspectiveField,
   precisionField,
+  simplifyField,
   showAdvancedOptionsField,
   enableFixedStarsField,
   fixedStarPresetsField,

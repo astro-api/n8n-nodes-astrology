@@ -104,6 +104,7 @@ export function createLocationFields(
       type: "number",
       displayOptions: coordDisplayOptions,
       default: 0,
+      placeholder: "e.g. 50.45",
       typeOptions: {
         minValue: -90,
         maxValue: 90,
@@ -117,6 +118,7 @@ export function createLocationFields(
       type: "number",
       displayOptions: coordDisplayOptions,
       default: 0,
+      placeholder: "e.g. 30.52",
       typeOptions: {
         minValue: -180,
         maxValue: 180,
