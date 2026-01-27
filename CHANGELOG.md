@@ -1,5 +1,13 @@
 # @astro-api/n8n-nodes-astrology
 
+## 0.1.3
+
+### Patch Changes
+
+- 145a962: - Added eslint-plugin-n8n-nodes-base to ESLint configuration for improved linting of n8n nodes and credentials.
+  - Modified CI workflow to use Node.js version 22 for better compatibility.
+  - Refactored Astrology node operations to enhance user experience and streamline options.
+
 ## 0.1.1
 
 ### Patch Changes
