@@ -72,7 +72,8 @@ export function createLocationFields(
         },
       ],
       default: "city",
-      description: "How to specify the birth location",
+      description:
+        "Choose how to specify birth location: by city name (auto-detects coordinates) or exact latitude/longitude",
     },
 
     // City-based location fields
@@ -83,7 +84,7 @@ export function createLocationFields(
       displayOptions: cityDisplayOptions,
       default: "",
       placeholder: "London",
-      description: "City name",
+      description: 'Birth city name (e.g., "London", "New York", "Kyiv")',
       required: true,
     },
     {
@@ -93,7 +94,8 @@ export function createLocationFields(
       displayOptions: cityDisplayOptions,
       default: "",
       placeholder: "GB",
-      description: "ISO 3166-1 alpha-2 country code (e.g., UA, US, GB, DE)",
+      description:
+        "2-letter ISO country code for the birth city (e.g., US, GB, UA, DE, FR)",
       required: true,
     },
 
@@ -109,7 +111,8 @@ export function createLocationFields(
         minValue: -90,
         maxValue: 90,
       },
-      description: "Latitude of birth place (-90 to 90)",
+      description:
+        "Geographic latitude of birth location in decimal degrees (-90 to 90, positive=North)",
       required: true,
     },
     {
@@ -123,7 +126,8 @@ export function createLocationFields(
         minValue: -180,
         maxValue: 180,
       },
-      description: "Longitude of birth place (-180 to 180)",
+      description:
+        "Geographic longitude of birth location in decimal degrees (-180 to 180, positive=East)",
       required: true,
     },
   ];
