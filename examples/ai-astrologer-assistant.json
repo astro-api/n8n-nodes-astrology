@@ -1,0 +1,271 @@
+{
+  "name": "AI Astrologer Assistant",
+  "nodes": [
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "209f3af9-93fe-42f7-8c99-bdc73bce11d9",
+      "name": "Chat Trigger",
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        1792,
+        1232
+      ],
+      "webhookId": "astrology-chat"
+    },
+    {
+      "parameters": {
+        "options": {
+          "systemMessage": "You are an expert astrologer assistant with access to professional astrological calculation tools.\n\n## Your Capabilities\nYou can:\n1. **Calculate planetary positions** - Get exact positions of planets in zodiac signs with degrees\n2. **Calculate aspects** - Find angular relationships between planets (conjunctions, squares, trines, etc.)\n3. **Get lunar metrics** - Current moon phase, illumination, and cycle position\n4. **Generate horoscopes** - Daily predictions by zodiac sign\n5. **Create natal charts** - Complete birth charts with houses and aspects\n\n## Birth Data Format\nWhen users provide birth information, extract:\n- Year (4 digits, e.g., 1990)\n- Month (1-12)\n- Day (1-31)\n- Hour (0-23, 24-hour format)\n- Minute (0-59)\n- City and Country Code (e.g., \"London, GB\" or \"New York, US\")\n\nIf birth time is unknown, use 12:00 (noon) as default.\n\n## Response Style\n- Be warm and insightful, but also scientifically grounded\n- Explain astrological concepts when relevant\n- Always base your interpretations on the actual calculated data\n- If you need more information from the user (like birth data), ask politely"
+        }
+      },
+      "id": "f5f916a1-aa87-4b6d-9aba-9eaf344a9701",
+      "name": "AI Astrologer",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.7,
+      "position": [
+        2032,
+        1232
+      ]
+    },
+    {
+      "parameters": {
+        "model": "gpt-4o",
+        "options": {}
+      },
+      "id": "0f1f2460-4a4f-41fd-a1e0-7aec2e00a12f",
+      "name": "OpenAI Chat Model",
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1,
+      "position": [
+        1904,
+        1456
+      ]
+    },
+    {
+      "parameters": {
+        "year": "={{ $fromAI('year', 'Birth year (e.g., 1990)') }}",
+        "month": "={{ $fromAI('month', 'Month 1-12') }}",
+        "day": "={{ $fromAI('day', 'Day 1-31') }}",
+        "hour": "={{ $fromAI('hour', 'Hour 0-23') }}",
+        "minute": "={{ $fromAI('minute', 'Minute 0-59') }}",
+        "city": "={{ $fromAI('city', 'City name') }}",
+        "countryCode": "={{ $fromAI('countryCode', '2-letter ISO country code') }}"
+      },
+      "id": "67950c18-4752-4fba-8e42-d3347b78455d",
+      "name": "Planetary Positions",
+      "type": "@astro-api/n8n-nodes-astrology.astrologyTool",
+      "typeVersion": 1,
+      "position": [
+        2128,
+        1472
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "aspects",
+        "year": "={{ $fromAI('year', 'Birth year') }}",
+        "month": "={{ $fromAI('month', 'Month 1-12') }}",
+        "day": "={{ $fromAI('day', 'Day 1-31') }}",
+        "hour": "={{ $fromAI('hour', 'Hour 0-23') }}",
+        "minute": "={{ $fromAI('minute', 'Minute 0-59') }}",
+        "city": "={{ $fromAI('city', 'City name') }}",
+        "countryCode": "={{ $fromAI('countryCode', '2-letter ISO country code') }}"
+      },
+      "id": "b88b27da-5f63-4592-b494-d9689be92f41",
+      "name": "Aspects",
+      "type": "@astro-api/n8n-nodes-astrology.astrologyTool",
+      "typeVersion": 1,
+      "position": [
+        2288,
+        1472
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "lunarMetrics",
+        "year": "={{ $fromAI('year', 'Year') }}",
+        "month": "={{ $fromAI('month', 'Month 1-12') }}",
+        "day": "={{ $fromAI('day', 'Day 1-31') }}",
+        "hour": "={{ $fromAI('hour', 'Hour 0-23') }}",
+        "minute": "={{ $fromAI('minute', 'Minute 0-59') }}",
+        "city": "={{ $fromAI('city', 'City name') }}",
+        "countryCode": "={{ $fromAI('countryCode', '2-letter ISO country code') }}"
+      },
+      "id": "9278f0e8-0ce6-4f56-9d2b-b6b8416a8175",
+      "name": "Lunar Metrics",
+      "type": "@astro-api/n8n-nodes-astrology.astrologyTool",
+      "typeVersion": 1,
+      "position": [
+        2464,
+        1472
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "horoscope",
+        "operation": "signDailyText",
+        "sign": "={{ $fromAI('sign', 'Zodiac sign: aries, taurus, gemini, cancer, leo, virgo, libra, scorpio, sagittarius, capricorn, aquarius, pisces') }}"
+      },
+      "id": "5364d29b-1b23-49c2-9c19-e876dc5e2816",
+      "name": "Daily Horoscope",
+      "type": "@astro-api/n8n-nodes-astrology.astrologyTool",
+      "typeVersion": 1,
+      "position": [
+        2208,
+        1584
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "charts",
+        "year": "={{ $fromAI('year', 'Birth year') }}",
+        "month": "={{ $fromAI('month', 'Birth month 1-12') }}",
+        "day": "={{ $fromAI('day', 'Birth day 1-31') }}",
+        "hour": "={{ $fromAI('hour', 'Birth hour 0-23') }}",
+        "minute": "={{ $fromAI('minute', 'Birth minute 0-59') }}",
+        "city": "={{ $fromAI('city', 'Birth city name') }}",
+        "countryCode": "={{ $fromAI('countryCode', '2-letter ISO country code') }}"
+      },
+      "id": "2d973683-05cf-41f3-a20a-0601d1fd2139",
+      "name": "Natal Chart",
+      "type": "@astro-api/n8n-nodes-astrology.astrologyTool",
+      "typeVersion": 1,
+      "position": [
+        2384,
+        1584
+      ]
+    },
+    {
+      "parameters": {},
+      "id": "0029dc45-b7b1-4717-889e-5f94e4274094",
+      "name": "Window Buffer Memory",
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        2000,
+        1568
+      ]
+    },
+    {
+      "parameters": {
+        "content": "## AI Astrologer Assistant\n\nThis workflow demonstrates how to use **Astrology API** nodes as **AI Tools** with an **AI Agent** for conversational astrology.\n\n### Setup Instructions:\n\n**Step 1: Configure Credentials**\n- Add **OpenAI API** credentials\n- Add **Astrology API** credentials\n\n**Step 2: Test**\nOpen the chat and try:\n- \"What moon phase is it today?\"\n- \"I was born Jan 15, 1990 at 14:30 in London. What are my planetary positions?\"\n- \"What's the horoscope for Aries?\"\n- \"Generate my natal chart\"",
+        "height": 436,
+        "width": 356
+      },
+      "id": "c872c437-1603-4c2f-844c-a23edcd6c9c0",
+      "name": "Sticky Note",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1504,
+        1392
+      ]
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Chat Trigger": {
+      "main": [
+        [
+          {
+            "node": "AI Astrologer",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Astrologer",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Planetary Positions": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Astrologer",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Aspects": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Astrologer",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Lunar Metrics": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Astrologer",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Daily Horoscope": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Astrologer",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Natal Chart": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Astrologer",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Window Buffer Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Astrologer",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "availableInMCP": false
+  },
+  "versionId": "bc1edc0e-e9be-436d-b7a2-44559e6bd222",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "6f5111d1e35c841cd8db439c570229a09cae20ffb8ce02caea4c283f188644ec"
+  },
+  "id": "dNUaIJ2etqhp8MfY",
+  "tags": []
+}

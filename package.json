@@ -70,7 +70,7 @@
     ]
   },
   "peerDependencies": {
-    "n8n-workflow": "1.55.0"
+    "n8n-workflow": "1.120.7"
   },
   "devDependencies": {
     "@changesets/cli": "^2.29.8",
@@ -81,7 +81,7 @@
     "eslint-plugin-n8n-nodes-base": "^1.16.5",
     "husky": "^9.1.7",
     "lint-staged": "^16.2.7",
-    "n8n-workflow": "1.55.0",
+    "n8n-workflow": "1.120.7",
     "prettier": "3.4.1",
     "typescript": "5.5.4"
   }

@@ -46,8 +46,10 @@ export class Astrology implements INodeType {
     icon: "file:astrology.svg",
     group: ["transform"],
     version: 1,
+    usableAsTool: true,
     subtitle: '={{$parameter["operation"] + ": " + $parameter["resource"]}}',
-    description: "Get astrological data from Astrology API",
+    description:
+      "Professional astrological calculations: planetary positions, house cusps, aspects, lunar metrics, horoscopes, and natal charts using Astrology API",
     defaults: {
       name: "Astrology",
     },

@@ -166,7 +166,8 @@ const houseSystemField: INodeProperties = {
   },
   options: houseSystemOptions,
   default: "P",
-  description: "Astrological house calculation system",
+  description:
+    "House calculation system. Placidus (most common), Whole Sign (traditional), Koch (time-based), Equal (simple), etc.",
 };
 
 /**
@@ -185,16 +186,19 @@ const zodiacTypeField: INodeProperties = {
     {
       name: "Tropical (Western)",
       value: "Tropic",
-      description: "Equinox-based zodiac used in Western astrology",
+      description:
+        "Equinox-based zodiac used in Western astrology (signs aligned to seasons)",
     },
     {
       name: "Sidereal (Vedic)",
       value: "Sidereal",
-      description: "Constellation-based zodiac used in Vedic astrology",
+      description:
+        "Constellation-based zodiac used in Vedic/Indian astrology (signs aligned to stars)",
     },
   ],
   default: "Tropic",
-  description: "Zodiac calculation method",
+  description:
+    "Zodiac calculation method: Tropical (Western, season-based) or Sidereal (Vedic, star-based)",
 };
 
 /**
@@ -470,7 +474,7 @@ const simplifyField: INodeProperties = {
   },
   default: true,
   description:
-    "Whether to return a simplified version of the response instead of the raw data",
+    "Whether to return simplified response with key data only. Disable for full API response with all metadata.",
 };
 
 /**

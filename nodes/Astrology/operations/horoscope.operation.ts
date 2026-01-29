@@ -181,7 +181,8 @@ export const horoscopeOperations: INodeProperties[] = [
       { name: "Virgo", value: "virgo" },
     ],
     default: "aries",
-    description: "The zodiac sign for the horoscope",
+    description:
+      "Select the zodiac sign (Aries through Pisces) to get horoscope predictions for",
     required: true,
   },
 
@@ -198,7 +199,7 @@ export const horoscopeOperations: INodeProperties[] = [
     },
     default: 1990,
     placeholder: "e.g. 1990",
-    description: "Birth year",
+    description: "Birth year in 4-digit format (e.g., 1990)",
     required: true,
   },
   {
@@ -217,7 +218,7 @@ export const horoscopeOperations: INodeProperties[] = [
       minValue: 1,
       maxValue: 12,
     },
-    description: "Birth month (1-12)",
+    description: "Birth month as number 1-12 (January=1, December=12)",
     required: true,
   },
   {
@@ -236,7 +237,7 @@ export const horoscopeOperations: INodeProperties[] = [
       minValue: 1,
       maxValue: 31,
     },
-    description: "Birth day (1-31)",
+    description: "Birth day of month (1-31)",
     required: true,
   },
   {
@@ -255,7 +256,8 @@ export const horoscopeOperations: INodeProperties[] = [
       minValue: 0,
       maxValue: 23,
     },
-    description: "Birth hour (0-23)",
+    description:
+      "Birth hour in 24-hour format (0-23, where 0=midnight, 12=noon)",
     required: true,
   },
   {
@@ -303,7 +305,8 @@ export const horoscopeOperations: INodeProperties[] = [
       },
     ],
     default: "city",
-    description: "How to specify the birth location",
+    description:
+      "Choose how to specify birth location: by city name (auto-detects coordinates) or exact latitude/longitude",
   },
 
   // City-based location
@@ -320,7 +323,7 @@ export const horoscopeOperations: INodeProperties[] = [
     },
     default: "",
     placeholder: "London",
-    description: "City name",
+    description: 'Birth city name (e.g., "London", "New York", "Kyiv")',
     required: true,
   },
   {
@@ -336,7 +339,8 @@ export const horoscopeOperations: INodeProperties[] = [
     },
     default: "",
     placeholder: "GB",
-    description: "ISO 3166-1 alpha-2 country code (e.g., UA, US, GB, DE)",
+    description:
+      "2-letter ISO country code for the birth city (e.g., US, GB, UA, DE, FR)",
     required: true,
   },
 
@@ -358,7 +362,8 @@ export const horoscopeOperations: INodeProperties[] = [
       minValue: -90,
       maxValue: 90,
     },
-    description: "Latitude of birth place (-90 to 90)",
+    description:
+      "Geographic latitude of birth location in decimal degrees (-90 to 90, positive=North)",
     required: true,
   },
   {
@@ -378,7 +383,8 @@ export const horoscopeOperations: INodeProperties[] = [
       minValue: -180,
       maxValue: 180,
     },
-    description: "Longitude of birth place (-180 to 180)",
+    description:
+      "Geographic longitude of birth location in decimal degrees (-180 to 180, positive=East)",
     required: true,
   },
 
@@ -398,7 +404,7 @@ export const horoscopeOperations: INodeProperties[] = [
     default: "",
     placeholder: "2024-01-15",
     description:
-      "Target date for prediction (YYYY-MM-DD). Leave empty for today.",
+      "Date for prediction in YYYY-MM-DD format. Leave empty for current date predictions.",
   },
 
   // Bazi Year (for Chinese Bazi)
@@ -428,7 +434,8 @@ export const horoscopeOperations: INodeProperties[] = [
     },
     default: "en",
     placeholder: "en",
-    description: "Response language code (en, uk, ru, es, de, etc.)",
+    description:
+      "Language code for horoscope text output (en=English, uk=Ukrainian, ru=Russian, es=Spanish, de=German)",
   },
 
   // Tradition (for all horoscope operations)
@@ -453,7 +460,8 @@ export const horoscopeOperations: INodeProperties[] = [
       { name: "Vedic", value: "vedic" },
     ],
     default: "universal",
-    description: "Astrological tradition to use",
+    description:
+      "Astrological tradition affecting interpretation style and emphasis",
   },
 
   // Text format (for text operations)
@@ -475,7 +483,8 @@ export const horoscopeOperations: INodeProperties[] = [
       { name: "Structured", value: "structured" },
     ],
     default: "paragraph",
-    description: "Text output style",
+    description:
+      "Output format for text predictions: short (1-2 sentences), paragraph (flowing text), bullets (key points), structured (categorized sections)",
   },
 
   // Include emoji (for text operations)

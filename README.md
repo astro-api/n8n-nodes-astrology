@@ -108,8 +108,51 @@ Generate SVG birth charts with **Charts → Natal**. Supports 23+ house systems 
 
 Import complete workflow examples from the [`examples/`](examples/) folder:
 
+- **[AI Astrologer Assistant](examples/ai-astrologer-assistant.json)** — AI-powered chatbot with multiple Astrology tools. Demonstrates using the node with n8n AI Agent for conversational astrology queries.
 - **[Personal Horoscope Workflow](examples/personal-horoscope-workflow.json)** — Generates personalized horoscopes (day/week/month/year) by comparing natal chart with current transits. Includes AI interpretation.
 - **[Tarot Reading Workflow](examples/tarot-reading-workflow.json)** — Performs tarot card readings influenced by current planetary positions and moon phase. Supports multiple spread types.
+
+### Using with AI Agent
+
+The Astrology node supports **AI Tool mode** via n8n's `usableAsTool` feature. This allows you to connect the node to an AI Agent for conversational astrology queries.
+
+#### How It Works
+
+When `usableAsTool: true` is set, n8n automatically generates a companion Tool node:
+
+| Node Type | Purpose | Connection Type |
+|-----------|---------|-----------------|
+| `astrology` | Standard workflow node | `main` → `main` |
+| `astrologyTool` | AI Tool for Agent | `ai_tool` → `ai_tool` |
+
+#### Creating AI Workflows
+
+When building workflows with AI Agent:
+
+1. **Use the Tool version** — In workflow JSON, use type `@astro-api/n8n-nodes-astrology.astrologyTool`
+2. **Connect via `ai_tool`** — Connect nodes to AI Agent using `ai_tool` connection type
+3. **Use `$fromAI()` expressions** — Let AI extract parameters automatically
+
+**Example node configuration:**
+```json
+{
+  "parameters": {
+    "year": "={{ $fromAI('year', 'Birth year (e.g., 1990)') }}",
+    "month": "={{ $fromAI('month', 'Month 1-12') }}",
+    "city": "={{ $fromAI('city', 'City name') }}"
+  },
+  "type": "@astro-api/n8n-nodes-astrology.astrologyTool"
+}
+```
+
+**Example connection:**
+```json
+"Planetary Positions": {
+  "ai_tool": [[{"node": "AI Agent", "type": "ai_tool", "index": 0}]]
+}
+```
+
+See [AI Astrologer Assistant](examples/ai-astrologer-assistant.json) for a complete working example.
 
 ## API Documentation
 

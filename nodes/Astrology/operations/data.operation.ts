@@ -18,32 +18,36 @@ const dataOperationField: INodeProperties = {
     {
       name: "Aspects",
       value: "aspects",
-      description: "Calculate angular relationships between celestial bodies",
+      description:
+        "Calculate angular relationships (conjunctions, squares, trines, oppositions) between planets and points for astrological interpretation",
       action: "Get aspects data",
     },
     {
       name: "Current Time",
       value: "now",
-      description: "Get current UTC time data for astrological calculations",
+      description:
+        "Get current UTC time with Julian Day number for real-time astrological calculations",
       action: "Get current time data",
     },
     {
       name: "House Cusps",
       value: "houseCusps",
-      description: "Calculate astrological house boundaries",
+      description:
+        "Calculate the 12 astrological house boundaries (cusps) using specified house system (Placidus, Whole Sign, Koch, etc.)",
       action: "Get house cusps data",
     },
     {
       name: "Lunar Metrics",
       value: "lunarMetrics",
-      description: "Calculate moon phase cycles and illumination",
+      description:
+        "Get current Moon phase, illumination percentage, and lunar cycle position",
       action: "Get lunar metrics data",
     },
     {
       name: "Planetary Positions",
       value: "positions",
       description:
-        "Calculate planetary positions with zodiac signs and degrees",
+        "Calculate positions of planets and points showing zodiac sign, degree, minute, retrograde status",
       action: "Get planetary positions data",
     },
   ],
@@ -71,7 +75,7 @@ const simplifyField: INodeProperties = {
   },
   default: true,
   description:
-    "Whether to return a simplified version of the response instead of the raw data",
+    "Whether to return simplified response with key data only. Disable for full API response with all metadata.",
 };
 
 export const dataOperations: INodeProperties[] = [

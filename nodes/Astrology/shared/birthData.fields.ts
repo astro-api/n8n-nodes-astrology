@@ -36,7 +36,7 @@ export function createBirthDataFields(
       displayOptions: { ...baseDisplayOptions },
       default: 1990,
       placeholder: "e.g. 1990",
-      description: "Birth year",
+      description: "Birth year in 4-digit format (e.g., 1990)",
       required: true,
     },
     {
@@ -50,7 +50,7 @@ export function createBirthDataFields(
         minValue: 1,
         maxValue: 12,
       },
-      description: "Birth month (1-12)",
+      description: "Birth month as number 1-12 (January=1, December=12)",
       required: true,
     },
     {
@@ -64,7 +64,7 @@ export function createBirthDataFields(
         minValue: 1,
         maxValue: 31,
       },
-      description: "Birth day (1-31)",
+      description: "Birth day of month (1-31)",
       required: true,
     },
     {
@@ -78,7 +78,8 @@ export function createBirthDataFields(
         minValue: 0,
         maxValue: 23,
       },
-      description: "Birth hour (0-23)",
+      description:
+        "Birth hour in 24-hour format (0-23, where 0=midnight, 12=noon)",
       required: true,
     },
     {

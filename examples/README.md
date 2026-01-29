@@ -16,6 +16,7 @@ Ready-to-use n8n workflows demonstrating the Astrology node capabilities.
 
 | File | Resource | Description |
 |------|----------|-------------|
+| `ai-astrologer-assistant.json` | AI Tool | Conversational AI chatbot with Astrology tools |
 | `personal-horoscope-workflow.json` | Data | Natal chart + transits with AI interpretation |
 | `cosmic-tarot-reading.json` | Data | Tarot reading based on planetary positions |
 | `tarot-reading-workflow.json` | Data | Alternative tarot workflow |
@@ -23,6 +24,62 @@ Ready-to-use n8n workflows demonstrating the Astrology node capabilities.
 | `personal-weekly-forecast.json` | Horoscope | Personalized weekly forecast |
 | `zodiac-content-generator.json` | Horoscope | Generate horoscopes for all 12 signs |
 | `chinese-bazi-reading.json` | Horoscope | Chinese Bazi with AI interpretation |
+
+---
+
+## AI Tool Examples
+
+### AI Astrologer Assistant
+
+**File:** `ai-astrologer-assistant.json`
+
+Conversational AI chatbot that uses Astrology nodes as AI Tools. Users can ask questions in natural language and the AI Agent automatically calls the appropriate tools.
+
+```
+Chat Trigger ─────────── user sends message
+      │
+      ▼
+AI Astrologer ───────── LangChain Agent with tools
+      │
+      ├── Planetary Positions (astrologyTool)
+      ├── Aspects (astrologyTool)
+      ├── Lunar Metrics (astrologyTool)
+      ├── Daily Horoscope (astrologyTool)
+      └── Natal Chart (astrologyTool)
+      │
+      ▼
+OpenAI Chat Model ───── GPT-4o for reasoning
+Window Buffer Memory ── conversation history
+```
+
+**How It Works:**
+
+The Astrology node has `usableAsTool: true`, which enables n8n to auto-generate a Tool version (`astrologyTool`) for AI Agent integration:
+
+| Node Type | Purpose | Connection |
+|-----------|---------|------------|
+| `astrology` | Standard workflow | `main` → `main` |
+| `astrologyTool` | AI Agent tool | `ai_tool` → `ai_tool` |
+
+**Key Features:**
+
+- Uses `$fromAI()` expressions for automatic parameter extraction
+- AI understands context and calls appropriate tools
+- Conversation memory for follow-up questions
+
+**Example Queries:**
+
+- "What moon phase is it today?"
+- "I was born Jan 15, 1990 at 14:30 in London. What are my planetary positions?"
+- "What's the horoscope for Aries?"
+- "Generate my natal chart"
+
+**Configuration:**
+
+| Credential | Required |
+|------------|----------|
+| OpenAI API | Yes |
+| Astrology API | Yes |
 
 ---
 

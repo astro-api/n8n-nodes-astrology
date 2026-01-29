@@ -13,17 +13,20 @@ export const resourceField: INodeProperties = {
     {
       name: "Chart",
       value: "charts",
-      description: "Generate astrological charts (natal, transit, etc.)",
+      description:
+        "Generate natal (birth) charts with planetary positions, houses, and aspects for a given birth time and location",
     },
     {
       name: "Data",
       value: "data",
-      description: "Astrological data calculations",
+      description:
+        "Get raw astrological calculations: planetary positions, house cusps, aspects between planets, and lunar phase data",
     },
     {
       name: "Horoscope",
       value: "horoscope",
-      description: "Daily, weekly, monthly, and yearly predictions",
+      description:
+        "Generate horoscope predictions by zodiac sign or personalized by birth data (daily, weekly, monthly, yearly)",
     },
   ],
   default: "data",

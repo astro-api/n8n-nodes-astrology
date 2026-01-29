@@ -125,6 +125,35 @@ The node uses n8n's standard pattern with router-based architecture:
 - Operations are conditionally shown via `displayOptions.show.resource`
 - Shared fields use factory functions from `shared/` to avoid duplication
 
+### AI Tool Integration
+
+The node has `usableAsTool: true` (line 49 in `Astrology.node.ts`), which enables n8n to auto-generate a companion Tool node for AI Agent integration.
+
+**Two node types are available:**
+
+| Type | Name in JSON | Purpose | Connection |
+|------|--------------|---------|------------|
+| Standard | `@astro-api/n8n-nodes-astrology.astrology` | Regular workflow node | `main` → `main` |
+| AI Tool | `@astro-api/n8n-nodes-astrology.astrologyTool` | AI Agent tool | `ai_tool` → `ai_tool` |
+
+**When creating AI Agent workflows:**
+
+1. Use node type ending with `Tool` suffix (`astrologyTool`)
+2. Connect via `ai_tool` connection type (not `main`)
+3. Use `$fromAI()` expressions for parameter extraction:
+   ```json
+   "year": "={{ $fromAI('year', 'Birth year (e.g., 1990)') }}"
+   ```
+
+**Example connection in workflow JSON:**
+```json
+"Planetary Positions": {
+  "ai_tool": [[{"node": "AI Agent", "type": "ai_tool", "index": 0}]]
+}
+```
+
+See `examples/ai-astrologer-assistant.json` for a complete working example.
+
 ### Adding a New Resource
 
 1. Create `operations/newResource.operation.ts` with operation definitions
@@ -147,6 +176,7 @@ This ensures code follows current n8n conventions and API patterns.
 
 See the `examples/` folder for ready-to-use n8n workflows:
 
+- **ai-astrologer-assistant.json** - AI-powered chatbot demonstrating multi-tool usage with n8n AI Agent. Shows how to connect Astrology nodes as AI Tools for conversational queries. Uses `$fromAI()` expressions for automatic parameter extraction.
 - **personal-horoscope-workflow.json** - Generates personalized horoscopes (day/week/month/year) by comparing natal chart with current transits. Includes AI interpretation.
 - **tarot-reading-workflow.json** - Performs tarot card readings influenced by current planetary positions and moon phase. Supports multiple spread types.
 
