@@ -88,7 +88,7 @@
       },
       "id": "weekly-1",
       "name": "Weekly Forecast Data",
-      "type": "CUSTOM.astrology",
+      "type": "@astro-api/n8n-nodes-astrology.astrology",
       "typeVersion": 1,
       "position": [832, 288]
     },
@@ -111,7 +111,7 @@
       },
       "id": "weekly-text-1",
       "name": "Weekly Forecast Text",
-      "type": "CUSTOM.astrology",
+      "type": "@astro-api/n8n-nodes-astrology.astrology",
       "typeVersion": 1,
       "position": [1056, 288]
     },
