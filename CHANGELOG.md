@@ -1,5 +1,11 @@
 # @astro-api/n8n-nodes-astrology
 
+## 0.1.6
+
+### Patch Changes
+
+- c441458: Update Docker Compose and example JSON files to use new astrology node type and adjust volume paths. Replace 'CUSTOM.astrology' with '@astro-api/n8n-nodes-astrology.astrology' in multiple example workflows. Enable community package tool usage in Docker configuration.
+
 ## 0.1.5
 
 ### Patch Changes
