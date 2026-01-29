@@ -5,11 +5,11 @@ services:
     ports:
       - '5678:5678'
     environment:
-      - N8N_CUSTOM_EXTENSIONS=/home/node/.n8n/custom
       - GENERIC_TIMEZONE=Europe/Kiev
       - ASTROLOGY_API_BASE_URL=${ASTROLOGY_API_BASE_URL}
+      - N8N_COMMUNITY_PACKAGES_ALLOW_TOOL_USAGE=true
       # reset license on shutdown
       - N8N_LICENSE_DETACH_FLOATING_ON_SHUTDOWN=true
     volumes:
       - ./data/n8n_data:/home/node/.n8n
-      - ../dist:/home/node/.n8n/custom/n8n-nodes-astrology
+      - ..:/home/node/.n8n/nodes/node_modules/@astro-api/n8n-nodes-astrology

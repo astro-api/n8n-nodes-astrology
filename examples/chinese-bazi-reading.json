@@ -82,7 +82,7 @@
       },
       "id": "bazi-1",
       "name": "Chinese Bazi Reading",
-      "type": "CUSTOM.astrology",
+      "type": "@astro-api/n8n-nodes-astrology.astrology",
       "typeVersion": 1,
       "position": [832, 288]
     },

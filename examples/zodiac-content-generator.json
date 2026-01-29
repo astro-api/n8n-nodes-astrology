@@ -29,7 +29,7 @@
       },
       "id": "daily-data-1",
       "name": "Daily Horoscope Data",
-      "type": "CUSTOM.astrology",
+      "type": "@astro-api/n8n-nodes-astrology.astrology",
       "typeVersion": 1,
       "position": [832, 288]
     },
@@ -45,7 +45,7 @@
       },
       "id": "daily-text-1",
       "name": "Daily Horoscope Text",
-      "type": "CUSTOM.astrology",
+      "type": "@astro-api/n8n-nodes-astrology.astrology",
       "typeVersion": 1,
       "position": [1056, 288]
     },

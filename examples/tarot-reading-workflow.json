@@ -64,7 +64,7 @@
         "city": "London",
         "countryCode": "GB"
       },
-      "type": "CUSTOM.astrology",
+      "type": "@astro-api/n8n-nodes-astrology.astrology",
       "typeVersion": 1,
       "position": [
         832,
@@ -85,7 +85,7 @@
         "city": "London",
         "countryCode": "GB"
       },
-      "type": "CUSTOM.astrology",
+      "type": "@astro-api/n8n-nodes-astrology.astrology",
       "typeVersion": 1,
       "position": [
         1040,
