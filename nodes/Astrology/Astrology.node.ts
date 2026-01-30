@@ -48,8 +48,7 @@ export class Astrology implements INodeType {
     version: 1,
     usableAsTool: true,
     subtitle: '={{$parameter["operation"] + ": " + $parameter["resource"]}}',
-    description:
-      "Professional astrological calculations: planetary positions, house cusps, aspects, lunar metrics, horoscopes, and natal charts using Astrology API",
+    description: "Perform astrological calculations via Astrology API",
     defaults: {
       name: "Astrology",
     },
