@@ -25,8 +25,14 @@ Official n8n community node for [Astrology API](https://astrology-api.io) — pr
 
 ### Charts & Visualization
 - **Natal Charts** — Birth chart generation with SVG output
-- **Transit Charts** — Current planetary transits overlay
-- **Synastry** — Relationship compatibility analysis
+- **Transit Charts** — Current planetary transits overlay on natal chart
+- **Synastry Charts** — Relationship compatibility analysis (cross-aspects)
+- **Composite Charts** — Merged midpoint chart for couples
+- **Solar Return Charts** — Birthday year forecast
+- **Lunar Return Charts** — Monthly forecast based on Moon return
+- **Progressions Charts** — Secondary progressions for life phases
+- **Natal Transits** — Transit analysis over date range
+- **Directions Charts** — Primary directions for timing predictions
 - **Multiple House Systems** — Placidus, Koch, Equal, Whole Sign, and 20+ more
 
 ## Installation
@@ -89,6 +95,14 @@ For Docker deployments, mount the package or use `N8N_CUSTOM_EXTENSIONS`.
 | Personal forecast | Horoscope | Personal Daily/Weekly/Monthly/Yearly | Birth chart-based personalized predictions |
 | Chinese astrology | Horoscope | Chinese Bazi | Four Pillars of Destiny analysis |
 | Birth chart | Charts | Natal | SVG natal chart with configurable house system |
+| Relationship chart | Charts | Synastry | Two-person compatibility analysis (cross-aspects) |
+| Combined chart | Charts | Composite | Merged midpoint chart for couples |
+| Current transits | Charts | Transit | Planetary transits overlay on natal chart |
+| Birthday forecast | Charts | Solar Return | Year-ahead predictions based on Sun return |
+| Monthly forecast | Charts | Lunar Return | Month-ahead predictions based on Moon return |
+| Life phases | Charts | Progressions | Secondary progressions for internal development |
+| Period analysis | Charts | Natal Transits | Transit events over a date range |
+| Timing predictions | Charts | Directions | Primary directions for life event timing |
 
 ### Common Use Cases
 

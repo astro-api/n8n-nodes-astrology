@@ -1,194 +1,89 @@
-# Technical Details: n8n-nodes-astrology
+# n8n-nodes-astrology - Project Roadmap
 
-## Project Structure
+## API Coverage
+
+| Resource | Status | Endpoints | Priority |
+|----------|--------|-----------|----------|
+| Data | ⚠️ Partial | 5/9 | |
+| Horoscope | ✅ Complete | 17/17 | |
+| Charts | ⚠️ Partial | 9/11 | |
+| Human Design | ⬜ Not started | 0/8 | 🔴 High |
+| Numerology | ⬜ Not started | 0/3 | 🔴 High |
+| Tarot | ⬜ Not started | 0/19 | 🟠 Medium |
+| Lunar | ⬜ Not started | 0/5 | 🟠 Medium |
+| Vedic | ⬜ Not started | 0/22 | 🟠 Medium |
+| Analysis | ⬜ Not started | 0/24 | 🟡 Low |
+| Render/SVG | ⬜ Not started | 0/8 | 🟡 Low |
+| Insights | ⬜ Not started | 0/31 | 🟢 On demand |
+| Traditional | ⬜ Not started | 0/10 | 🟢 On demand |
+| Astrocartography | ⬜ Not started | 0/13 | 🟢 On demand |
+| Chinese | ⬜ Not started | 0/8 | 🔵 Future |
+| Kabbalah | ⬜ Not started | 0/7 | 🔵 Future |
+| Horary | ⬜ Not started | 0/6 | 🔵 Future |
+| Fengshui | ⬜ Not started | 0/4 | 🔵 Future |
+| Fixed Stars | ⬜ Not started | 0/4 | 🔵 Future |
+| Enhanced | ⬜ Not started | 0/4 | 🔵 Future |
+| PDF | ⬜ Not started | 0/4 | 🔵 Future |
+| Glossary | ⬜ Not started | 0/14 | 🔵 Future |
+| Eclipses | ⬜ Not started | 0/3 | 🔵 Future |
+| Ziwei | ⬜ Not started | 0/1 | 🔵 Future |
+| **Total** | | **31/237** | |
+
+### Priority Legend
+
+- 🔴 **High** - Top market demand (Human Design trend, Numerology often requested with astrology)
+- 🟠 **Medium** - Strong market presence (Vedic for India market, Tarot for esoteric audience, Lunar cycles)
+- 🟡 **Low** - Useful for AI agents (Analysis reports, Chart visualization)
+- 🟢 **On demand** - B2B/niche features (Business insights, Traditional astrology, Astrocartography)
+- 🔵 **Future** - Specialized markets (Chinese, Kabbalah, Horary, etc.)
+
+---
+
+## Technical Details
+
+### Project Structure
 
 ```
 n8n-nodes-astrology/
 ├── credentials/
-│   └── AstrologyApi.credentials.ts    # API credentials (base URL)
+│   └── AstrologyApi.credentials.ts    # API credentials
 ├── nodes/Astrology/
-│   ├── Astrology.node.ts              # Main node implementation
+│   ├── Astrology.node.ts              # Main node (router pattern)
 │   ├── astrology.svg                  # Node icon
-│   └── operations/
-│       └── data.operation.ts          # UI parameters for all operations
-├── examples/
-│   ├── README.md                      # Workflow documentation
-│   ├── personal-horoscope-workflow.json
-│   └── tarot-reading-workflow.json
-├── docker/
-│   └── docker-compose.yml             # Test n8n instance
+│   ├── interfaces/                    # TypeScript types
+│   ├── shared/                        # Reusable field creators
+│   ├── operations/                    # UI parameter definitions
+│   │   ├── resource.options.ts
+│   │   ├── data.operation.ts
+│   │   ├── horoscope.operation.ts
+│   │   └── charts.operation.ts
+│   └── handlers/                      # Execute logic
+│       ├── data.handler.ts
+│       ├── horoscope.handler.ts
+│       └── charts.handler.ts
+├── examples/                          # Workflow examples
+├── docker/                            # Test environment
 └── dist/                              # Compiled output
 ```
 
-## Credentials
+### Adding New Resources
 
-- **Type:** `astrologyApi`
-- **Fields:**
-  - `apiKey` – RapidAPI Key (required)
-  - `baseUrl` – RapidAPI host URL (default: `https://best-astrology-api-natal-charts-transits-synastry.p.rapidapi.com`)
-- **Headers sent:**
-  - `x-rapidapi-host` – Extracted from baseUrl
-  - `x-rapidapi-key` – From credentials
+1. Create `operations/{resource}.operation.ts` - UI parameters
+2. Create `handlers/{resource}.handler.ts` - Execute logic
+3. Add resource to `operations/resource.options.ts`
+4. Export from barrel files
+5. Add handler to `resourceHandlers` map in `Astrology.node.ts`
 
-## Node Operations
-
-### Current Time (`now`)
-
-Returns current UTC time data for astrological calculations.
-
-- **Endpoint:** `GET /api/v3/data/now`
-- **Parameters:** None
-
-### Planetary Positions (`positions`)
-
-Returns planetary positions with zodiac signs and degrees.
-
-- **Endpoint:** `POST /api/v3/data/positions`
-- **Parameters:**
-  - `year`, `month`, `day`, `hour`, `minute` – Date/time
-  - Location: `city` + `countryCode` OR `latitude` + `longitude`
-
-### House Cusps (`houseCusps`)
-
-Returns astrological house boundaries (supports 23+ house systems).
-
-- **Endpoint:** `POST /api/v3/data/house-cusps`
-- **Parameters:** Same as positions
-
-### Aspects (`aspects`)
-
-Returns angular relationships between celestial bodies.
-
-- **Endpoint:** `POST /api/v3/data/aspects`
-- **Parameters:** Same as positions
-
-### Lunar Metrics (`lunarMetrics`)
-
-Returns moon phase cycles and illumination data.
-
-- **Endpoint:** `POST /api/v3/data/lunar-metrics`
-- **Parameters:** Same as positions
-
-## API Request Format
-
-All POST endpoints require `subject.birth_data` wrapper:
-
-```json
-{
-  "subject": {
-    "birth_data": {
-      "year": 1990,
-      "month": 6,
-      "day": 15,
-      "hour": 12,
-      "minute": 0,
-      "city": "London",
-      "country_code": "GB"
-    }
-  }
-}
-```
-
-Or with coordinates:
-
-```json
-{
-  "subject": {
-    "birth_data": {
-      "year": 1990,
-      "month": 6,
-      "day": 15,
-      "hour": 12,
-      "minute": 0,
-      "latitude": 51.5074,
-      "longitude": -0.1278
-    }
-  }
-}
-```
-
-## Location Input
-
-The node supports two location types:
-
-1. **City Name** (default)
-   - `city` – City name (e.g., "London")
-   - `countryCode` – ISO 3166-1 alpha-2 code (e.g., "GB")
-   - API automatically geocodes to coordinates
-
-2. **Coordinates**
-   - `latitude` – -90 to 90
-   - `longitude` – -180 to 180
-
-## Test Environment
-
-### Docker Compose
-
-```yaml
-# docker/docker-compose.yml
-services:
-  n8n:
-    image: docker.n8n.io/n8nio/n8n:latest
-    ports:
-      - "5678:5678"
-    volumes:
-      - ../dist:/home/node/.n8n/custom/n8n-nodes-astrology
-    environment:
-      - N8N_CUSTOM_EXTENSIONS=/home/node/.n8n/custom
-```
-
-### Running Tests
+### Build & Test
 
 ```bash
-npm run build              # Build TypeScript
-cd docker && docker compose up   # Start n8n
-# Access at http://localhost:5678
+npm run build                    # Compile TypeScript
+npm run lint                     # Check code quality
+cd docker && docker compose up   # Start test n8n at http://localhost:5678
 ```
 
-## Build Commands
+### API Documentation
 
-| Command | Description |
-|---------|-------------|
-| `npm run build` | Compile TypeScript to `dist/` |
-| `npm run lint` | Run ESLint on `nodes/` and `credentials/` |
-| `npm run dev` | Watch mode for development |
-
-## Example Workflows
-
-### Personal Horoscope with Transits
-
-Generates personalized astrological forecasts by comparing natal chart with current transits.
-
-**Flow:**
-```
-Set Birth Data → Natal Positions → Natal Aspects → Current Transits → Lunar Metrics → AI Generator
-```
-
-**Features:**
-- Multiple forecast periods (day/week/month/year)
-- Multi-language support
-- Transit-to-natal aspect analysis
-
-### Cosmic Tarot Reading
-
-Performs tarot card readings influenced by current planetary positions.
-
-**Flow:**
-```
-Set Reading Intent → Current Planetary Energy → Moon Phase → AI Tarot Reader
-```
-
-**Features:**
-- 5 spread types (single card, three cards, celtic cross, love, career)
-- 4 deck styles (Rider-Waite, Thoth, Marseille, Modern)
-- Astrologically-influenced card selection
-
-## API Documentation
-
-Full API documentation: https://rapidapi.com/developer-developer-default/api/best-astrology-api-natal-charts-transits-synastry
-
-### Additional Endpoints (not yet implemented)
-
-- `POST /api/v3/data/global-positions` – Location-independent ephemeris
-- `POST /api/v3/data/positions/enhanced` – Positions with dignity analysis
-- `POST /api/v3/data/aspects/enhanced` – Aspects with reception analysis
+- **Base URL:** `https://api.astrology-api.io`
+- **Auth:** Bearer token
+- **Full docs:** https://api.astrology-api.io/rapidoc
