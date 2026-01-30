@@ -1,5 +1,11 @@
 # @astro-api/n8n-nodes-astrology
 
+## 0.3.0
+
+### Minor Changes
+
+- da7aca5: Add extended chart operations: synastry, transit, composite, solar return, lunar return, progressions, natal transits, and directions
+
 ## 0.2.0
 
 ### Minor Changes
