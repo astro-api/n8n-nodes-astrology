@@ -4,7 +4,7 @@
 
 | Resource | Status | Endpoints | Priority |
 |----------|--------|-----------|----------|
-| Data | ⚠️ Partial | 5/9 | |
+| Data | ✅ Complete | 9/9 | |
 | Horoscope | ✅ Complete | 17/17 | |
 | Charts | ⚠️ Partial | 9/11 | |
 | Human Design | ⬜ Not started | 0/8 | 🔴 High |
@@ -27,7 +27,7 @@
 | Glossary | ⬜ Not started | 0/14 | 🔵 Future |
 | Eclipses | ⬜ Not started | 0/3 | 🔵 Future |
 | Ziwei | ⬜ Not started | 0/1 | 🔵 Future |
-| **Total** | | **31/237** | |
+| **Total** | | **35/237** | |
 
 ### Priority Legend
 
