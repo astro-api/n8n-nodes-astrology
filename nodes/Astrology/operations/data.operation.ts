@@ -23,11 +23,25 @@ const dataOperationField: INodeProperties = {
       action: "Get aspects data",
     },
     {
+      name: "Aspects (Enhanced)",
+      value: "aspectsEnhanced",
+      description:
+        "Aspects with traditional reception analysis (mutual/single reception quality, applying/separating)",
+      action: "Get enhanced aspects with traditional analysis",
+    },
+    {
       name: "Current Time",
       value: "now",
       description:
         "Get current UTC time with Julian Day number for real-time astrological calculations",
       action: "Get current time data",
+    },
+    {
+      name: "Global Positions",
+      value: "globalPositions",
+      description:
+        "Location-independent ephemeris data for batch processing and caching planetary positions",
+      action: "Get global planetary positions",
     },
     {
       name: "House Cusps",
@@ -44,11 +58,25 @@ const dataOperationField: INodeProperties = {
       action: "Get lunar metrics data",
     },
     {
+      name: "Lunar Metrics (Enhanced)",
+      value: "lunarMetricsEnhanced",
+      description:
+        "Lunar data with Void of Course periods, lunar mansions, and traditional timing analysis",
+      action: "Get enhanced lunar metrics",
+    },
+    {
       name: "Planetary Positions",
       value: "positions",
       description:
         "Calculate positions of planets and points showing zodiac sign, degree, minute, retrograde status",
       action: "Get planetary positions data",
+    },
+    {
+      name: "Planetary Positions (Enhanced)",
+      value: "positionsEnhanced",
+      description:
+        "Planetary positions with essential dignities, receptions, and traditional Hellenistic astrology data",
+      action: "Get enhanced positions with traditional astrology",
     },
   ],
   default: "positions",
@@ -85,8 +113,8 @@ export const dataOperations: INodeProperties[] = [
   // Birth data fields (hidden for 'now' operation)
   ...createBirthDataFields("data", undefined, ["now"]),
 
-  // Location fields (hidden for 'now' operation)
-  ...createLocationFields("data", undefined, ["now"]),
+  // Location fields (hidden for 'now' and 'globalPositions' operations)
+  ...createLocationFields("data", undefined, ["now", "globalPositions"]),
 
   // Simplify output (hidden for 'now' operation)
   simplifyField,

@@ -36,9 +36,13 @@ export type ResourceType = "data" | "horoscope" | "charts";
 export type DataOperation =
   | "now"
   | "positions"
+  | "positionsEnhanced"
   | "houseCusps"
   | "aspects"
-  | "lunarMetrics";
+  | "aspectsEnhanced"
+  | "lunarMetrics"
+  | "lunarMetricsEnhanced"
+  | "globalPositions";
 
 /**
  * Horoscope resource operations
