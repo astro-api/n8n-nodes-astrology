@@ -1,5 +1,45 @@
 import type { INodeProperties } from "n8n-workflow";
-import { createBirthDataFields, createLocationFields } from "../shared";
+import {
+  createBirthDataFields,
+  createLocationFields,
+  createSecondSubjectFields,
+  createTransitTimeFields,
+  createDateRangeFields,
+} from "../shared";
+
+/**
+ * Operation groups for displayOptions
+ */
+// Operations that use birth data (almost all except maybe specific ones)
+const birthDataOperations = [
+  "natal",
+  "synastry",
+  "transit",
+  "composite",
+  "solarReturn",
+  "lunarReturn",
+  "progressions",
+  "natalTransits",
+  "directions",
+];
+
+// Operations requiring two subjects
+const twoPersonOperations = ["synastry", "composite"];
+
+// Operations requiring transit time
+const transitOperations = ["transit"];
+
+// Solar return operations
+const solarReturnOperations = ["solarReturn"];
+
+// Lunar return operations
+const lunarReturnOperations = ["lunarReturn"];
+
+// Date-based operations (single target date)
+const dateBasedOperations = ["progressions", "directions"];
+
+// Date range operations
+const dateRangeOperations = ["natalTransits"];
 
 /**
  * All available active points for natal chart
@@ -105,11 +145,67 @@ const chartsOperationField: INodeProperties = {
   },
   options: [
     {
+      name: "Composite Chart",
+      value: "composite",
+      description:
+        "Generate a merged midpoint chart representing the combined energy of two people as a relationship entity",
+      action: "Generate composite chart",
+    },
+    {
+      name: "Directions Chart",
+      value: "directions",
+      description:
+        "Generate a primary directions chart for predictive timing of life events",
+      action: "Generate directions chart",
+    },
+    {
+      name: "Lunar Return Chart",
+      value: "lunarReturn",
+      description:
+        "Generate a monthly forecast chart based on Moon returning to natal position",
+      action: "Generate lunar return chart",
+    },
+    {
       name: "Natal Chart",
       value: "natal",
       description:
         "Generate a complete natal (birth) chart with planetary positions, house cusps, and aspects",
       action: "Generate natal chart",
+    },
+    {
+      name: "Natal Transits",
+      value: "natalTransits",
+      description:
+        "Analyze planetary transits over a date range against the natal chart for period forecasting",
+      action: "Get natal transits",
+    },
+    {
+      name: "Progressions Chart",
+      value: "progressions",
+      description:
+        "Generate a secondary progressions chart showing internal development and life phase themes",
+      action: "Generate progressions chart",
+    },
+    {
+      name: "Solar Return Chart",
+      value: "solarReturn",
+      description:
+        "Generate a birthday chart showing themes and predictions for the coming year based on Sun return",
+      action: "Generate solar return chart",
+    },
+    {
+      name: "Synastry Chart",
+      value: "synastry",
+      description:
+        "Generate a relationship compatibility chart comparing two birth charts to analyze partnership dynamics",
+      action: "Generate synastry chart",
+    },
+    {
+      name: "Transit Chart",
+      value: "transit",
+      description:
+        "Generate a transit overlay showing planetary positions at a specific time against the natal chart",
+      action: "Generate transit chart",
     },
   ],
   default: "natal",
@@ -461,6 +557,200 @@ const useCacheField: INodeProperties = {
 };
 
 /**
+ * Solar Return year field
+ */
+const returnYearField: INodeProperties = {
+  displayName: "Return Year",
+  name: "returnYear",
+  type: "number",
+  displayOptions: {
+    show: {
+      resource: ["charts"],
+      operation: solarReturnOperations,
+    },
+  },
+  default: 2024,
+  placeholder: "e.g. 2024",
+  description: "Year for the solar return chart (year of birthday to analyze)",
+  required: true,
+};
+
+/**
+ * Use relocated return toggle
+ */
+const useRelocatedReturnField: INodeProperties = {
+  displayName: "Use Relocated Location",
+  name: "useRelocatedReturn",
+  type: "boolean",
+  displayOptions: {
+    show: {
+      resource: ["charts"],
+      operation: solarReturnOperations,
+    },
+  },
+  default: false,
+  description:
+    "Whether to calculate for a different location than birth place (relocation astrology)",
+};
+
+/**
+ * Relocated return location type
+ */
+const returnLocationTypeField: INodeProperties = {
+  displayName: "Return Location Type",
+  name: "returnLocationType",
+  type: "options",
+  displayOptions: {
+    show: {
+      resource: ["charts"],
+      operation: solarReturnOperations,
+      useRelocatedReturn: [true],
+    },
+  },
+  options: [
+    {
+      name: "City Name",
+      value: "city",
+      description: "Enter city and country",
+    },
+    {
+      name: "Coordinates",
+      value: "coordinates",
+      description: "Enter exact latitude and longitude",
+    },
+  ],
+  default: "city",
+  description: "How to specify the relocated return location",
+};
+
+/**
+ * Relocated return city
+ */
+const returnCityField: INodeProperties = {
+  displayName: "Return City",
+  name: "returnCity",
+  type: "string",
+  displayOptions: {
+    show: {
+      resource: ["charts"],
+      operation: solarReturnOperations,
+      useRelocatedReturn: [true],
+      returnLocationType: ["city"],
+    },
+  },
+  default: "",
+  placeholder: "e.g. New York",
+  description: "City where you will be on your birthday",
+};
+
+/**
+ * Relocated return country code
+ */
+const returnCountryCodeField: INodeProperties = {
+  displayName: "Return Country Code",
+  name: "returnCountryCode",
+  type: "string",
+  displayOptions: {
+    show: {
+      resource: ["charts"],
+      operation: solarReturnOperations,
+      useRelocatedReturn: [true],
+      returnLocationType: ["city"],
+    },
+  },
+  default: "",
+  placeholder: "e.g. US",
+  description: "2-letter ISO country code for return location",
+};
+
+/**
+ * Relocated return latitude
+ */
+const returnLatitudeField: INodeProperties = {
+  displayName: "Return Latitude",
+  name: "returnLatitude",
+  type: "number",
+  displayOptions: {
+    show: {
+      resource: ["charts"],
+      operation: solarReturnOperations,
+      useRelocatedReturn: [true],
+      returnLocationType: ["coordinates"],
+    },
+  },
+  default: 0,
+  placeholder: "e.g. 40.71",
+  typeOptions: {
+    minValue: -90,
+    maxValue: 90,
+  },
+  description: "Latitude of return location (-90 to 90)",
+};
+
+/**
+ * Relocated return longitude
+ */
+const returnLongitudeField: INodeProperties = {
+  displayName: "Return Longitude",
+  name: "returnLongitude",
+  type: "number",
+  displayOptions: {
+    show: {
+      resource: ["charts"],
+      operation: solarReturnOperations,
+      useRelocatedReturn: [true],
+      returnLocationType: ["coordinates"],
+    },
+  },
+  default: 0,
+  placeholder: "e.g. -74.01",
+  typeOptions: {
+    minValue: -180,
+    maxValue: 180,
+  },
+  description: "Longitude of return location (-180 to 180)",
+};
+
+/**
+ * Lunar Return date field
+ */
+const lunarReturnDateField: INodeProperties = {
+  displayName: "Return Date",
+  name: "lunarReturnDate",
+  type: "string",
+  displayOptions: {
+    show: {
+      resource: ["charts"],
+      operation: lunarReturnOperations,
+    },
+  },
+  default: "",
+  placeholder: "2024-06-15",
+  description:
+    "Target date for lunar return (YYYY-MM-DD). Leave empty for current/next lunar return.",
+};
+
+/**
+ * Progression/Direction date field
+ */
+const targetDateField: INodeProperties = {
+  displayName: "Target Date",
+  name: "targetDate",
+  type: "string",
+  displayOptions: {
+    show: {
+      resource: ["charts"],
+      operation: dateBasedOperations,
+    },
+  },
+  default: "",
+  placeholder: "2024-06-15",
+  description:
+    "Target date for progression/direction calculation (YYYY-MM-DD format)",
+  required: true,
+};
+
+/**
  * Simplify output toggle for charts resource
  */
 const simplifyField: INodeProperties = {
@@ -482,10 +772,38 @@ const simplifyField: INodeProperties = {
  */
 export const chartsOperations: INodeProperties[] = [
   chartsOperationField,
+
+  // Subject 1 fields (for all operations)
   subjectNameField,
-  ...createBirthDataFields("charts"),
+  ...createBirthDataFields("charts", birthDataOperations),
   secondField,
-  ...createLocationFields("charts"),
+  ...createLocationFields("charts", birthDataOperations),
+
+  // Subject 2 fields (for synastry, composite)
+  ...createSecondSubjectFields("charts", twoPersonOperations),
+
+  // Transit time fields (for transit operation)
+  ...createTransitTimeFields("charts", transitOperations),
+
+  // Solar Return fields
+  returnYearField,
+  useRelocatedReturnField,
+  returnLocationTypeField,
+  returnCityField,
+  returnCountryCodeField,
+  returnLatitudeField,
+  returnLongitudeField,
+
+  // Lunar Return fields
+  lunarReturnDateField,
+
+  // Progression/Direction date field
+  targetDateField,
+
+  // Date range fields (for natalTransits)
+  ...createDateRangeFields("charts", dateRangeOperations),
+
+  // Chart options (for most operations)
   houseSystemField,
   zodiacTypeField,
   activePointsPresetField,
@@ -493,6 +811,8 @@ export const chartsOperations: INodeProperties[] = [
   perspectiveField,
   precisionField,
   simplifyField,
+
+  // Advanced options
   showAdvancedOptionsField,
   enableFixedStarsField,
   fixedStarPresetsField,

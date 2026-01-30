@@ -65,7 +65,105 @@ export type HoroscopeOperation =
 /**
  * Charts resource operations
  */
-export type ChartsOperation = "natal";
+export type ChartsOperation =
+  | "natal"
+  | "synastry"
+  | "transit"
+  | "composite"
+  | "solarReturn"
+  | "lunarReturn"
+  | "progressions"
+  | "natalTransits"
+  | "directions";
+
+/**
+ * Transit time structure for transit chart requests
+ */
+export interface ITransitTime {
+  year: number;
+  month: number;
+  day: number;
+  hour: number;
+  minute: number;
+  city?: string;
+  country_code?: string;
+  latitude?: number;
+  longitude?: number;
+}
+
+/**
+ * Two-subject request for synastry/composite charts
+ */
+export interface ITwoSubjectRequest {
+  subject1: {
+    name?: string;
+    birth_data: IBirthData;
+  };
+  subject2: {
+    name?: string;
+    birth_data: IBirthData;
+  };
+  options?: IDataObject;
+}
+
+/**
+ * Transit chart request structure
+ */
+export interface ITransitChartRequest {
+  subject: {
+    name?: string;
+    birth_data: IBirthData;
+  };
+  transit_time: {
+    datetime: ITransitTime;
+  };
+  options?: IDataObject;
+}
+
+/**
+ * Solar/Lunar return request structure
+ */
+export interface IReturnChartRequest {
+  subject: {
+    name?: string;
+    birth_data: IBirthData;
+  };
+  return_year?: number;
+  return_date?: string;
+  return_location?: {
+    city?: string;
+    country_code?: string;
+    latitude?: number;
+    longitude?: number;
+  };
+  options?: IDataObject;
+}
+
+/**
+ * Progressions/Directions request structure
+ */
+export interface IProgressionChartRequest {
+  subject: {
+    name?: string;
+    birth_data: IBirthData;
+  };
+  progression_date?: string;
+  direction_date?: string;
+  options?: IDataObject;
+}
+
+/**
+ * Natal transits (date range) request structure
+ */
+export interface INatalTransitsRequest {
+  subject: {
+    name?: string;
+    birth_data: IBirthData;
+  };
+  start_date: string;
+  end_date: string;
+  options?: IDataObject;
+}
 
 /**
  * Handler context passed to resource handlers

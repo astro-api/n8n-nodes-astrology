@@ -7,6 +7,9 @@ export {
   traditionOptions,
   createTraditionField,
 } from "./zodiac.fields";
+export { createSecondSubjectFields } from "./secondSubject.fields";
+export { createTransitTimeFields } from "./transitTime.fields";
+export { createDateRangeFields } from "./dateRange.fields";
 
 // Helper functions
 export {
