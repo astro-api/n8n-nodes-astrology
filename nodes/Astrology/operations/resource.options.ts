@@ -40,6 +40,12 @@ export const resourceField: INodeProperties = {
       description:
         "Numerology calculations: Life Path, Expression, Soul Urge numbers, comprehensive readings, and compatibility analysis",
     },
+    {
+      name: "Tarot",
+      value: "tarot",
+      description:
+        "Tarot card readings and analysis: daily cards, spreads (single, three-card, Celtic Cross), birth cards, and astrological integration",
+    },
   ],
   default: "data",
 };

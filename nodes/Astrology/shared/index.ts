@@ -16,6 +16,16 @@ export {
   createLanguageField,
   createIncludeInterpretationsField,
 } from "./language.fields";
+export {
+  tarotTraditionOptions,
+  tarotInterpretationDepthOptions,
+  tarotArcanaOptions,
+  tarotSuitOptions,
+  tarotElementOptions,
+  createTarotTraditionField,
+  createInterpretationDepthField,
+  createTarotOptionsFields,
+} from "./tarot.fields";
 
 // Helper functions
 export {

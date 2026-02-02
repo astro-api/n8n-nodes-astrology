@@ -33,7 +33,8 @@ export type ResourceType =
   | "horoscope"
   | "charts"
   | "humanDesign"
-  | "numerology";
+  | "numerology"
+  | "tarot";
 
 /**
  * Data resource operations
@@ -107,6 +108,62 @@ export type NumerologyOperation =
   | "coreNumbers"
   | "comprehensive"
   | "compatibility";
+
+/**
+ * Tarot resource operations
+ */
+export type TarotOperation =
+  // Glossary (GET)
+  | "glossaryCards"
+  | "glossarySpreads"
+  | "glossaryCardDetail"
+  | "searchCards"
+  | "dailyCard"
+  // Draw (POST)
+  | "drawCards"
+  // Reports (POST)
+  | "reportSingle"
+  | "reportThreeCard"
+  | "reportCelticCross"
+  | "reportSynastry"
+  | "reportHouses"
+  | "reportTreeOfLife"
+  // Analysis (POST)
+  | "analysisQuintessence"
+  | "analysisBirthCards"
+  | "analysisDignities"
+  | "analysisTiming"
+  | "analysisOptimalTimes"
+  | "analysisTransitReport"
+  | "analysisNatalReport";
+
+/**
+ * Tarot tradition/interpretation style
+ */
+export type TarotTradition =
+  | "universal"
+  | "psychological"
+  | "classical"
+  | "hermetic";
+
+/**
+ * Tarot interpretation depth levels
+ */
+export type TarotInterpretationDepth =
+  | "keywords"
+  | "basic"
+  | "detailed"
+  | "professional";
+
+/**
+ * Tarot arcana types for filtering
+ */
+export type TarotArcana = "major" | "minor";
+
+/**
+ * Tarot suits for filtering
+ */
+export type TarotSuit = "wands" | "cups" | "swords" | "pentacles";
 
 /**
  * Human Design circuit types
