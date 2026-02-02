@@ -3,3 +3,4 @@ export { handleHoroscopeResource } from "./horoscope.handler";
 export { handleChartsResource } from "./charts.handler";
 export { handleHumanDesignResource } from "./humanDesign.handler";
 export { handleNumerologyResource } from "./numerology.handler";
+export { handleTarotResource } from "./tarot.handler";
