@@ -28,6 +28,18 @@ export const resourceField: INodeProperties = {
       description:
         "Generate horoscope predictions by zodiac sign or personalized by birth data (daily, weekly, monthly, yearly)",
     },
+    {
+      name: "Human Design",
+      value: "humanDesign",
+      description:
+        "Human Design System calculations: BodyGraph, type/strategy/authority, channels, gates, and compatibility analysis",
+    },
+    {
+      name: "Numerology",
+      value: "numerology",
+      description:
+        "Numerology calculations: Life Path, Expression, Soul Urge numbers, comprehensive readings, and compatibility analysis",
+    },
   ],
   default: "data",
 };

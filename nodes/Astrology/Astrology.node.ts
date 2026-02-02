@@ -12,11 +12,15 @@ import {
   dataOperations,
   horoscopeOperations,
   chartsOperations,
+  humanDesignOperations,
+  numerologyOperations,
 } from "./operations";
 import {
   handleDataResource,
   handleHoroscopeResource,
   handleChartsResource,
+  handleHumanDesignResource,
+  handleNumerologyResource,
 } from "./handlers";
 import type { IHandlerContext, ResourceType } from "./interfaces";
 
@@ -37,6 +41,8 @@ const resourceHandlers: Record<ResourceType, typeof handleDataResource> = {
   data: handleDataResource,
   horoscope: handleHoroscopeResource,
   charts: handleChartsResource,
+  humanDesign: handleHumanDesignResource,
+  numerology: handleNumerologyResource,
 };
 
 export class Astrology implements INodeType {
@@ -65,6 +71,8 @@ export class Astrology implements INodeType {
       ...dataOperations,
       ...horoscopeOperations,
       ...chartsOperations,
+      ...humanDesignOperations,
+      ...numerologyOperations,
     ],
   };
 

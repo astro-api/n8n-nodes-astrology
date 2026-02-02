@@ -28,7 +28,12 @@ export interface ISubjectRequest {
 /**
  * Resource types available in the node
  */
-export type ResourceType = "data" | "horoscope" | "charts";
+export type ResourceType =
+  | "data"
+  | "horoscope"
+  | "charts"
+  | "humanDesign"
+  | "numerology";
 
 /**
  * Data resource operations
@@ -81,6 +86,46 @@ export type ChartsOperation =
   | "progressions"
   | "natalTransits"
   | "directions";
+
+/**
+ * Human Design resource operations
+ */
+export type HumanDesignOperation =
+  | "glossaryChannels"
+  | "glossaryGates"
+  | "glossaryTypes"
+  | "bodygraph"
+  | "compatibility"
+  | "designDate"
+  | "transits"
+  | "typeOnly";
+
+/**
+ * Numerology resource operations
+ */
+export type NumerologyOperation =
+  | "coreNumbers"
+  | "comprehensive"
+  | "compatibility";
+
+/**
+ * Human Design circuit types
+ */
+export type HumanDesignCircuit = "individual" | "collective" | "tribal";
+
+/**
+ * Human Design center types
+ */
+export type HumanDesignCenter =
+  | "head"
+  | "ajna"
+  | "throat"
+  | "g_center"
+  | "heart"
+  | "sacral"
+  | "solar_plexus"
+  | "spleen"
+  | "root";
 
 /**
  * Transit time structure for transit chart requests
