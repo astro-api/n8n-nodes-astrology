@@ -16,7 +16,9 @@ const CHARTS_ENDPOINTS: Record<ChartsOperation, string> = {
   transit: "/api/v3/charts/transit",
   composite: "/api/v3/charts/composite",
   solarReturn: "/api/v3/charts/solar-return",
+  solarReturnTransits: "/api/v3/charts/solar-return-transits",
   lunarReturn: "/api/v3/charts/lunar-return",
+  lunarReturnTransits: "/api/v3/charts/lunar-return-transits",
   progressions: "/api/v3/charts/progressions",
   natalTransits: "/api/v3/charts/natal-transits",
   directions: "/api/v3/charts/directions",
@@ -155,8 +157,12 @@ export async function handleChartsResource(
       return handleCompositeChart(context);
     case "solarReturn":
       return handleSolarReturnChart(context);
+    case "solarReturnTransits":
+      return handleSolarReturnTransits(context);
     case "lunarReturn":
       return handleLunarReturnChart(context);
+    case "lunarReturnTransits":
+      return handleLunarReturnTransits(context);
     case "progressions":
       return handleProgressionsChart(context);
     case "natalTransits":
@@ -941,6 +947,184 @@ async function handleDirectionsChart(
     "POST",
     baseUrl,
     CHARTS_ENDPOINTS.directions,
+    apiKey,
+    body,
+  );
+
+  const simplify = executeFunctions.getNodeParameter(
+    "simplify",
+    itemIndex,
+    true,
+  ) as boolean;
+
+  return simplify ? simplifyResponse(responseData) : responseData;
+}
+
+/**
+ * Handles solar return transits (transits to solar return chart over a date range)
+ */
+async function handleSolarReturnTransits(
+  context: IHandlerContext,
+): Promise<IDataObject> {
+  const { executeFunctions, itemIndex, baseUrl, apiKey } = context;
+
+  // Build natal subject
+  const birthData = buildBirthData(executeFunctions, itemIndex);
+  const subjectName = executeFunctions.getNodeParameter(
+    "subjectName",
+    itemIndex,
+    "",
+  ) as string;
+
+  // Get return year
+  const returnYear = executeFunctions.getNodeParameter(
+    "returnYear",
+    itemIndex,
+  ) as number;
+
+  // Get date range
+  const startDate = executeFunctions.getNodeParameter(
+    "startDate",
+    itemIndex,
+  ) as string;
+  const endDate = executeFunctions.getNodeParameter(
+    "endDate",
+    itemIndex,
+  ) as string;
+
+  // Get orb
+  const orb = executeFunctions.getNodeParameter(
+    "orb",
+    itemIndex,
+    1.0,
+  ) as number;
+
+  // Build request body
+  const body: IDataObject = {
+    subject: {
+      birth_data: birthData,
+      ...(subjectName && { name: subjectName }),
+    },
+    return_year: returnYear,
+    date_range: { start_date: startDate, end_date: endDate },
+    orb,
+  };
+
+  // Handle relocated return location
+  const useRelocatedReturn = executeFunctions.getNodeParameter(
+    "useRelocatedReturn",
+    itemIndex,
+    false,
+  ) as boolean;
+
+  if (useRelocatedReturn) {
+    const returnLocationType = executeFunctions.getNodeParameter(
+      "returnLocationType",
+      itemIndex,
+    ) as string;
+
+    const returnLocation: IDataObject = {};
+
+    if (returnLocationType === "city") {
+      returnLocation.city = executeFunctions.getNodeParameter(
+        "returnCity",
+        itemIndex,
+      ) as string;
+      returnLocation.country_code = executeFunctions.getNodeParameter(
+        "returnCountryCode",
+        itemIndex,
+      ) as string;
+    } else {
+      returnLocation.latitude = executeFunctions.getNodeParameter(
+        "returnLatitude",
+        itemIndex,
+      ) as number;
+      returnLocation.longitude = executeFunctions.getNodeParameter(
+        "returnLongitude",
+        itemIndex,
+      ) as number;
+    }
+
+    body.return_location = returnLocation;
+  }
+
+  const responseData = await makeApiRequest(
+    executeFunctions,
+    "POST",
+    baseUrl,
+    CHARTS_ENDPOINTS.solarReturnTransits,
+    apiKey,
+    body,
+  );
+
+  const simplify = executeFunctions.getNodeParameter(
+    "simplify",
+    itemIndex,
+    true,
+  ) as boolean;
+
+  return simplify ? simplifyResponse(responseData) : responseData;
+}
+
+/**
+ * Handles lunar return transits (transits to lunar return chart over a date range)
+ */
+async function handleLunarReturnTransits(
+  context: IHandlerContext,
+): Promise<IDataObject> {
+  const { executeFunctions, itemIndex, baseUrl, apiKey } = context;
+
+  // Build natal subject
+  const birthData = buildBirthData(executeFunctions, itemIndex);
+  const subjectName = executeFunctions.getNodeParameter(
+    "subjectName",
+    itemIndex,
+    "",
+  ) as string;
+
+  // Get return date (optional)
+  const lunarReturnDate = executeFunctions.getNodeParameter(
+    "lunarReturnDate",
+    itemIndex,
+    "",
+  ) as string;
+
+  // Get date range
+  const startDate = executeFunctions.getNodeParameter(
+    "startDate",
+    itemIndex,
+  ) as string;
+  const endDate = executeFunctions.getNodeParameter(
+    "endDate",
+    itemIndex,
+  ) as string;
+
+  // Get orb
+  const orb = executeFunctions.getNodeParameter(
+    "orb",
+    itemIndex,
+    1.0,
+  ) as number;
+
+  // Build request body
+  const body: IDataObject = {
+    subject: {
+      birth_data: birthData,
+      ...(subjectName && { name: subjectName }),
+    },
+    date_range: { start_date: startDate, end_date: endDate },
+    orb,
+  };
+
+  if (lunarReturnDate) {
+    body.return_date = lunarReturnDate;
+  }
+
+  const responseData = await makeApiRequest(
+    executeFunctions,
+    "POST",
+    baseUrl,
+    CHARTS_ENDPOINTS.lunarReturnTransits,
     apiKey,
     body,
   );

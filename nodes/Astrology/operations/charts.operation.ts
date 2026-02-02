@@ -17,7 +17,9 @@ const birthDataOperations = [
   "transit",
   "composite",
   "solarReturn",
+  "solarReturnTransits",
   "lunarReturn",
+  "lunarReturnTransits",
   "progressions",
   "natalTransits",
   "directions",
@@ -30,16 +32,23 @@ const twoPersonOperations = ["synastry", "composite"];
 const transitOperations = ["transit"];
 
 // Solar return operations
-const solarReturnOperations = ["solarReturn"];
+const solarReturnOperations = ["solarReturn", "solarReturnTransits"];
 
 // Lunar return operations
-const lunarReturnOperations = ["lunarReturn"];
+const lunarReturnOperations = ["lunarReturn", "lunarReturnTransits"];
+
+// Return transit operations (need orb field)
+const returnTransitOperations = ["solarReturnTransits", "lunarReturnTransits"];
 
 // Date-based operations (single target date)
 const dateBasedOperations = ["progressions", "directions"];
 
 // Date range operations
-const dateRangeOperations = ["natalTransits"];
+const dateRangeOperations = [
+  "natalTransits",
+  "solarReturnTransits",
+  "lunarReturnTransits",
+];
 
 /**
  * All available active points for natal chart
@@ -166,6 +175,13 @@ const chartsOperationField: INodeProperties = {
       action: "Generate lunar return chart",
     },
     {
+      name: "Lunar Return Transits",
+      value: "lunarReturnTransits",
+      description:
+        "Analyze transits to lunar return chart - timing events within your lunar month cycle",
+      action: "Get lunar return transits",
+    },
+    {
       name: "Natal Chart",
       value: "natal",
       description:
@@ -192,6 +208,13 @@ const chartsOperationField: INodeProperties = {
       description:
         "Generate a birthday chart showing themes and predictions for the coming year based on Sun return",
       action: "Generate solar return chart",
+    },
+    {
+      name: "Solar Return Transits",
+      value: "solarReturnTransits",
+      description:
+        "Analyze transits to solar return chart - timing events within your birthday year",
+      action: "Get solar return transits",
     },
     {
       name: "Synastry Chart",
@@ -768,6 +791,29 @@ const simplifyField: INodeProperties = {
 };
 
 /**
+ * Orb field for return transit operations
+ */
+const orbField: INodeProperties = {
+  displayName: "Orb (Degrees)",
+  name: "orb",
+  type: "number",
+  displayOptions: {
+    show: {
+      resource: ["charts"],
+      operation: returnTransitOperations,
+    },
+  },
+  default: 1.0,
+  typeOptions: {
+    minValue: 0.1,
+    maxValue: 10,
+    numberPrecision: 1,
+  },
+  description:
+    "Maximum orb in degrees for aspect exactness. Smaller orbs find fewer but more precise transits.",
+};
+
+/**
  * Combined charts operations export
  */
 export const chartsOperations: INodeProperties[] = [
@@ -800,8 +846,11 @@ export const chartsOperations: INodeProperties[] = [
   // Progression/Direction date field
   targetDateField,
 
-  // Date range fields (for natalTransits)
+  // Date range fields (for natalTransits, solarReturnTransits, lunarReturnTransits)
   ...createDateRangeFields("charts", dateRangeOperations),
+
+  // Orb field (for return transit operations)
+  orbField,
 
   // Chart options (for most operations)
   houseSystemField,
