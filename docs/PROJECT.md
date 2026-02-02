@@ -7,8 +7,8 @@
 | Data | ✅ Complete | 9/9 | |
 | Horoscope | ✅ Complete | 17/17 | |
 | Charts | ✅ Complete | 11/11 | |
-| Human Design | ⬜ Not started | 0/8 | 🔴 High |
-| Numerology | ⬜ Not started | 0/3 | 🔴 High |
+| Human Design | ✅ Complete | 8/8 | |
+| Numerology | ✅ Complete | 3/3 | |
 | Tarot | ⬜ Not started | 0/19 | 🟠 Medium |
 | Lunar | ⬜ Not started | 0/5 | 🟠 Medium |
 | Vedic | ⬜ Not started | 0/22 | 🟠 Medium |
@@ -27,7 +27,7 @@
 | Glossary | ⬜ Not started | 0/14 | 🔵 Future |
 | Eclipses | ⬜ Not started | 0/3 | 🔵 Future |
 | Ziwei | ⬜ Not started | 0/1 | 🔵 Future |
-| **Total** | | **37/237** | |
+| **Total** | | **48/237** | |
 
 ### Priority Legend
 
@@ -56,11 +56,15 @@ n8n-nodes-astrology/
 │   │   ├── resource.options.ts
 │   │   ├── data.operation.ts
 │   │   ├── horoscope.operation.ts
-│   │   └── charts.operation.ts
+│   │   ├── charts.operation.ts
+│   │   ├── humanDesign.operation.ts
+│   │   └── numerology.operation.ts
 │   └── handlers/                      # Execute logic
 │       ├── data.handler.ts
 │       ├── horoscope.handler.ts
-│       └── charts.handler.ts
+│       ├── charts.handler.ts
+│       ├── humanDesign.handler.ts
+│       └── numerology.handler.ts
 ├── examples/                          # Workflow examples
 ├── docker/                            # Test environment
 └── dist/                              # Compiled output
