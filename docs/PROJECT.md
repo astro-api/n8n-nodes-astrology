@@ -6,7 +6,7 @@
 |----------|--------|-----------|----------|
 | Data | ✅ Complete | 9/9 | |
 | Horoscope | ✅ Complete | 17/17 | |
-| Charts | ⚠️ Partial | 9/11 | |
+| Charts | ✅ Complete | 11/11 | |
 | Human Design | ⬜ Not started | 0/8 | 🔴 High |
 | Numerology | ⬜ Not started | 0/3 | 🔴 High |
 | Tarot | ⬜ Not started | 0/19 | 🟠 Medium |
@@ -27,7 +27,7 @@
 | Glossary | ⬜ Not started | 0/14 | 🔵 Future |
 | Eclipses | ⬜ Not started | 0/3 | 🔵 Future |
 | Ziwei | ⬜ Not started | 0/1 | 🔵 Future |
-| **Total** | | **35/237** | |
+| **Total** | | **37/237** | |
 
 ### Priority Legend
 

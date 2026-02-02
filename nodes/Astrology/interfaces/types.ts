@@ -75,7 +75,9 @@ export type ChartsOperation =
   | "transit"
   | "composite"
   | "solarReturn"
+  | "solarReturnTransits"
   | "lunarReturn"
+  | "lunarReturnTransits"
   | "progressions"
   | "natalTransits"
   | "directions";
