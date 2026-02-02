@@ -5,6 +5,7 @@ import {
   createSecondSubjectFields,
   createTransitTimeFields,
   createDateRangeFields,
+  createSimplifyField,
 } from "../shared";
 
 /**
@@ -774,23 +775,6 @@ const targetDateField: INodeProperties = {
 };
 
 /**
- * Simplify output toggle for charts resource
- */
-const simplifyField: INodeProperties = {
-  displayName: "Simplify",
-  name: "simplify",
-  type: "boolean",
-  displayOptions: {
-    show: {
-      resource: ["charts"],
-    },
-  },
-  default: true,
-  description:
-    "Whether to return simplified response with key data only. Disable for full API response with all metadata.",
-};
-
-/**
  * Orb field for return transit operations
  */
 const orbField: INodeProperties = {
@@ -859,7 +843,7 @@ export const chartsOperations: INodeProperties[] = [
   customActivePointsField,
   perspectiveField,
   precisionField,
-  simplifyField,
+  createSimplifyField("charts"),
 
   // Advanced options
   showAdvancedOptionsField,

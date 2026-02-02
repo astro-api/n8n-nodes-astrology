@@ -51,11 +51,15 @@ nodes/Astrology/
 │   ├── index.ts            # Barrel export
 │   └── types.ts            # IBirthData, IHandlerContext, ResourceType, etc.
 ├── shared/                 # Reusable field definitions and helpers
-│   ├── index.ts            # Barrel export
+│   ├── index.ts            # Barrel export for all shared utilities
 │   ├── birthData.fields.ts # createBirthDataFields()
 │   ├── location.fields.ts  # createLocationFields()
 │   ├── zodiac.fields.ts    # createZodiacSignField(), createTraditionField()
-│   └── helpers.ts          # buildBirthData(), makeApiRequest()
+│   ├── simplify.fields.ts  # createSimplifyField()
+│   ├── secondSubject.fields.ts # createSecondSubjectFields()
+│   ├── transitTime.fields.ts   # createTransitTimeFields()
+│   ├── tarot.fields.ts     # Tarot-specific field creators
+│   └── helpers.ts          # Shared handler utilities (see below)
 ├── operations/             # UI parameter definitions by resource
 │   ├── index.ts            # Barrel export
 │   ├── resource.options.ts # Resource selector field
@@ -73,7 +77,9 @@ nodes/Astrology/
 
 - **credentials/** - Credential type definitions. `AstrologyApi.credentials.ts` defines API key and base URL fields.
 - **interfaces/** - TypeScript interfaces and types for type safety across the module.
-- **shared/** - Reusable field creators (`createBirthDataFields()`, `createLocationFields()`) to avoid code duplication when adding new resources.
+- **shared/** - Reusable field creators and handler utilities to avoid code duplication:
+  - **Field creators:** `createBirthDataFields()`, `createLocationFields()`, `createSimplifyField()`, `createSecondSubjectFields()`, `createTransitTimeFields()`
+  - **Handler helpers:** `buildBirthData()`, `buildSecondSubjectBirthData()`, `buildTransitTime()`, `buildReturnLocation()`, `makeApiRequest()`, `applySimplifyIfEnabled()`
 - **operations/** - UI parameter definitions organized by resource type. These export `INodeProperties[]` arrays that are spread into the main node's properties.
 - **handlers/** - Execute logic separated by resource. The main node uses a router pattern to delegate to the appropriate handler.
 
@@ -156,12 +162,65 @@ See `examples/ai-astrologer-assistant.json` for a complete working example.
 
 ### Adding a New Resource
 
-1. Create `operations/newResource.operation.ts` with operation definitions
-2. Create `handlers/newResource.handler.ts` with execute logic
-3. Add resource to `operations/resource.options.ts`
-4. Export from barrel files (`operations/index.ts`, `handlers/index.ts`)
-5. Add handler to `resourceHandlers` map in `Astrology.node.ts`
-6. Use shared field creators for common fields (birthData, location, etc.)
+1. **Check existing code first** - Review `shared/` for reusable utilities before writing new code
+2. Create `operations/newResource.operation.ts` with operation definitions
+3. Create `handlers/newResource.handler.ts` with execute logic
+4. Add resource to `operations/resource.options.ts`
+5. Export from barrel files (`operations/index.ts`, `handlers/index.ts`)
+6. Add handler to `resourceHandlers` map in `Astrology.node.ts`
+7. Use shared field creators for common fields (birthData, location, simplify, etc.)
+8. Use shared handler helpers (`applySimplifyIfEnabled`, `buildBirthData`, etc.)
+
+## Code Reuse Guidelines
+
+**IMPORTANT:** Before writing new code, always check `shared/` directory for existing utilities.
+
+### Available Field Creators (for operations/*.ts)
+
+| Function | Purpose | Usage |
+|----------|---------|-------|
+| `createBirthDataFields(resource, operations)` | Birth date/time/location fields | All resources needing birth data |
+| `createLocationFields(prefix, resource, operations)` | City/coordinates location fields | Standalone location inputs |
+| `createSimplifyField(resource, hideForOps?)` | "Simplify" toggle for API responses | All resources with simplify option |
+| `createSecondSubjectFields(resource, operations)` | Second person's birth data | Synastry, compatibility operations |
+| `createTransitTimeFields(resource, operations)` | Transit datetime fields | Transit chart operations |
+| `createZodiacSignField(resource, operations)` | Zodiac sign dropdown | Horoscope operations |
+
+### Available Handler Helpers (for handlers/*.ts)
+
+| Function | Purpose | Returns |
+|----------|---------|---------|
+| `buildBirthData(execFns, itemIndex)` | Extract birth data from node params | `IBirthData` |
+| `buildSecondSubjectBirthData(execFns, itemIndex, dateOnly?)` | Extract second subject's birth data | `IBirthData` |
+| `buildTransitTime(execFns, itemIndex)` | Extract transit time from params | `ITransitTime` |
+| `buildReturnLocation(execFns, itemIndex)` | Extract return location (if enabled) | `IDataObject \| undefined` |
+| `makeApiRequest(execFns, method, baseUrl, endpoint, apiKey, body?)` | Make authenticated API call | `Promise<IDataObject>` |
+| `applySimplifyIfEnabled(execFns, itemIndex, responseData)` | Conditionally simplify response | `IDataObject` |
+| `createSubjectRequest(birthData, additionalFields?)` | Wrap birth data in subject object | `IDataObject` |
+
+### Anti-Patterns to Avoid
+
+```typescript
+// ❌ BAD: Duplicating simplify logic
+const simplify = executeFunctions.getNodeParameter("simplify", itemIndex, true) as boolean;
+return simplify ? simplifyResponse(responseData) : responseData;
+
+// ✅ GOOD: Use shared helper
+return applySimplifyIfEnabled(executeFunctions, itemIndex, responseData);
+```
+
+```typescript
+// ❌ BAD: Inline field definitions
+const simplifyField: INodeProperties = {
+  displayName: "Simplify",
+  name: "simplify",
+  type: "boolean",
+  // ... repeated in every operation file
+};
+
+// ✅ GOOD: Use factory function
+createSimplifyField("data", ["now"])
+```
 
 ## Documentation & Best Practices
 

@@ -1,11 +1,13 @@
 import type { IDataObject, IExecuteFunctions } from "n8n-workflow";
-import type {
-  IHandlerContext,
-  ChartsOperation,
-  IBirthData,
-  ITransitTime,
-} from "../interfaces/types";
-import { buildBirthData, makeApiRequest, simplifyResponse } from "../shared";
+import type { IHandlerContext, ChartsOperation } from "../interfaces/types";
+import {
+  buildBirthData,
+  makeApiRequest,
+  applySimplifyIfEnabled,
+  buildSecondSubjectBirthData,
+  buildTransitTime,
+  buildReturnLocation,
+} from "../shared";
 
 /**
  * Endpoint mapping for chart operations
@@ -322,117 +324,7 @@ async function handleNatalChart(
     body,
   );
 
-  const simplify = executeFunctions.getNodeParameter(
-    "simplify",
-    itemIndex,
-    true,
-  ) as boolean;
-
-  return simplify ? simplifyResponse(responseData) : responseData;
-}
-
-/**
- * Builds second subject birth data from subject2* prefixed fields
- */
-function buildSecondSubjectBirthData(
-  executeFunctions: IExecuteFunctions,
-  itemIndex: number,
-): IBirthData {
-  const locationType = executeFunctions.getNodeParameter(
-    "subject2LocationType",
-    itemIndex,
-  ) as string;
-
-  const birthData: IBirthData = {
-    year: executeFunctions.getNodeParameter(
-      "subject2Year",
-      itemIndex,
-    ) as number,
-    month: executeFunctions.getNodeParameter(
-      "subject2Month",
-      itemIndex,
-    ) as number,
-    day: executeFunctions.getNodeParameter("subject2Day", itemIndex) as number,
-    hour: executeFunctions.getNodeParameter(
-      "subject2Hour",
-      itemIndex,
-    ) as number,
-    minute: executeFunctions.getNodeParameter(
-      "subject2Minute",
-      itemIndex,
-    ) as number,
-  };
-
-  if (locationType === "city") {
-    birthData.city = executeFunctions.getNodeParameter(
-      "subject2City",
-      itemIndex,
-    ) as string;
-    birthData.country_code = executeFunctions.getNodeParameter(
-      "subject2CountryCode",
-      itemIndex,
-    ) as string;
-  } else {
-    birthData.latitude = executeFunctions.getNodeParameter(
-      "subject2Latitude",
-      itemIndex,
-    ) as number;
-    birthData.longitude = executeFunctions.getNodeParameter(
-      "subject2Longitude",
-      itemIndex,
-    ) as number;
-  }
-
-  return birthData;
-}
-
-/**
- * Builds transit time object from transit* prefixed fields
- */
-function buildTransitTime(
-  executeFunctions: IExecuteFunctions,
-  itemIndex: number,
-): ITransitTime {
-  const locationType = executeFunctions.getNodeParameter(
-    "transitLocationType",
-    itemIndex,
-  ) as string;
-
-  const transitTime: ITransitTime = {
-    year: executeFunctions.getNodeParameter("transitYear", itemIndex) as number,
-    month: executeFunctions.getNodeParameter(
-      "transitMonth",
-      itemIndex,
-    ) as number,
-    day: executeFunctions.getNodeParameter("transitDay", itemIndex) as number,
-    hour: executeFunctions.getNodeParameter("transitHour", itemIndex) as number,
-    minute: executeFunctions.getNodeParameter(
-      "transitMinute",
-      itemIndex,
-    ) as number,
-  };
-
-  if (locationType === "city") {
-    transitTime.city = executeFunctions.getNodeParameter(
-      "transitCity",
-      itemIndex,
-    ) as string;
-    transitTime.country_code = executeFunctions.getNodeParameter(
-      "transitCountryCode",
-      itemIndex,
-    ) as string;
-  } else {
-    transitTime.latitude = executeFunctions.getNodeParameter(
-      "transitLatitude",
-      itemIndex,
-    ) as number;
-    transitTime.longitude = executeFunctions.getNodeParameter(
-      "transitLongitude",
-      itemIndex,
-    ) as number;
-  }
-
-  return transitTime;
+  return applySimplifyIfEnabled(executeFunctions, itemIndex, responseData);
 }
 
 /**
@@ -533,13 +425,7 @@ async function handleSynastryChart(
     body,
   );
 
-  const simplify = executeFunctions.getNodeParameter(
-    "simplify",
-    itemIndex,
-    true,
-  ) as boolean;
-
-  return simplify ? simplifyResponse(responseData) : responseData;
+  return applySimplifyIfEnabled(executeFunctions, itemIndex, responseData);
 }
 
 /**
@@ -585,13 +471,7 @@ async function handleTransitChart(
     body,
   );
 
-  const simplify = executeFunctions.getNodeParameter(
-    "simplify",
-    itemIndex,
-    true,
-  ) as boolean;
-
-  return simplify ? simplifyResponse(responseData) : responseData;
+  return applySimplifyIfEnabled(executeFunctions, itemIndex, responseData);
 }
 
 /**
@@ -643,13 +523,7 @@ async function handleCompositeChart(
     body,
   );
 
-  const simplify = executeFunctions.getNodeParameter(
-    "simplify",
-    itemIndex,
-    true,
-  ) as boolean;
-
-  return simplify ? simplifyResponse(responseData) : responseData;
+  return applySimplifyIfEnabled(executeFunctions, itemIndex, responseData);
 }
 
 /**
@@ -688,40 +562,8 @@ async function handleSolarReturnChart(
   };
 
   // Handle relocated return location
-  const useRelocatedReturn = executeFunctions.getNodeParameter(
-    "useRelocatedReturn",
-    itemIndex,
-    false,
-  ) as boolean;
-
-  if (useRelocatedReturn) {
-    const returnLocationType = executeFunctions.getNodeParameter(
-      "returnLocationType",
-      itemIndex,
-    ) as string;
-
-    const returnLocation: IDataObject = {};
-
-    if (returnLocationType === "city") {
-      returnLocation.city = executeFunctions.getNodeParameter(
-        "returnCity",
-        itemIndex,
-      ) as string;
-      returnLocation.country_code = executeFunctions.getNodeParameter(
-        "returnCountryCode",
-        itemIndex,
-      ) as string;
-    } else {
-      returnLocation.latitude = executeFunctions.getNodeParameter(
-        "returnLatitude",
-        itemIndex,
-      ) as number;
-      returnLocation.longitude = executeFunctions.getNodeParameter(
-        "returnLongitude",
-        itemIndex,
-      ) as number;
-    }
-
+  const returnLocation = buildReturnLocation(executeFunctions, itemIndex);
+  if (returnLocation) {
     body.return_location = returnLocation;
   }
 
@@ -734,13 +576,7 @@ async function handleSolarReturnChart(
     body,
   );
 
-  const simplify = executeFunctions.getNodeParameter(
-    "simplify",
-    itemIndex,
-    true,
-  ) as boolean;
-
-  return simplify ? simplifyResponse(responseData) : responseData;
+  return applySimplifyIfEnabled(executeFunctions, itemIndex, responseData);
 }
 
 /**
@@ -791,13 +627,7 @@ async function handleLunarReturnChart(
     body,
   );
 
-  const simplify = executeFunctions.getNodeParameter(
-    "simplify",
-    itemIndex,
-    true,
-  ) as boolean;
-
-  return simplify ? simplifyResponse(responseData) : responseData;
+  return applySimplifyIfEnabled(executeFunctions, itemIndex, responseData);
 }
 
 /**
@@ -844,13 +674,7 @@ async function handleProgressionsChart(
     body,
   );
 
-  const simplify = executeFunctions.getNodeParameter(
-    "simplify",
-    itemIndex,
-    true,
-  ) as boolean;
-
-  return simplify ? simplifyResponse(responseData) : responseData;
+  return applySimplifyIfEnabled(executeFunctions, itemIndex, responseData);
 }
 
 /**
@@ -898,13 +722,7 @@ async function handleNatalTransits(
     body,
   );
 
-  const simplify = executeFunctions.getNodeParameter(
-    "simplify",
-    itemIndex,
-    true,
-  ) as boolean;
-
-  return simplify ? simplifyResponse(responseData) : responseData;
+  return applySimplifyIfEnabled(executeFunctions, itemIndex, responseData);
 }
 
 /**
@@ -951,13 +769,7 @@ async function handleDirectionsChart(
     body,
   );
 
-  const simplify = executeFunctions.getNodeParameter(
-    "simplify",
-    itemIndex,
-    true,
-  ) as boolean;
-
-  return simplify ? simplifyResponse(responseData) : responseData;
+  return applySimplifyIfEnabled(executeFunctions, itemIndex, responseData);
 }
 
 /**
@@ -1011,40 +823,8 @@ async function handleSolarReturnTransits(
   };
 
   // Handle relocated return location
-  const useRelocatedReturn = executeFunctions.getNodeParameter(
-    "useRelocatedReturn",
-    itemIndex,
-    false,
-  ) as boolean;
-
-  if (useRelocatedReturn) {
-    const returnLocationType = executeFunctions.getNodeParameter(
-      "returnLocationType",
-      itemIndex,
-    ) as string;
-
-    const returnLocation: IDataObject = {};
-
-    if (returnLocationType === "city") {
-      returnLocation.city = executeFunctions.getNodeParameter(
-        "returnCity",
-        itemIndex,
-      ) as string;
-      returnLocation.country_code = executeFunctions.getNodeParameter(
-        "returnCountryCode",
-        itemIndex,
-      ) as string;
-    } else {
-      returnLocation.latitude = executeFunctions.getNodeParameter(
-        "returnLatitude",
-        itemIndex,
-      ) as number;
-      returnLocation.longitude = executeFunctions.getNodeParameter(
-        "returnLongitude",
-        itemIndex,
-      ) as number;
-    }
-
+  const returnLocation = buildReturnLocation(executeFunctions, itemIndex);
+  if (returnLocation) {
     body.return_location = returnLocation;
   }
 
@@ -1057,13 +837,7 @@ async function handleSolarReturnTransits(
     body,
   );
 
-  const simplify = executeFunctions.getNodeParameter(
-    "simplify",
-    itemIndex,
-    true,
-  ) as boolean;
-
-  return simplify ? simplifyResponse(responseData) : responseData;
+  return applySimplifyIfEnabled(executeFunctions, itemIndex, responseData);
 }
 
 /**
@@ -1129,11 +903,5 @@ async function handleLunarReturnTransits(
     body,
   );
 
-  const simplify = executeFunctions.getNodeParameter(
-    "simplify",
-    itemIndex,
-    true,
-  ) as boolean;
-
-  return simplify ? simplifyResponse(responseData) : responseData;
+  return applySimplifyIfEnabled(executeFunctions, itemIndex, responseData);
 }

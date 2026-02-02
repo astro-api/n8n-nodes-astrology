@@ -1,6 +1,7 @@
 // Shared field creators
 export { createBirthDataFields } from "./birthData.fields";
 export { createLocationFields } from "./location.fields";
+export { createSimplifyField } from "./simplify.fields";
 export {
   zodiacSignOptions,
   createZodiacSignField,
@@ -33,4 +34,8 @@ export {
   makeApiRequest,
   createSubjectRequest,
   simplifyResponse,
+  applySimplifyIfEnabled,
+  buildSecondSubjectBirthData,
+  buildTransitTime,
+  buildReturnLocation,
 } from "./helpers";

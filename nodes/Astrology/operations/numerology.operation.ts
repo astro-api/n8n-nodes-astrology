@@ -2,6 +2,7 @@ import type { INodeProperties } from "n8n-workflow";
 import {
   createLanguageField,
   createIncludeInterpretationsField,
+  createSimplifyField,
 } from "../shared";
 
 /**
@@ -217,23 +218,6 @@ const subject2DayField: INodeProperties = {
 };
 
 /**
- * Simplify output toggle for Numerology
- */
-const simplifyField: INodeProperties = {
-  displayName: "Simplify",
-  name: "simplify",
-  type: "boolean",
-  displayOptions: {
-    show: {
-      resource: ["numerology"],
-    },
-  },
-  default: true,
-  description:
-    "Whether to return simplified response with key data only. Disable for full API response.",
-};
-
-/**
  * All properties for the Numerology resource
  */
 export const numerologyOperations: INodeProperties[] = [
@@ -258,5 +242,5 @@ export const numerologyOperations: INodeProperties[] = [
   createIncludeInterpretationsField("numerology"),
 
   // Simplify output
-  simplifyField,
+  createSimplifyField("numerology"),
 ];

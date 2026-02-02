@@ -5,6 +5,7 @@ import {
   createSecondSubjectFields,
   createLanguageField,
   createIncludeInterpretationsField,
+  createSimplifyField,
 } from "../shared";
 
 /**
@@ -248,26 +249,6 @@ const includeVariablesField: INodeProperties = {
 };
 
 /**
- * Simplify output toggle for Human Design
- */
-const simplifyField: INodeProperties = {
-  displayName: "Simplify",
-  name: "simplify",
-  type: "boolean",
-  displayOptions: {
-    show: {
-      resource: ["humanDesign"],
-    },
-    hide: {
-      operation: glossaryOperations,
-    },
-  },
-  default: true,
-  description:
-    "Whether to return simplified response with key data only. Disable for full API response.",
-};
-
-/**
  * All properties for the Human Design resource
  */
 export const humanDesignOperations: INodeProperties[] = [
@@ -300,6 +281,6 @@ export const humanDesignOperations: INodeProperties[] = [
   includeVariablesField,
   createIncludeInterpretationsField("humanDesign", birthDataOperations),
 
-  // Simplify output
-  simplifyField,
+  // Simplify output (hidden for glossary operations)
+  createSimplifyField("humanDesign", glossaryOperations),
 ];

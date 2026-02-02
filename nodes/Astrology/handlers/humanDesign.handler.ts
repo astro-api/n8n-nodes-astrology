@@ -1,10 +1,14 @@
-import type { IDataObject, IExecuteFunctions } from "n8n-workflow";
+import type { IDataObject } from "n8n-workflow";
 import type {
   IHandlerContext,
   HumanDesignOperation,
-  IBirthData,
 } from "../interfaces/types";
-import { buildBirthData, makeApiRequest, simplifyResponse } from "../shared";
+import {
+  buildBirthData,
+  makeApiRequest,
+  applySimplifyIfEnabled,
+  buildSecondSubjectBirthData,
+} from "../shared";
 
 /**
  * Endpoint mapping for Human Design operations
@@ -217,68 +221,7 @@ async function handleBodygraph(context: IHandlerContext): Promise<IDataObject> {
     body,
   );
 
-  const simplify = executeFunctions.getNodeParameter(
-    "simplify",
-    itemIndex,
-    true,
-  ) as boolean;
-
-  return simplify ? simplifyResponse(responseData) : responseData;
-}
-
-/**
- * Builds second subject birth data from subject2* prefixed fields
- */
-function buildSecondSubjectBirthData(
-  executeFunctions: IExecuteFunctions,
-  itemIndex: number,
-): IBirthData {
-  const locationType = executeFunctions.getNodeParameter(
-    "subject2LocationType",
-    itemIndex,
-  ) as string;
-
-  const birthData: IBirthData = {
-    year: executeFunctions.getNodeParameter(
-      "subject2Year",
-      itemIndex,
-    ) as number,
-    month: executeFunctions.getNodeParameter(
-      "subject2Month",
-      itemIndex,
-    ) as number,
-    day: executeFunctions.getNodeParameter("subject2Day", itemIndex) as number,
-    hour: executeFunctions.getNodeParameter(
-      "subject2Hour",
-      itemIndex,
-    ) as number,
-    minute: executeFunctions.getNodeParameter(
-      "subject2Minute",
-      itemIndex,
-    ) as number,
-  };
-
-  if (locationType === "city") {
-    birthData.city = executeFunctions.getNodeParameter(
-      "subject2City",
-      itemIndex,
-    ) as string;
-    birthData.country_code = executeFunctions.getNodeParameter(
-      "subject2CountryCode",
-      itemIndex,
-    ) as string;
-  } else {
-    birthData.latitude = executeFunctions.getNodeParameter(
-      "subject2Latitude",
-      itemIndex,
-    ) as number;
-    birthData.longitude = executeFunctions.getNodeParameter(
-      "subject2Longitude",
-      itemIndex,
-    ) as number;
-  }
-
-  return birthData;
+  return applySimplifyIfEnabled(executeFunctions, itemIndex, responseData);
 }
 
 /**
@@ -352,13 +295,7 @@ async function handleCompatibility(
     body,
   );
 
-  const simplify = executeFunctions.getNodeParameter(
-    "simplify",
-    itemIndex,
-    true,
-  ) as boolean;
-
-  return simplify ? simplifyResponse(responseData) : responseData;
+  return applySimplifyIfEnabled(executeFunctions, itemIndex, responseData);
 }
 
 /**
@@ -394,13 +331,7 @@ async function handleDesignDate(
     body,
   );
 
-  const simplify = executeFunctions.getNodeParameter(
-    "simplify",
-    itemIndex,
-    true,
-  ) as boolean;
-
-  return simplify ? simplifyResponse(responseData) : responseData;
+  return applySimplifyIfEnabled(executeFunctions, itemIndex, responseData);
 }
 
 /**
@@ -462,13 +393,7 @@ async function handleTransits(context: IHandlerContext): Promise<IDataObject> {
     body,
   );
 
-  const simplify = executeFunctions.getNodeParameter(
-    "simplify",
-    itemIndex,
-    true,
-  ) as boolean;
-
-  return simplify ? simplifyResponse(responseData) : responseData;
+  return applySimplifyIfEnabled(executeFunctions, itemIndex, responseData);
 }
 
 /**
@@ -502,11 +427,5 @@ async function handleTypeOnly(context: IHandlerContext): Promise<IDataObject> {
     body,
   );
 
-  const simplify = executeFunctions.getNodeParameter(
-    "simplify",
-    itemIndex,
-    true,
-  ) as boolean;
-
-  return simplify ? simplifyResponse(responseData) : responseData;
+  return applySimplifyIfEnabled(executeFunctions, itemIndex, responseData);
 }
