@@ -1,6 +1,10 @@
 import type { IDataObject } from "n8n-workflow";
 import type { IHandlerContext, NumerologyOperation } from "../interfaces/types";
-import { makeApiRequest, simplifyResponse } from "../shared";
+import {
+  makeApiRequest,
+  applySimplifyIfEnabled,
+  buildSecondSubjectBirthData,
+} from "../shared";
 
 /**
  * Endpoint mapping for Numerology operations
@@ -52,25 +56,6 @@ function buildNumerologyBirthData(context: IHandlerContext): IDataObject {
 }
 
 /**
- * Builds second subject birth data for compatibility
- */
-function buildSecondSubjectBirthData(context: IHandlerContext): IDataObject {
-  const { executeFunctions, itemIndex } = context;
-
-  return {
-    year: executeFunctions.getNodeParameter(
-      "subject2Year",
-      itemIndex,
-    ) as number,
-    month: executeFunctions.getNodeParameter(
-      "subject2Month",
-      itemIndex,
-    ) as number,
-    day: executeFunctions.getNodeParameter("subject2Day", itemIndex) as number,
-  };
-}
-
-/**
  * Handles core numbers calculation (POST)
  */
 async function handleCoreNumbers(
@@ -118,13 +103,7 @@ async function handleCoreNumbers(
     body,
   );
 
-  const simplify = executeFunctions.getNodeParameter(
-    "simplify",
-    itemIndex,
-    true,
-  ) as boolean;
-
-  return simplify ? simplifyResponse(responseData) : responseData;
+  return applySimplifyIfEnabled(executeFunctions, itemIndex, responseData);
 }
 
 /**
@@ -175,13 +154,7 @@ async function handleComprehensive(
     body,
   );
 
-  const simplify = executeFunctions.getNodeParameter(
-    "simplify",
-    itemIndex,
-    true,
-  ) as boolean;
-
-  return simplify ? simplifyResponse(responseData) : responseData;
+  return applySimplifyIfEnabled(executeFunctions, itemIndex, responseData);
 }
 
 /**
@@ -204,7 +177,11 @@ async function handleCompatibility(
     "subject2Name",
     itemIndex,
   ) as string;
-  const birthData2 = buildSecondSubjectBirthData(context);
+  const birthData2 = buildSecondSubjectBirthData(
+    executeFunctions,
+    itemIndex,
+    true,
+  );
 
   // Get options
   const language = executeFunctions.getNodeParameter(
@@ -245,11 +222,5 @@ async function handleCompatibility(
     body,
   );
 
-  const simplify = executeFunctions.getNodeParameter(
-    "simplify",
-    itemIndex,
-    true,
-  ) as boolean;
-
-  return simplify ? simplifyResponse(responseData) : responseData;
+  return applySimplifyIfEnabled(executeFunctions, itemIndex, responseData);
 }

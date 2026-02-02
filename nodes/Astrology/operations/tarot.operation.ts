@@ -10,6 +10,7 @@ import {
   createTarotTraditionField,
   createInterpretationDepthField,
   createTarotOptionsFields,
+  createSimplifyField,
 } from "../shared";
 
 /**
@@ -545,26 +546,6 @@ const cardsInputField: INodeProperties = {
 };
 
 /**
- * Simplify output toggle
- */
-const simplifyField: INodeProperties = {
-  displayName: "Simplify",
-  name: "simplify",
-  type: "boolean",
-  displayOptions: {
-    show: {
-      resource: ["tarot"],
-    },
-    hide: {
-      operation: glossaryOperations,
-    },
-  },
-  default: true,
-  description:
-    "Whether to return simplified response with key data only. Disable for full API response.",
-};
-
-/**
  * All properties for the Tarot resource
  */
 export const tarotOperations: INodeProperties[] = [
@@ -623,6 +604,6 @@ export const tarotOperations: INodeProperties[] = [
     ...analysisOperations,
   ]),
 
-  // Simplify output
-  simplifyField,
+  // Simplify output (hidden for glossary operations)
+  createSimplifyField("tarot", glossaryOperations),
 ];

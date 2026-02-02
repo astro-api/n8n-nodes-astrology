@@ -4,7 +4,7 @@ import {
   buildBirthData,
   makeApiRequest,
   createSubjectRequest,
-  simplifyResponse,
+  applySimplifyIfEnabled,
 } from "../shared";
 
 /**
@@ -76,12 +76,7 @@ export async function handleDataResource(
       body,
     );
 
-    const simplify = executeFunctions.getNodeParameter(
-      "simplify",
-      itemIndex,
-      true,
-    ) as boolean;
-    return simplify ? simplifyResponse(responseData) : responseData;
+    return applySimplifyIfEnabled(executeFunctions, itemIndex, responseData);
   }
 
   // All other operations require birth data with location
@@ -98,11 +93,5 @@ export async function handleDataResource(
     body,
   );
 
-  const simplify = executeFunctions.getNodeParameter(
-    "simplify",
-    itemIndex,
-    true,
-  ) as boolean;
-
-  return simplify ? simplifyResponse(responseData) : responseData;
+  return applySimplifyIfEnabled(executeFunctions, itemIndex, responseData);
 }

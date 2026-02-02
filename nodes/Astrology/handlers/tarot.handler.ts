@@ -1,10 +1,11 @@
 import type { IDataObject, IExecuteFunctions } from "n8n-workflow";
-import type {
-  IHandlerContext,
-  TarotOperation,
-  IBirthData,
-} from "../interfaces/types";
-import { buildBirthData, makeApiRequest, simplifyResponse } from "../shared";
+import type { IHandlerContext, TarotOperation } from "../interfaces/types";
+import {
+  buildBirthData,
+  makeApiRequest,
+  applySimplifyIfEnabled,
+  buildSecondSubjectBirthData,
+} from "../shared";
 
 /**
  * Endpoint mapping for Tarot operations
@@ -141,61 +142,6 @@ function buildTarotOptions(
       "en",
     ) as string,
   };
-}
-
-/**
- * Builds second subject birth data from subject2* prefixed fields
- */
-function buildSecondSubjectBirthData(
-  executeFunctions: IExecuteFunctions,
-  itemIndex: number,
-): IBirthData {
-  const locationType = executeFunctions.getNodeParameter(
-    "subject2LocationType",
-    itemIndex,
-  ) as string;
-
-  const birthData: IBirthData = {
-    year: executeFunctions.getNodeParameter(
-      "subject2Year",
-      itemIndex,
-    ) as number,
-    month: executeFunctions.getNodeParameter(
-      "subject2Month",
-      itemIndex,
-    ) as number,
-    day: executeFunctions.getNodeParameter("subject2Day", itemIndex) as number,
-    hour: executeFunctions.getNodeParameter(
-      "subject2Hour",
-      itemIndex,
-    ) as number,
-    minute: executeFunctions.getNodeParameter(
-      "subject2Minute",
-      itemIndex,
-    ) as number,
-  };
-
-  if (locationType === "city") {
-    birthData.city = executeFunctions.getNodeParameter(
-      "subject2City",
-      itemIndex,
-    ) as string;
-    birthData.country_code = executeFunctions.getNodeParameter(
-      "subject2CountryCode",
-      itemIndex,
-    ) as string;
-  } else {
-    birthData.latitude = executeFunctions.getNodeParameter(
-      "subject2Latitude",
-      itemIndex,
-    ) as number;
-    birthData.longitude = executeFunctions.getNodeParameter(
-      "subject2Longitude",
-      itemIndex,
-    ) as number;
-  }
-
-  return birthData;
 }
 
 /**
@@ -516,13 +462,7 @@ async function handleDrawCards(context: IHandlerContext): Promise<IDataObject> {
     body,
   );
 
-  const simplify = executeFunctions.getNodeParameter(
-    "simplify",
-    itemIndex,
-    true,
-  ) as boolean;
-
-  return simplify ? simplifyResponse(responseData) : responseData;
+  return applySimplifyIfEnabled(executeFunctions, itemIndex, responseData);
 }
 
 /**
@@ -563,13 +503,7 @@ async function handleReport(
     body,
   );
 
-  const simplify = executeFunctions.getNodeParameter(
-    "simplify",
-    itemIndex,
-    true,
-  ) as boolean;
-
-  return simplify ? simplifyResponse(responseData) : responseData;
+  return applySimplifyIfEnabled(executeFunctions, itemIndex, responseData);
 }
 
 /**
@@ -613,13 +547,7 @@ async function handleReportSynastry(
     body,
   );
 
-  const simplify = executeFunctions.getNodeParameter(
-    "simplify",
-    itemIndex,
-    true,
-  ) as boolean;
-
-  return simplify ? simplifyResponse(responseData) : responseData;
+  return applySimplifyIfEnabled(executeFunctions, itemIndex, responseData);
 }
 
 /**
@@ -658,13 +586,7 @@ async function handleAnalysisWithCards(
     body,
   );
 
-  const simplify = executeFunctions.getNodeParameter(
-    "simplify",
-    itemIndex,
-    true,
-  ) as boolean;
-
-  return simplify ? simplifyResponse(responseData) : responseData;
+  return applySimplifyIfEnabled(executeFunctions, itemIndex, responseData);
 }
 
 /**
@@ -695,13 +617,7 @@ async function handleAnalysisBirthCards(
     body,
   );
 
-  const simplify = executeFunctions.getNodeParameter(
-    "simplify",
-    itemIndex,
-    true,
-  ) as boolean;
-
-  return simplify ? simplifyResponse(responseData) : responseData;
+  return applySimplifyIfEnabled(executeFunctions, itemIndex, responseData);
 }
 
 /**
@@ -728,13 +644,7 @@ async function handleAnalysisOptimalTimes(
     body,
   );
 
-  const simplify = executeFunctions.getNodeParameter(
-    "simplify",
-    itemIndex,
-    true,
-  ) as boolean;
-
-  return simplify ? simplifyResponse(responseData) : responseData;
+  return applySimplifyIfEnabled(executeFunctions, itemIndex, responseData);
 }
 
 /**
@@ -765,13 +675,7 @@ async function handleAnalysisTransitReport(
     body,
   );
 
-  const simplify = executeFunctions.getNodeParameter(
-    "simplify",
-    itemIndex,
-    true,
-  ) as boolean;
-
-  return simplify ? simplifyResponse(responseData) : responseData;
+  return applySimplifyIfEnabled(executeFunctions, itemIndex, responseData);
 }
 
 /**
@@ -802,11 +706,5 @@ async function handleAnalysisNatalReport(
     body,
   );
 
-  const simplify = executeFunctions.getNodeParameter(
-    "simplify",
-    itemIndex,
-    true,
-  ) as boolean;
-
-  return simplify ? simplifyResponse(responseData) : responseData;
+  return applySimplifyIfEnabled(executeFunctions, itemIndex, responseData);
 }

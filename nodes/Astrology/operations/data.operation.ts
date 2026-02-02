@@ -1,5 +1,9 @@
 import type { INodeProperties } from "n8n-workflow";
-import { createBirthDataFields, createLocationFields } from "../shared";
+import {
+  createBirthDataFields,
+  createLocationFields,
+  createSimplifyField,
+} from "../shared";
 
 /**
  * Operation selector for data resource
@@ -86,26 +90,6 @@ const dataOperationField: INodeProperties = {
  * All properties for the data resource
  * Uses shared field creators to avoid duplication
  */
-/**
- * Simplify output toggle for data resource
- */
-const simplifyField: INodeProperties = {
-  displayName: "Simplify",
-  name: "simplify",
-  type: "boolean",
-  displayOptions: {
-    show: {
-      resource: ["data"],
-    },
-    hide: {
-      operation: ["now"],
-    },
-  },
-  default: true,
-  description:
-    "Whether to return simplified response with key data only. Disable for full API response with all metadata.",
-};
-
 export const dataOperations: INodeProperties[] = [
   // Operation selector
   dataOperationField,
@@ -117,5 +101,5 @@ export const dataOperations: INodeProperties[] = [
   ...createLocationFields("data", undefined, ["now", "globalPositions"]),
 
   // Simplify output (hidden for 'now' operation)
-  simplifyField,
+  createSimplifyField("data", ["now"]),
 ];
