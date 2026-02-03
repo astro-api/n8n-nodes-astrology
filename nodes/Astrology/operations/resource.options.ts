@@ -17,10 +17,22 @@ export const resourceField: INodeProperties = {
         "AI-powered astrological reports and interpretations: natal, synastry, transit, career, health, psychological profiles",
     },
     {
+      name: "Astrocartography",
+      value: "astrocartography",
+      description:
+        "Location-based astrology: planetary lines, relocation charts, power zones, and optimal location analysis",
+    },
+    {
       name: "Chart",
       value: "charts",
       description:
         "Generate natal (birth) charts with planetary positions, houses, and aspects for a given birth time and location",
+    },
+    {
+      name: "Chinese",
+      value: "chinese",
+      description:
+        "Chinese astrology: BaZi Four Pillars, zodiac animals, luck pillars, Ming Gua, and compatibility analysis",
     },
     {
       name: "Data",
@@ -39,6 +51,18 @@ export const resourceField: INodeProperties = {
       value: "humanDesign",
       description:
         "Human Design System calculations: BodyGraph, type/strategy/authority, channels, gates, and compatibility analysis",
+    },
+    {
+      name: "Insights",
+      value: "insights",
+      description:
+        "Business, wellness, relationship, pet, and financial insights: timing, compatibility, biorhythms, and market analysis",
+    },
+    {
+      name: "Kabbalah",
+      value: "kabbalah",
+      description:
+        "Kabbalistic astrology: Tree of Life chart, birth angels, tikkun (soul correction), and gematria calculations",
     },
     {
       name: "Lunar",
@@ -63,6 +87,12 @@ export const resourceField: INodeProperties = {
       value: "tarot",
       description:
         "Tarot card readings and analysis: daily cards, spreads (single, three-card, Celtic Cross), birth cards, and astrological integration",
+    },
+    {
+      name: "Traditional",
+      value: "traditional",
+      description:
+        "Hellenistic and traditional astrology: dignities, lots (Arabic parts), profections, and sect analysis",
     },
     {
       name: "Vedic",

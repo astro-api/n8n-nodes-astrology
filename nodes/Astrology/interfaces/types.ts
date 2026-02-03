@@ -38,7 +38,12 @@ export type ResourceType =
   | "lunar"
   | "vedic"
   | "analysis"
-  | "render";
+  | "render"
+  | "insights"
+  | "traditional"
+  | "astrocartography"
+  | "chinese"
+  | "kabbalah";
 
 /**
  * Data resource operations
@@ -211,6 +216,106 @@ export type AnalysisOperation =
  * Render resource operations
  */
 export type RenderOperation = "natal" | "transit" | "synastry" | "composite";
+
+/**
+ * Insights resource operations
+ */
+export type InsightsOperation =
+  // Discovery
+  | "discover"
+  | "discoverRelationship"
+  // Relationship
+  | "relationshipCompatibility"
+  | "relationshipCompatibilityScore"
+  | "relationshipLoveLanguages"
+  | "relationshipDavison"
+  | "relationshipTiming"
+  | "relationshipRedFlags"
+  // Pet
+  | "petPersonality"
+  | "petCompatibility"
+  | "petTrainingWindows"
+  | "petHealthSensitivities"
+  | "petMultiPetDynamics"
+  // Wellness
+  | "wellnessBodyMapping"
+  | "wellnessBiorhythms"
+  | "wellnessTiming"
+  | "wellnessEnergyPatterns"
+  | "wellnessScore"
+  | "wellnessMoonCalendar"
+  // Financial
+  | "financialMarketTiming"
+  | "financialPersonalTrading"
+  | "financialGannAnalysis"
+  | "financialBradleySiderograph"
+  | "financialCryptoTiming"
+  | "financialForexTiming"
+  // Business
+  | "businessTeamDynamics"
+  | "businessHiringCompatibility"
+  | "businessLeadershipStyle"
+  | "businessTiming"
+  | "businessDepartmentCompatibility"
+  | "businessSuccessionPlanning";
+
+/**
+ * Traditional resource operations
+ */
+export type TraditionalOperation =
+  | "capabilities"
+  | "glossaryTraditionalPoints"
+  | "glossaryDignities"
+  | "glossaryProfectionHouses"
+  | "analysis"
+  | "annualProfection"
+  | "profectionTimeline"
+  | "dignities"
+  | "lots"
+  | "profections";
+
+/**
+ * Astrocartography resource operations
+ */
+export type AstrocartographyOperation =
+  | "supportedFeatures"
+  | "lineMeanings"
+  | "map"
+  | "render"
+  | "lines"
+  | "locationAnalysis"
+  | "searchLocations"
+  | "compareLocations"
+  | "relocationChart"
+  | "powerZones"
+  | "paranMap"
+  | "astrodynes"
+  | "astrodynesCompare";
+
+/**
+ * Chinese resource operations
+ */
+export type ChineseOperation =
+  | "zodiacAnimal"
+  | "solarTerms"
+  | "elementsBalance"
+  | "bazi"
+  | "compatibility"
+  | "luckPillars"
+  | "mingGua"
+  | "yearlyForecast";
+
+/**
+ * Kabbalah resource operations
+ */
+export type KabbalahOperation =
+  | "glossarySephiroth"
+  | "glossaryHebrewLetters"
+  | "glossaryAngels72"
+  | "treeOfLifeChart"
+  | "birthAngels"
+  | "tikkun"
+  | "gematria";
 
 /**
  * Tarot tradition/interpretation style
@@ -472,3 +577,78 @@ export type RenderTheme =
   | "classic"
   | "modern_light"
   | "traditional";
+
+/**
+ * Chinese zodiac animals
+ */
+export type ChineseAnimal =
+  | "rat"
+  | "ox"
+  | "tiger"
+  | "rabbit"
+  | "dragon"
+  | "snake"
+  | "horse"
+  | "goat"
+  | "monkey"
+  | "rooster"
+  | "dog"
+  | "pig";
+
+/**
+ * Chinese tradition type
+ */
+export type ChineseTradition = "classical" | "modern" | "simplified";
+
+/**
+ * Analysis depth for Chinese astrology
+ */
+export type AnalysisDepth =
+  | "basic"
+  | "standard"
+  | "comprehensive"
+  | "professional";
+
+/**
+ * Gender type (for Chinese luck pillars)
+ */
+export type Gender = "male" | "female";
+
+/**
+ * Kabbalah system type
+ */
+export type KabbalahSystem = "classical" | "modern_halevi" | "golden_dawn";
+
+/**
+ * Gematria calculation methods
+ */
+export type GematriaMethod =
+  | "mispar_gadol"
+  | "mispar_katan"
+  | "mispar_siduri"
+  | "mispar_musafi"
+  | "mispar_perati"
+  | "mispar_shemi"
+  | "atbash"
+  | "albam"
+  | "ayak_bakar";
+
+/**
+ * Astrocartography line types
+ */
+export type AstrocartographyLineType = "AC" | "MC" | "DS" | "IC";
+
+/**
+ * Pet species
+ */
+export type PetSpecies = "dog" | "cat" | "horse" | "bird" | "other";
+
+/**
+ * Business activity types for timing
+ */
+export type BusinessActivity =
+  | "product_launch"
+  | "meetings"
+  | "negotiations"
+  | "hiring"
+  | "restructuring";

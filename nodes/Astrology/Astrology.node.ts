@@ -19,6 +19,11 @@ import {
   vedicOperations,
   analysisOperations,
   renderOperations,
+  insightsOperations,
+  traditionalOperations,
+  astrocartographyOperations,
+  chineseOperations,
+  kabbalahOperations,
 } from "./operations";
 import {
   handleDataResource,
@@ -31,6 +36,11 @@ import {
   handleVedicResource,
   handleAnalysisResource,
   handleRenderResource,
+  handleInsightsResource,
+  handleTraditionalResource,
+  handleAstrocartographyResource,
+  handleChineseResource,
+  handleKabbalahResource,
 } from "./handlers";
 import type { IHandlerContext, ResourceType } from "./interfaces";
 
@@ -58,6 +68,11 @@ const resourceHandlers: Record<ResourceType, typeof handleDataResource> = {
   vedic: handleVedicResource,
   analysis: handleAnalysisResource,
   render: handleRenderResource,
+  insights: handleInsightsResource,
+  traditional: handleTraditionalResource,
+  astrocartography: handleAstrocartographyResource,
+  chinese: handleChineseResource,
+  kabbalah: handleKabbalahResource,
 };
 
 export class Astrology implements INodeType {
@@ -93,6 +108,11 @@ export class Astrology implements INodeType {
       ...vedicOperations,
       ...analysisOperations,
       ...renderOperations,
+      ...insightsOperations,
+      ...traditionalOperations,
+      ...astrocartographyOperations,
+      ...chineseOperations,
+      ...kabbalahOperations,
     ],
   };
 

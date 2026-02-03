@@ -14,11 +14,11 @@
 | Vedic | ✅ Complete | 22/22 | |
 | Analysis | ✅ Complete | 24/24 | |
 | Render | ✅ Complete | 4/4 | |
-| Insights | ⬜ Not started | 0/31 | 🟢 On demand |
-| Traditional | ⬜ Not started | 0/10 | 🟢 On demand |
-| Astrocartography | ⬜ Not started | 0/13 | 🟢 On demand |
-| Chinese | ⬜ Not started | 0/8 | 🔵 Future |
-| Kabbalah | ⬜ Not started | 0/7 | 🔵 Future |
+| Insights | ✅ Complete | 31/31 | |
+| Traditional | ✅ Complete | 10/10 | |
+| Astrocartography | ✅ Complete | 13/13 | |
+| Chinese | ✅ Complete | 8/8 | |
+| Kabbalah | ✅ Complete | 7/7 | |
 | Horary | ⬜ Not started | 0/6 | 🔵 Future |
 | Fengshui | ⬜ Not started | 0/4 | 🔵 Future |
 | Fixed Stars | ⬜ Not started | 0/4 | 🔵 Future |
@@ -27,7 +27,7 @@
 | Glossary | ⬜ Not started | 0/14 | 🔵 Future |
 | Eclipses | ⬜ Not started | 0/3 | 🔵 Future |
 | Ziwei | ⬜ Not started | 0/1 | 🔵 Future |
-| **Total** | | **122/233** | |
+| **Total** | | **191/233** | |
 
 ### Priority Legend
 
@@ -63,7 +63,12 @@ n8n-nodes-astrology/
 │   │   ├── lunar.operation.ts
 │   │   ├── vedic.operation.ts
 │   │   ├── analysis.operation.ts
-│   │   └── render.operation.ts
+│   │   ├── render.operation.ts
+│   │   ├── insights.operation.ts
+│   │   ├── traditional.operation.ts
+│   │   ├── astrocartography.operation.ts
+│   │   ├── chinese.operation.ts
+│   │   └── kabbalah.operation.ts
 │   └── handlers/                      # Execute logic
 │       ├── data.handler.ts
 │       ├── horoscope.handler.ts
@@ -74,7 +79,12 @@ n8n-nodes-astrology/
 │       ├── lunar.handler.ts
 │       ├── vedic.handler.ts
 │       ├── analysis.handler.ts
-│       └── render.handler.ts
+│       ├── render.handler.ts
+│       ├── insights.handler.ts
+│       ├── traditional.handler.ts
+│       ├── astrocartography.handler.ts
+│       ├── chinese.handler.ts
+│       └── kabbalah.handler.ts
 ├── examples/                          # Workflow examples
 ├── docker/                            # Test environment
 └── dist/                              # Compiled output

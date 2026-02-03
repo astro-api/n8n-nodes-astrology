@@ -63,3 +63,46 @@ export {
   createVedicOptionsFields,
   createDashaYearsField,
 } from "./vedic.fields";
+
+// Kabbalah fields
+export {
+  createKabbalahSystemField,
+  createGematriaTextField,
+  createGematriaMethodsField,
+  createFindEquivalentsField,
+  createIncludeDaatField,
+  createIncludePathsField,
+} from "./kabbalah.fields";
+
+// Chinese fields
+export {
+  createChineseAnimalField,
+  createChineseTraditionField,
+  createAnalysisDepthField,
+  createGenderField,
+  createIncludeLuckPillarsField,
+  createIncludeAnnualPillarsField,
+  createChineseYearField,
+} from "./chinese.fields";
+
+// Astrocartography fields
+export {
+  createAstrocartographyPlanetsField,
+  createLineTypesField,
+  createCoordinateDensityField,
+  createCoordinatePrecisionField,
+  createTargetLocationFields,
+  createMapVisualOptionsFields,
+  createPowerTypeField,
+} from "./astrocartography.fields";
+
+// Insights fields
+export {
+  createPetSpeciesField,
+  createPetBreedField,
+  createBusinessActivityField,
+  createIncludeOwnerField,
+  createOwnerBirthDataFields,
+  createMarketTypeField,
+  createWellnessFocusField,
+} from "./insights.fields";

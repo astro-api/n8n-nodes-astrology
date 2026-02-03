@@ -8,3 +8,8 @@ export { handleLunarResource } from "./lunar.handler";
 export { handleVedicResource } from "./vedic.handler";
 export { handleAnalysisResource } from "./analysis.handler";
 export { handleRenderResource } from "./render.handler";
+export { handleInsightsResource } from "./insights.handler";
+export { handleTraditionalResource } from "./traditional.handler";
+export { handleAstrocartographyResource } from "./astrocartography.handler";
+export { handleChineseResource } from "./chinese.handler";
+export { handleKabbalahResource } from "./kabbalah.handler";

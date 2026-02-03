@@ -9,3 +9,8 @@ export { lunarOperations } from "./lunar.operation";
 export { vedicOperations } from "./vedic.operation";
 export { analysisOperations } from "./analysis.operation";
 export { renderOperations } from "./render.operation";
+export { insightsOperations } from "./insights.operation";
+export { traditionalOperations } from "./traditional.operation";
+export { astrocartographyOperations } from "./astrocartography.operation";
+export { chineseOperations } from "./chinese.operation";
+export { kabbalahOperations } from "./kabbalah.operation";
