@@ -1,5 +1,164 @@
 # @astro-api/n8n-nodes-astrology
 
+## 0.8.0
+
+### Minor Changes
+
+- ba0dbd6: Add 5 new resources with 69 endpoints (82% API coverage)
+
+  **Insights Resource (31 operations)**
+
+  - Discovery: discover, discoverRelationship
+  - Relationship: compatibility, compatibilityScore, loveLanguages, davison, timing, redFlags
+  - Pet: personality, compatibility, trainingWindows, healthSensitivities, multiPetDynamics
+  - Wellness: bodyMapping, biorhythms, timing, energyPatterns, score, moonCalendar
+  - Financial: marketTiming, personalTrading, gannAnalysis, bradleySiderograph, cryptoTiming, forexTiming
+  - Business: teamDynamics, hiringCompatibility, leadershipStyle, timing, departmentCompatibility, successionPlanning
+
+  **Traditional Resource (10 operations)**
+
+  - Glossary: capabilities, traditionalPoints, dignities, profectionHouses
+  - Analysis: analysis, annualProfection, profectionTimeline, dignities, lots, profections
+
+  **Astrocartography Resource (13 operations)**
+
+  - Reference: supportedFeatures, lineMeanings
+  - Maps: map, render, lines, paranMap
+  - Location: locationAnalysis, searchLocations, compareLocations, relocationChart, powerZones
+  - Astrodynes: astrodynes, astrodynesCompare
+
+  **Chinese Resource (8 operations)**
+
+  - Glossary: zodiacAnimal, solarTerms, elementsBalance
+  - Analysis: bazi, compatibility, luckPillars, mingGua, yearlyForecast
+
+  **Kabbalah Resource (7 operations)**
+
+  - Glossary: glossarySephiroth, glossaryHebrewLetters, glossaryAngels72
+  - Analysis: treeOfLifeChart, birthAngels, tikkun, gematria
+
+- c2d351e: Add 8 new resources with 40 endpoints (99% API coverage)
+
+  **Glossary Resource (14 operations)**
+
+  - cities, countries, houseSystems, houses, zodiacTypes, elements, keywords
+  - activePoints, activePointsPrimary, fixedStars, horaryCategories, lifeAreas, themes, languages
+
+  **Horary Resource (6 operations)**
+
+  - analyze: Comprehensive horary chart analysis with judgment
+  - aspects: Horary aspects and planetary relationships
+  - chart: Generate horary astrology chart
+  - fertilityAnalysis: Fertility and conception timing analysis
+  - glossaryCategories, glossaryConsiderations: Reference guides
+
+  **Fengshui Resource (4 operations)**
+
+  - flyingStarsChart: Calculate complete Flying Stars natal chart (9-palace grid)
+  - flyingStarsAnnual: Annual Flying Stars positions
+  - afflictions: Annual afflictions (Tai Sui, Five Yellow, Three Killings)
+  - glossaryStars: Flying Stars reference
+
+  **Fixed Stars Resource (4 operations)**
+
+  - positions: Calculate current positions of fixed stars
+  - conjunctions: Find planetary conjunctions to fixed stars
+  - report: Comprehensive fixed stars analysis report
+  - presets: Available star preset information
+
+  **Enhanced Resource (4 operations)**
+
+  - personalAnalysis: Complete natal chart with traditional enhancements
+  - globalAnalysis: Global astrological analysis
+  - chartsPersonalAnalysis, chartsGlobalAnalysis: Enhanced chart variants
+
+  **PDF Resource (4 operations)**
+
+  - horoscopeDaily, horoscopeWeekly: Generate horoscope PDFs
+  - horoscopeData: Get horoscope data for PDF generation
+  - natalReport: Generate natal chart PDF report
+
+  **Eclipses Resource (3 operations)**
+
+  - upcoming: List of upcoming eclipses with NASA format IDs
+  - natalCheck: Check eclipse impact on natal chart
+  - interpretation: Detailed eclipse interpretation with Saros context
+
+  **Ziwei Resource (1 operation)**
+
+  - chart: Calculate Zi Wei Dou Shu (Purple Star) chart with 12 palaces
+
+- 2a11301: Add 4 new resources with 55 operations, increasing API coverage from 28% to 51%
+
+  ### New Resources
+
+  **Lunar** (5 operations)
+
+  - `phases` - Precise moon phases using Swiss Ephemeris
+  - `voidOfCourse` - Void-of-course Moon periods
+  - `mansions` - Lunar mansions (28 mansions system)
+  - `events` - Lunar events (eclipses, supermoons)
+  - `calendar` - Annual lunar calendar
+
+  **Vedic** (22 operations)
+
+  - `chart` - Vedic birth chart (Kundli)
+  - `chartRender` - Render Vedic chart as SVG/PNG
+  - `birthDetails` - Vedic birth details (Tithi, Nakshatra, Yoga, Karana)
+  - `vimshottariDasha` - Vimshottari Dasha periods (120-year cycle)
+  - `charaDasha` - Chara Dasha (Jaimini) periods
+  - `yoginiDasha` - Yogini Dasha periods (36-year cycle)
+  - `nakshatra` - Nakshatra analysis and predictions
+  - `divisionalChart` - Divisional charts (D1-D60)
+  - `ashtakvarga` - Ashtakvarga strength analysis
+  - `shadbala` - Shadbala (six-fold strength) of planets
+  - `yogaAnalysis` - Planetary Yoga combinations
+  - `kundliMatching` - Marriage compatibility (Ashtakoot)
+  - `manglikDosha` - Manglik Dosha check
+  - `kaalSarpaDosha` - Kaal Sarpa Dosha check
+  - `sadeSati` - Saturn Sade Sati analysis
+  - `transit` - Vedic transit analysis
+  - `varshaphal` - Annual horoscope (Solar Return)
+  - `panchang` - Daily Panchang
+  - `regionalPanchang` - Regional Panchang with local times
+  - `festivalCalendar` - Hindu festival calendar
+  - `kpSystem` - Krishnamurti Paddhati analysis
+  - `remedies` - Astrological remedies
+
+  **Analysis** (24 operations)
+
+  - `natalReport` - AI natal chart interpretation
+  - `synastryReport` - Compatibility report
+  - `transitReport` - Transit analysis report
+  - `compositeReport` - Composite chart report
+  - `solarReturnReport` - Solar return analysis
+  - `lunarReturnReport` - Lunar return analysis
+  - `progressionReport` - Progressions report
+  - `directionReport` - Directions report
+  - `natalTransitReport` - Transits to natal chart
+  - `solarReturnTransitReport` - Transits to solar return
+  - `lunarReturnTransitReport` - Transits to lunar return
+  - `lunarAnalysis` - Lunar analysis
+  - `compatibility` - General compatibility
+  - `compatibilityScore` - Numeric compatibility score
+  - `relationship` - Relationship analysis
+  - `relationshipScore` - Relationship score
+  - `career` - Career analysis
+  - `vocational` - Vocational guidance
+  - `health` - Health analysis
+  - `psychological` - Psychological profile
+  - `spiritual` - Spiritual analysis
+  - `karmic` - Karmic analysis
+  - `predictive` - Predictive analysis
+  - `relocation` - Relocation analysis
+
+  **Render** (4 operations)
+
+  - `natal` - Render natal chart SVG/PNG
+  - `transit` - Render transit chart
+  - `synastry` - Render synastry chart
+  - `composite` - Render composite chart
+
 ## 0.7.1
 
 ### Patch Changes
