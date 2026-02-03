@@ -11,13 +11,13 @@ export function createEclipseIdField(
     displayName: "Eclipse ID",
     name: "eclipseId",
     type: "string",
+    default: "",
     displayOptions: {
       show: {
         resource: [resource],
         operation: operations,
       },
     },
-    default: "",
     required: true,
     placeholder: "2025Sep21P",
     description:
@@ -36,13 +36,13 @@ export function createEclipseOrbField(
     displayName: "Maximum Orb",
     name: "maxOrb",
     type: "number",
+    default: 5,
     displayOptions: {
       show: {
         resource: [resource],
         operation: operations,
       },
     },
-    default: 5,
     typeOptions: {
       minValue: 1,
       maxValue: 10,
@@ -64,13 +64,13 @@ export function createEclipseDateRangeFields(
       displayName: "Start Year",
       name: "startYear",
       type: "number",
+      default: 2025,
       displayOptions: {
         show: {
           resource: [resource],
           operation: operations,
         },
       },
-      default: new Date().getFullYear(),
       required: true,
       description: "Start year for eclipse search",
     },
@@ -78,13 +78,13 @@ export function createEclipseDateRangeFields(
       displayName: "Start Month",
       name: "startMonth",
       type: "number",
+      default: 1,
       displayOptions: {
         show: {
           resource: [resource],
           operation: operations,
         },
       },
-      default: 1,
       typeOptions: {
         minValue: 1,
         maxValue: 12,
@@ -96,13 +96,13 @@ export function createEclipseDateRangeFields(
       displayName: "Start Day",
       name: "startDay",
       type: "number",
+      default: 1,
       displayOptions: {
         show: {
           resource: [resource],
           operation: operations,
         },
       },
-      default: 1,
       typeOptions: {
         minValue: 1,
         maxValue: 31,
@@ -114,14 +114,13 @@ export function createEclipseDateRangeFields(
       displayName: "End Year",
       name: "endYear",
       type: "number",
-      default: "0",
+      default: 2026,
       displayOptions: {
         show: {
           resource: [resource],
           operation: operations,
         },
       },
-      default: new Date().getFullYear() + 1,
       required: true,
       description: "End year for eclipse search",
     },
@@ -129,13 +128,13 @@ export function createEclipseDateRangeFields(
       displayName: "End Month",
       name: "endMonth",
       type: "number",
+      default: 12,
       displayOptions: {
         show: {
           resource: [resource],
           operation: operations,
         },
       },
-      default: 12,
       typeOptions: {
         minValue: 1,
         maxValue: 12,
@@ -147,13 +146,13 @@ export function createEclipseDateRangeFields(
       displayName: "End Day",
       name: "endDay",
       type: "number",
+      default: 31,
       displayOptions: {
         show: {
           resource: [resource],
           operation: operations,
         },
       },
-      default: 31,
       typeOptions: {
         minValue: 1,
         maxValue: 31,
@@ -175,13 +174,13 @@ export function createEclipseCountField(
     displayName: "Count",
     name: "count",
     type: "number",
+    default: 10,
     displayOptions: {
       show: {
         resource: [resource],
         operation: operations,
       },
     },
-    default: 10,
     typeOptions: {
       minValue: 1,
       maxValue: 50,
@@ -201,13 +200,13 @@ export function createIncludePersonalField(
     displayName: "Include Personal Analysis",
     name: "includePersonal",
     type: "boolean",
+    default: false,
     displayOptions: {
       show: {
         resource: [resource],
         operation: operations,
       },
     },
-    default: false,
     description:
       "Whether to include personal interpretation based on birth data",
   };

@@ -11,13 +11,13 @@ export function createQuestionField(
     displayName: "Question",
     name: "question",
     type: "string",
+    default: "",
     displayOptions: {
       show: {
         resource: [resource],
         operation: operations,
       },
     },
-    default: "",
     required: true,
     typeOptions: {
       rows: 3,
@@ -37,6 +37,7 @@ export function createQuestionCategoryField(
     displayName: "Question Category",
     name: "questionCategory",
     type: "options",
+    default: "general",
     displayOptions: {
       show: {
         resource: [resource],
@@ -80,7 +81,6 @@ export function createQuestionCategoryField(
         description: "Questions about journeys and travel",
       },
     ],
-    default: "general",
     description: "Category of the horary question",
   };
 }
@@ -97,13 +97,13 @@ export function createQuestionTimeFields(
       displayName: "Question Year",
       name: "questionYear",
       type: "number",
+      default: 2025,
       displayOptions: {
         show: {
           resource: [resource],
           operation: operations,
         },
       },
-      default: new Date().getFullYear(),
       required: true,
       description: "Year when the question was asked",
     },
@@ -111,14 +111,13 @@ export function createQuestionTimeFields(
       displayName: "Question Month",
       name: "questionMonth",
       type: "number",
-      default: "0",
+      default: 1,
       displayOptions: {
         show: {
           resource: [resource],
           operation: operations,
         },
       },
-      default: new Date().getMonth() + 1,
       typeOptions: {
         minValue: 1,
         maxValue: 12,
@@ -130,13 +129,13 @@ export function createQuestionTimeFields(
       displayName: "Question Day",
       name: "questionDay",
       type: "number",
+      default: 1,
       displayOptions: {
         show: {
           resource: [resource],
           operation: operations,
         },
       },
-      default: new Date().getDate(),
       typeOptions: {
         minValue: 1,
         maxValue: 31,
@@ -148,13 +147,13 @@ export function createQuestionTimeFields(
       displayName: "Question Hour",
       name: "questionHour",
       type: "number",
+      default: 12,
       displayOptions: {
         show: {
           resource: [resource],
           operation: operations,
         },
       },
-      default: new Date().getHours(),
       typeOptions: {
         minValue: 0,
         maxValue: 23,
@@ -166,13 +165,13 @@ export function createQuestionTimeFields(
       displayName: "Question Minute",
       name: "questionMinute",
       type: "number",
+      default: 0,
       displayOptions: {
         show: {
           resource: [resource],
           operation: operations,
         },
       },
-      default: new Date().getMinutes(),
       typeOptions: {
         minValue: 0,
         maxValue: 59,
@@ -195,13 +194,13 @@ export function createQuestionLocationFields(
       displayName: "Question City",
       name: "questionCity",
       type: "string",
+      default: "",
       displayOptions: {
         show: {
           resource: [resource],
           operation: operations,
         },
       },
-      default: "",
       required: true,
       description: "City where the question was asked",
     },
@@ -209,13 +208,13 @@ export function createQuestionLocationFields(
       displayName: "Question Country Code",
       name: "questionCountryCode",
       type: "string",
+      default: "",
       displayOptions: {
         show: {
           resource: [resource],
           operation: operations,
         },
       },
-      default: "",
       placeholder: "US, GB, UA...",
       required: true,
       description: "ISO 3166-1 alpha-2 country code",
@@ -234,13 +233,13 @@ export function createHoraryIncludeFixedStarsField(
     displayName: "Include Fixed Stars",
     name: "horaryIncludeFixedStars",
     type: "boolean",
+    default: false,
     displayOptions: {
       show: {
         resource: [resource],
         operation: operations,
       },
     },
-    default: false,
     description: "Whether to include fixed stars in the horary analysis",
   };
 }
