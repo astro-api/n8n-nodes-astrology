@@ -19,15 +19,15 @@
 | Astrocartography | ✅ Complete | 13/13 | |
 | Chinese | ✅ Complete | 8/8 | |
 | Kabbalah | ✅ Complete | 7/7 | |
-| Horary | ⬜ Not started | 0/6 | 🔵 Future |
-| Fengshui | ⬜ Not started | 0/4 | 🔵 Future |
-| Fixed Stars | ⬜ Not started | 0/4 | 🔵 Future |
-| Enhanced | ⬜ Not started | 0/4 | 🔵 Future |
-| PDF | ⬜ Not started | 0/4 | 🔵 Future |
-| Glossary | ⬜ Not started | 0/14 | 🔵 Future |
-| Eclipses | ⬜ Not started | 0/3 | 🔵 Future |
-| Ziwei | ⬜ Not started | 0/1 | 🔵 Future |
-| **Total** | | **191/233** | |
+| Horary | ✅ Complete | 6/6 | |
+| Fengshui | ✅ Complete | 4/4 | |
+| Fixed Stars | ✅ Complete | 4/4 | |
+| Enhanced | ✅ Complete | 4/4 | |
+| PDF | ✅ Complete | 4/4 | |
+| Glossary | ✅ Complete | 14/14 | |
+| Eclipses | ✅ Complete | 3/3 | |
+| Ziwei | ✅ Complete | 1/1 | |
+| **Total** | | **231/233** | |
 
 ### Priority Legend
 
@@ -68,7 +68,15 @@ n8n-nodes-astrology/
 │   │   ├── traditional.operation.ts
 │   │   ├── astrocartography.operation.ts
 │   │   ├── chinese.operation.ts
-│   │   └── kabbalah.operation.ts
+│   │   ├── kabbalah.operation.ts
+│   │   ├── glossary.operation.ts
+│   │   ├── horary.operation.ts
+│   │   ├── fengshui.operation.ts
+│   │   ├── fixedStars.operation.ts
+│   │   ├── enhanced.operation.ts
+│   │   ├── pdf.operation.ts
+│   │   ├── eclipses.operation.ts
+│   │   └── ziwei.operation.ts
 │   └── handlers/                      # Execute logic
 │       ├── data.handler.ts
 │       ├── horoscope.handler.ts
@@ -84,7 +92,15 @@ n8n-nodes-astrology/
 │       ├── traditional.handler.ts
 │       ├── astrocartography.handler.ts
 │       ├── chinese.handler.ts
-│       └── kabbalah.handler.ts
+│       ├── kabbalah.handler.ts
+│       ├── glossary.handler.ts
+│       ├── horary.handler.ts
+│       ├── fengshui.handler.ts
+│       ├── fixedStars.handler.ts
+│       ├── enhanced.handler.ts
+│       ├── pdf.handler.ts
+│       ├── eclipses.handler.ts
+│       └── ziwei.handler.ts
 ├── examples/                          # Workflow examples
 ├── docker/                            # Test environment
 └── dist/                              # Compiled output

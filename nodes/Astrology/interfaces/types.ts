@@ -43,7 +43,15 @@ export type ResourceType =
   | "traditional"
   | "astrocartography"
   | "chinese"
-  | "kabbalah";
+  | "kabbalah"
+  | "glossary"
+  | "horary"
+  | "fengshui"
+  | "fixedStars"
+  | "enhanced"
+  | "pdf"
+  | "eclipses"
+  | "ziwei";
 
 /**
  * Data resource operations
@@ -316,6 +324,82 @@ export type KabbalahOperation =
   | "birthAngels"
   | "tikkun"
   | "gematria";
+
+/**
+ * Glossary resource operations
+ */
+export type GlossaryOperation =
+  | "cities"
+  | "countries"
+  | "houseSystems"
+  | "houses"
+  | "zodiacTypes"
+  | "elements"
+  | "keywords"
+  | "activePoints"
+  | "activePointsPrimary"
+  | "fixedStars"
+  | "horaryCategories"
+  | "lifeAreas"
+  | "themes"
+  | "languages";
+
+/**
+ * Horary resource operations
+ */
+export type HoraryOperation =
+  | "analyze"
+  | "aspects"
+  | "chart"
+  | "fertilityAnalysis"
+  | "glossaryCategories"
+  | "glossaryConsiderations";
+
+/**
+ * Fengshui resource operations
+ */
+export type FengshuiOperation =
+  | "flyingStarsChart"
+  | "flyingStarsAnnual"
+  | "afflictions"
+  | "glossaryStars";
+
+/**
+ * Fixed Stars resource operations
+ */
+export type FixedStarsOperation =
+  | "positions"
+  | "conjunctions"
+  | "report"
+  | "presets";
+
+/**
+ * Enhanced resource operations
+ */
+export type EnhancedOperation =
+  | "personalAnalysis"
+  | "globalAnalysis"
+  | "chartsPersonalAnalysis"
+  | "chartsGlobalAnalysis";
+
+/**
+ * PDF resource operations
+ */
+export type PdfOperation =
+  | "horoscopeDaily"
+  | "horoscopeWeekly"
+  | "horoscopeData"
+  | "natalReport";
+
+/**
+ * Eclipses resource operations
+ */
+export type EclipsesOperation = "upcoming" | "natalCheck" | "interpretation";
+
+/**
+ * Ziwei resource operations
+ */
+export type ZiweiOperation = "chart";
 
 /**
  * Tarot tradition/interpretation style
@@ -652,3 +736,44 @@ export type BusinessActivity =
   | "negotiations"
   | "hiring"
   | "restructuring";
+
+/**
+ * Fixed stars preset types
+ */
+export type FixedStarsPreset =
+  | "essential"
+  | "traditional"
+  | "behenian"
+  | "extended";
+
+/**
+ * Fengshui period (8 = 2004-2023, 9 = 2024-2043)
+ */
+export type FengshuiPeriod = 8 | 9;
+
+/**
+ * PDF page size options
+ */
+export type PdfPageSize = "A4" | "Letter";
+
+/**
+ * PDF page orientation
+ */
+export type PdfOrientation = "portrait" | "landscape";
+
+/**
+ * PDF design theme
+ */
+export type PdfTheme = "modern" | "classic";
+
+/**
+ * Horary question categories
+ */
+export type HoraryQuestionCategory =
+  | "love"
+  | "career"
+  | "money"
+  | "health"
+  | "travel"
+  | "lost_objects"
+  | "general";

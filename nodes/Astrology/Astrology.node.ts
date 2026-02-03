@@ -24,6 +24,14 @@ import {
   astrocartographyOperations,
   chineseOperations,
   kabbalahOperations,
+  glossaryOperations,
+  horaryOperations,
+  fengshuiOperations,
+  fixedStarsOperations,
+  enhancedOperations,
+  pdfOperations,
+  eclipsesOperations,
+  ziweiOperations,
 } from "./operations";
 import {
   handleDataResource,
@@ -41,6 +49,14 @@ import {
   handleAstrocartographyResource,
   handleChineseResource,
   handleKabbalahResource,
+  handleGlossaryResource,
+  handleHoraryResource,
+  handleFengshuiResource,
+  handleFixedStarsResource,
+  handleEnhancedResource,
+  handlePdfResource,
+  handleEclipsesResource,
+  handleZiweiResource,
 } from "./handlers";
 import type { IHandlerContext, ResourceType } from "./interfaces";
 
@@ -73,6 +89,14 @@ const resourceHandlers: Record<ResourceType, typeof handleDataResource> = {
   astrocartography: handleAstrocartographyResource,
   chinese: handleChineseResource,
   kabbalah: handleKabbalahResource,
+  glossary: handleGlossaryResource,
+  horary: handleHoraryResource,
+  fengshui: handleFengshuiResource,
+  fixedStars: handleFixedStarsResource,
+  enhanced: handleEnhancedResource,
+  pdf: handlePdfResource,
+  eclipses: handleEclipsesResource,
+  ziwei: handleZiweiResource,
 };
 
 export class Astrology implements INodeType {
@@ -113,6 +137,14 @@ export class Astrology implements INodeType {
       ...astrocartographyOperations,
       ...chineseOperations,
       ...kabbalahOperations,
+      ...glossaryOperations,
+      ...horaryOperations,
+      ...fengshuiOperations,
+      ...fixedStarsOperations,
+      ...enhancedOperations,
+      ...pdfOperations,
+      ...eclipsesOperations,
+      ...ziweiOperations,
     ],
   };
 

@@ -41,6 +41,42 @@ export const resourceField: INodeProperties = {
         "Get raw astrological calculations: planetary positions, house cusps, aspects between planets, and lunar phase data",
     },
     {
+      name: "Eclipses",
+      value: "eclipses",
+      description:
+        "Eclipse tracking: upcoming eclipses with NASA IDs, natal chart impact analysis, and Saros series interpretations",
+    },
+    {
+      name: "Enhanced",
+      value: "enhanced",
+      description:
+        "Enhanced analysis: complete natal chart with traditional dignities, profections, fixed stars, and sect analysis",
+    },
+    {
+      name: "Fengshui",
+      value: "fengshui",
+      description:
+        "Flying Stars Feng Shui: natal charts, annual/monthly overlays, afflictions (Tai Sui, Five Yellow, Three Killings)",
+    },
+    {
+      name: "Fixed Stars",
+      value: "fixedStars",
+      description:
+        "Fixed stars analysis: Royal Stars, Behenian stars, planetary conjunctions, and star interpretations",
+    },
+    {
+      name: "Glossary",
+      value: "glossary",
+      description:
+        "Reference data: cities database, house systems, zodiac signs, elements, planets, and astrological keywords",
+    },
+    {
+      name: "Horary",
+      value: "horary",
+      description:
+        "Horary astrology: question charts, traditional considerations, radicality testing, and William Lilly methods",
+    },
+    {
       name: "Horoscope",
       value: "horoscope",
       description:
@@ -77,6 +113,12 @@ export const resourceField: INodeProperties = {
         "Numerology calculations: Life Path, Expression, Soul Urge numbers, comprehensive readings, and compatibility analysis",
     },
     {
+      name: "PDF",
+      value: "pdf",
+      description:
+        "PDF generation: daily/weekly horoscopes and natal reports as downloadable PDF documents",
+    },
+    {
       name: "Render",
       value: "render",
       description:
@@ -99,6 +141,12 @@ export const resourceField: INodeProperties = {
       value: "vedic",
       description:
         "Vedic (Jyotish) astrology: Kundli charts, Dasha systems, Nakshatra analysis, doshas, Panchang, and compatibility matching",
+    },
+    {
+      name: "Ziwei",
+      value: "ziwei",
+      description:
+        "Zi Wei Dou Shu (Purple Star) astrology: 12 palaces, 14 main stars, Four Transformations, and Chinese fate analysis",
     },
   ],
   default: "data",

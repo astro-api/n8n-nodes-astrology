@@ -106,3 +106,56 @@ export {
   createMarketTypeField,
   createWellnessFocusField,
 } from "./insights.fields";
+
+// Glossary fields
+export {
+  createSearchField,
+  createCountryCodeField,
+  createPaginationFields,
+  createSortFields,
+} from "./glossary.fields";
+
+// Eclipses fields
+export {
+  createEclipseIdField,
+  createEclipseOrbField,
+  createEclipseDateRangeFields,
+  createEclipseCountField,
+  createIncludePersonalField,
+} from "./eclipses.fields";
+
+// Fixed Stars fields
+export {
+  createFixedStarsPresetField,
+  createConjunctionOrbField,
+  createOppositionOrbField,
+  createIncludeStarInterpretationsField,
+} from "./fixedStars.fields";
+
+// Fengshui fields
+export {
+  createFacingDegreesField,
+  createFengshuiPeriodField,
+  createIncludeAnnualField,
+  createIncludeMonthlyField,
+  createAnalysisDateField,
+  createFengshuiYearField,
+} from "./fengshui.fields";
+
+// Horary fields
+export {
+  createQuestionField,
+  createQuestionCategoryField,
+  createQuestionTimeFields,
+  createQuestionLocationFields,
+  createHoraryIncludeFixedStarsField,
+} from "./horary.fields";
+
+// PDF fields
+export {
+  createPdfModeField,
+  createTargetDateField,
+  createPdfSectionsFields,
+  createPdfPageSettingsFields,
+  createPdfThemeField,
+} from "./pdf.fields";
