@@ -34,7 +34,24 @@ export type ResourceType =
   | "charts"
   | "humanDesign"
   | "numerology"
-  | "tarot";
+  | "tarot"
+  | "lunar"
+  | "vedic"
+  | "analysis"
+  | "render"
+  | "insights"
+  | "traditional"
+  | "astrocartography"
+  | "chinese"
+  | "kabbalah"
+  | "glossary"
+  | "horary"
+  | "fengshui"
+  | "fixedStars"
+  | "enhanced"
+  | "pdf"
+  | "eclipses"
+  | "ziwei";
 
 /**
  * Data resource operations
@@ -136,6 +153,253 @@ export type TarotOperation =
   | "analysisOptimalTimes"
   | "analysisTransitReport"
   | "analysisNatalReport";
+
+/**
+ * Lunar resource operations
+ */
+export type LunarOperation =
+  | "phases"
+  | "voidOfCourse"
+  | "mansions"
+  | "events"
+  | "calendar";
+
+/**
+ * Vedic resource operations
+ */
+export type VedicOperation =
+  | "chart"
+  | "chartRender"
+  | "birthDetails"
+  | "vimshottariDasha"
+  | "charaDasha"
+  | "yoginiDasha"
+  | "nakshatra"
+  | "divisionalChart"
+  | "ashtakvarga"
+  | "shadbala"
+  | "yogaAnalysis"
+  | "kundliMatching"
+  | "manglikDosha"
+  | "kaalSarpaDosha"
+  | "sadeSati"
+  | "transit"
+  | "varshaphal"
+  | "panchang"
+  | "regionalPanchang"
+  | "festivalCalendar"
+  | "kpSystem"
+  | "remedies";
+
+/**
+ * Analysis resource operations
+ */
+export type AnalysisOperation =
+  | "natalReport"
+  | "synastryReport"
+  | "transitReport"
+  | "compositeReport"
+  | "solarReturnReport"
+  | "lunarReturnReport"
+  | "progressionReport"
+  | "directionReport"
+  | "natalTransitReport"
+  | "solarReturnTransitReport"
+  | "lunarReturnTransitReport"
+  | "lunarAnalysis"
+  | "compatibility"
+  | "compatibilityScore"
+  | "relationship"
+  | "relationshipScore"
+  | "career"
+  | "vocational"
+  | "health"
+  | "psychological"
+  | "spiritual"
+  | "karmic"
+  | "predictive"
+  | "relocation";
+
+/**
+ * Render resource operations
+ */
+export type RenderOperation = "natal" | "transit" | "synastry" | "composite";
+
+/**
+ * Insights resource operations
+ */
+export type InsightsOperation =
+  // Discovery
+  | "discover"
+  | "discoverRelationship"
+  // Relationship
+  | "relationshipCompatibility"
+  | "relationshipCompatibilityScore"
+  | "relationshipLoveLanguages"
+  | "relationshipDavison"
+  | "relationshipTiming"
+  | "relationshipRedFlags"
+  // Pet
+  | "petPersonality"
+  | "petCompatibility"
+  | "petTrainingWindows"
+  | "petHealthSensitivities"
+  | "petMultiPetDynamics"
+  // Wellness
+  | "wellnessBodyMapping"
+  | "wellnessBiorhythms"
+  | "wellnessTiming"
+  | "wellnessEnergyPatterns"
+  | "wellnessScore"
+  | "wellnessMoonCalendar"
+  // Financial
+  | "financialMarketTiming"
+  | "financialPersonalTrading"
+  | "financialGannAnalysis"
+  | "financialBradleySiderograph"
+  | "financialCryptoTiming"
+  | "financialForexTiming"
+  // Business
+  | "businessTeamDynamics"
+  | "businessHiringCompatibility"
+  | "businessLeadershipStyle"
+  | "businessTiming"
+  | "businessDepartmentCompatibility"
+  | "businessSuccessionPlanning";
+
+/**
+ * Traditional resource operations
+ */
+export type TraditionalOperation =
+  | "capabilities"
+  | "glossaryTraditionalPoints"
+  | "glossaryDignities"
+  | "glossaryProfectionHouses"
+  | "analysis"
+  | "annualProfection"
+  | "profectionTimeline"
+  | "dignities"
+  | "lots"
+  | "profections";
+
+/**
+ * Astrocartography resource operations
+ */
+export type AstrocartographyOperation =
+  | "supportedFeatures"
+  | "lineMeanings"
+  | "map"
+  | "render"
+  | "lines"
+  | "locationAnalysis"
+  | "searchLocations"
+  | "compareLocations"
+  | "relocationChart"
+  | "powerZones"
+  | "paranMap"
+  | "astrodynes"
+  | "astrodynesCompare";
+
+/**
+ * Chinese resource operations
+ */
+export type ChineseOperation =
+  | "zodiacAnimal"
+  | "solarTerms"
+  | "elementsBalance"
+  | "bazi"
+  | "compatibility"
+  | "luckPillars"
+  | "mingGua"
+  | "yearlyForecast";
+
+/**
+ * Kabbalah resource operations
+ */
+export type KabbalahOperation =
+  | "glossarySephiroth"
+  | "glossaryHebrewLetters"
+  | "glossaryAngels72"
+  | "treeOfLifeChart"
+  | "birthAngels"
+  | "tikkun"
+  | "gematria";
+
+/**
+ * Glossary resource operations
+ */
+export type GlossaryOperation =
+  | "cities"
+  | "countries"
+  | "houseSystems"
+  | "houses"
+  | "zodiacTypes"
+  | "elements"
+  | "keywords"
+  | "activePoints"
+  | "activePointsPrimary"
+  | "fixedStars"
+  | "horaryCategories"
+  | "lifeAreas"
+  | "themes"
+  | "languages";
+
+/**
+ * Horary resource operations
+ */
+export type HoraryOperation =
+  | "analyze"
+  | "aspects"
+  | "chart"
+  | "fertilityAnalysis"
+  | "glossaryCategories"
+  | "glossaryConsiderations";
+
+/**
+ * Fengshui resource operations
+ */
+export type FengshuiOperation =
+  | "flyingStarsChart"
+  | "flyingStarsAnnual"
+  | "afflictions"
+  | "glossaryStars";
+
+/**
+ * Fixed Stars resource operations
+ */
+export type FixedStarsOperation =
+  | "positions"
+  | "conjunctions"
+  | "report"
+  | "presets";
+
+/**
+ * Enhanced resource operations
+ */
+export type EnhancedOperation =
+  | "personalAnalysis"
+  | "globalAnalysis"
+  | "chartsPersonalAnalysis"
+  | "chartsGlobalAnalysis";
+
+/**
+ * PDF resource operations
+ */
+export type PdfOperation =
+  | "horoscopeDaily"
+  | "horoscopeWeekly"
+  | "horoscopeData"
+  | "natalReport";
+
+/**
+ * Eclipses resource operations
+ */
+export type EclipsesOperation = "upcoming" | "natalCheck" | "interpretation";
+
+/**
+ * Ziwei resource operations
+ */
+export type ZiweiOperation = "chart";
 
 /**
  * Tarot tradition/interpretation style
@@ -322,3 +586,194 @@ export type Tradition = "western" | "vedic";
  * Text output format
  */
 export type TextFormat = "plain" | "markdown" | "html";
+
+/**
+ * DateTime location structure for Lunar API requests
+ */
+export interface IDateTimeLocation {
+  year: number;
+  month: number;
+  day: number;
+  hour: number;
+  minute: number;
+  second?: number;
+  city?: string;
+  country_code?: string;
+  latitude?: number;
+  longitude?: number;
+  timezone?: string;
+}
+
+/**
+ * Vedic chart style
+ */
+export type VedicChartStyle = "north_indian" | "south_indian";
+
+/**
+ * Vedic ayanamsa types
+ */
+export type VedicAyanamsa =
+  | "lahiri"
+  | "krishnamurti"
+  | "raman"
+  | "yukteshwar"
+  | "jn_bhasin"
+  | "fagan_bradley"
+  | "true_citra"
+  | "true_revati"
+  | "true_pushya"
+  | "galactic_center_0_sag"
+  | "sassanian"
+  | "ushashashi";
+
+/**
+ * Vedic divisional chart types
+ */
+export type VedicDivisionalChart =
+  | "D1"
+  | "D2"
+  | "D3"
+  | "D4"
+  | "D7"
+  | "D9"
+  | "D10"
+  | "D12"
+  | "D16"
+  | "D20"
+  | "D24"
+  | "D27"
+  | "D30"
+  | "D40"
+  | "D45"
+  | "D60";
+
+/**
+ * Render output format
+ */
+export type RenderFormat = "svg" | "png" | "jpg" | "webp" | "pdf";
+
+/**
+ * Render theme
+ */
+export type RenderTheme =
+  | "light"
+  | "dark"
+  | "classic"
+  | "modern_light"
+  | "traditional";
+
+/**
+ * Chinese zodiac animals
+ */
+export type ChineseAnimal =
+  | "rat"
+  | "ox"
+  | "tiger"
+  | "rabbit"
+  | "dragon"
+  | "snake"
+  | "horse"
+  | "goat"
+  | "monkey"
+  | "rooster"
+  | "dog"
+  | "pig";
+
+/**
+ * Chinese tradition type
+ */
+export type ChineseTradition = "classical" | "modern" | "simplified";
+
+/**
+ * Analysis depth for Chinese astrology
+ */
+export type AnalysisDepth =
+  | "basic"
+  | "standard"
+  | "comprehensive"
+  | "professional";
+
+/**
+ * Gender type (for Chinese luck pillars)
+ */
+export type Gender = "male" | "female";
+
+/**
+ * Kabbalah system type
+ */
+export type KabbalahSystem = "classical" | "modern_halevi" | "golden_dawn";
+
+/**
+ * Gematria calculation methods
+ */
+export type GematriaMethod =
+  | "mispar_gadol"
+  | "mispar_katan"
+  | "mispar_siduri"
+  | "mispar_musafi"
+  | "mispar_perati"
+  | "mispar_shemi"
+  | "atbash"
+  | "albam"
+  | "ayak_bakar";
+
+/**
+ * Astrocartography line types
+ */
+export type AstrocartographyLineType = "AC" | "MC" | "DS" | "IC";
+
+/**
+ * Pet species
+ */
+export type PetSpecies = "dog" | "cat" | "horse" | "bird" | "other";
+
+/**
+ * Business activity types for timing
+ */
+export type BusinessActivity =
+  | "product_launch"
+  | "meetings"
+  | "negotiations"
+  | "hiring"
+  | "restructuring";
+
+/**
+ * Fixed stars preset types
+ */
+export type FixedStarsPreset =
+  | "essential"
+  | "traditional"
+  | "behenian"
+  | "extended";
+
+/**
+ * Fengshui period (8 = 2004-2023, 9 = 2024-2043)
+ */
+export type FengshuiPeriod = 8 | 9;
+
+/**
+ * PDF page size options
+ */
+export type PdfPageSize = "A4" | "Letter";
+
+/**
+ * PDF page orientation
+ */
+export type PdfOrientation = "portrait" | "landscape";
+
+/**
+ * PDF design theme
+ */
+export type PdfTheme = "modern" | "classic";
+
+/**
+ * Horary question categories
+ */
+export type HoraryQuestionCategory =
+  | "love"
+  | "career"
+  | "money"
+  | "health"
+  | "travel"
+  | "lost_objects"
+  | "general";

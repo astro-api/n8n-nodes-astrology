@@ -3,7 +3,11 @@ import type {
   IExecuteFunctions,
   IHttpRequestOptions,
 } from "n8n-workflow";
-import type { IBirthData, ITransitTime } from "../interfaces/types";
+import type {
+  IBirthData,
+  ITransitTime,
+  IDateTimeLocation,
+} from "../interfaces/types";
 
 /**
  * Builds birth data object from node parameters
@@ -336,4 +340,62 @@ export function buildReturnLocation(
   }
 
   return location;
+}
+
+/**
+ * Builds datetime_location object for Lunar API requests.
+ * Used for lunar phases, void-of-course, mansions, and events.
+ *
+ * @param executeFunctions - n8n execute functions context
+ * @param itemIndex - Current item index
+ * @returns DateTimeLocation object for API requests
+ */
+export function buildDateTimeLocation(
+  executeFunctions: IExecuteFunctions,
+  itemIndex: number,
+): IDateTimeLocation {
+  const dateTimeLocation: IDateTimeLocation = {
+    year: executeFunctions.getNodeParameter("year", itemIndex) as number,
+    month: executeFunctions.getNodeParameter("month", itemIndex) as number,
+    day: executeFunctions.getNodeParameter("day", itemIndex) as number,
+    hour: executeFunctions.getNodeParameter("hour", itemIndex) as number,
+    minute: executeFunctions.getNodeParameter("minute", itemIndex) as number,
+  };
+
+  const locationType = executeFunctions.getNodeParameter(
+    "locationType",
+    itemIndex,
+  ) as string;
+
+  if (locationType === "city") {
+    dateTimeLocation.city = executeFunctions.getNodeParameter(
+      "city",
+      itemIndex,
+    ) as string;
+    dateTimeLocation.country_code = executeFunctions.getNodeParameter(
+      "countryCode",
+      itemIndex,
+    ) as string;
+  } else {
+    dateTimeLocation.latitude = executeFunctions.getNodeParameter(
+      "latitude",
+      itemIndex,
+    ) as number;
+    dateTimeLocation.longitude = executeFunctions.getNodeParameter(
+      "longitude",
+      itemIndex,
+    ) as number;
+
+    // Timezone is optional for coordinate-based locations
+    const timezone = executeFunctions.getNodeParameter(
+      "timezone",
+      itemIndex,
+      "",
+    ) as string;
+    if (timezone) {
+      dateTimeLocation.timezone = timezone;
+    }
+  }
+
+  return dateTimeLocation;
 }

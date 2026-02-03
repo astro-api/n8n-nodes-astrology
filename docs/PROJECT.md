@@ -10,24 +10,24 @@
 | Human Design | ✅ Complete | 8/8 | |
 | Numerology | ✅ Complete | 3/3 | |
 | Tarot | ✅ Complete | 19/19 | |
-| Lunar | ⬜ Not started | 0/5 | 🟠 Medium |
-| Vedic | ⬜ Not started | 0/22 | 🟠 Medium |
-| Analysis | ⬜ Not started | 0/24 | 🟡 Low |
-| Render/SVG | ⬜ Not started | 0/8 | 🟡 Low |
-| Insights | ⬜ Not started | 0/31 | 🟢 On demand |
-| Traditional | ⬜ Not started | 0/10 | 🟢 On demand |
-| Astrocartography | ⬜ Not started | 0/13 | 🟢 On demand |
-| Chinese | ⬜ Not started | 0/8 | 🔵 Future |
-| Kabbalah | ⬜ Not started | 0/7 | 🔵 Future |
-| Horary | ⬜ Not started | 0/6 | 🔵 Future |
-| Fengshui | ⬜ Not started | 0/4 | 🔵 Future |
-| Fixed Stars | ⬜ Not started | 0/4 | 🔵 Future |
-| Enhanced | ⬜ Not started | 0/4 | 🔵 Future |
-| PDF | ⬜ Not started | 0/4 | 🔵 Future |
-| Glossary | ⬜ Not started | 0/14 | 🔵 Future |
-| Eclipses | ⬜ Not started | 0/3 | 🔵 Future |
-| Ziwei | ⬜ Not started | 0/1 | 🔵 Future |
-| **Total** | | **67/237** | |
+| Lunar | ✅ Complete | 5/5 | |
+| Vedic | ✅ Complete | 22/22 | |
+| Analysis | ✅ Complete | 24/24 | |
+| Render | ✅ Complete | 4/4 | |
+| Insights | ✅ Complete | 31/31 | |
+| Traditional | ✅ Complete | 10/10 | |
+| Astrocartography | ✅ Complete | 13/13 | |
+| Chinese | ✅ Complete | 8/8 | |
+| Kabbalah | ✅ Complete | 7/7 | |
+| Horary | ✅ Complete | 6/6 | |
+| Fengshui | ✅ Complete | 4/4 | |
+| Fixed Stars | ✅ Complete | 4/4 | |
+| Enhanced | ✅ Complete | 4/4 | |
+| PDF | ✅ Complete | 4/4 | |
+| Glossary | ✅ Complete | 14/14 | |
+| Eclipses | ✅ Complete | 3/3 | |
+| Ziwei | ✅ Complete | 1/1 | |
+| **Total** | | **231/233** | |
 
 ### Priority Legend
 
@@ -59,14 +59,48 @@ n8n-nodes-astrology/
 │   │   ├── charts.operation.ts
 │   │   ├── humanDesign.operation.ts
 │   │   ├── numerology.operation.ts
-│   │   └── tarot.operation.ts
+│   │   ├── tarot.operation.ts
+│   │   ├── lunar.operation.ts
+│   │   ├── vedic.operation.ts
+│   │   ├── analysis.operation.ts
+│   │   ├── render.operation.ts
+│   │   ├── insights.operation.ts
+│   │   ├── traditional.operation.ts
+│   │   ├── astrocartography.operation.ts
+│   │   ├── chinese.operation.ts
+│   │   ├── kabbalah.operation.ts
+│   │   ├── glossary.operation.ts
+│   │   ├── horary.operation.ts
+│   │   ├── fengshui.operation.ts
+│   │   ├── fixedStars.operation.ts
+│   │   ├── enhanced.operation.ts
+│   │   ├── pdf.operation.ts
+│   │   ├── eclipses.operation.ts
+│   │   └── ziwei.operation.ts
 │   └── handlers/                      # Execute logic
 │       ├── data.handler.ts
 │       ├── horoscope.handler.ts
 │       ├── charts.handler.ts
 │       ├── humanDesign.handler.ts
 │       ├── numerology.handler.ts
-│       └── tarot.handler.ts
+│       ├── tarot.handler.ts
+│       ├── lunar.handler.ts
+│       ├── vedic.handler.ts
+│       ├── analysis.handler.ts
+│       ├── render.handler.ts
+│       ├── insights.handler.ts
+│       ├── traditional.handler.ts
+│       ├── astrocartography.handler.ts
+│       ├── chinese.handler.ts
+│       ├── kabbalah.handler.ts
+│       ├── glossary.handler.ts
+│       ├── horary.handler.ts
+│       ├── fengshui.handler.ts
+│       ├── fixedStars.handler.ts
+│       ├── enhanced.handler.ts
+│       ├── pdf.handler.ts
+│       ├── eclipses.handler.ts
+│       └── ziwei.handler.ts
 ├── examples/                          # Workflow examples
 ├── docker/                            # Test environment
 └── dist/                              # Compiled output
