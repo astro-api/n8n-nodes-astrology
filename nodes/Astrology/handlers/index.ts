@@ -4,3 +4,7 @@ export { handleChartsResource } from "./charts.handler";
 export { handleHumanDesignResource } from "./humanDesign.handler";
 export { handleNumerologyResource } from "./numerology.handler";
 export { handleTarotResource } from "./tarot.handler";
+export { handleLunarResource } from "./lunar.handler";
+export { handleVedicResource } from "./vedic.handler";
+export { handleAnalysisResource } from "./analysis.handler";
+export { handleRenderResource } from "./render.handler";

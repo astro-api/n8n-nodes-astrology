@@ -5,3 +5,7 @@ export { chartsOperations } from "./charts.operation";
 export { humanDesignOperations } from "./humanDesign.operation";
 export { numerologyOperations } from "./numerology.operation";
 export { tarotOperations } from "./tarot.operation";
+export { lunarOperations } from "./lunar.operation";
+export { vedicOperations } from "./vedic.operation";
+export { analysisOperations } from "./analysis.operation";
+export { renderOperations } from "./render.operation";

@@ -34,7 +34,11 @@ export type ResourceType =
   | "charts"
   | "humanDesign"
   | "numerology"
-  | "tarot";
+  | "tarot"
+  | "lunar"
+  | "vedic"
+  | "analysis"
+  | "render";
 
 /**
  * Data resource operations
@@ -136,6 +140,77 @@ export type TarotOperation =
   | "analysisOptimalTimes"
   | "analysisTransitReport"
   | "analysisNatalReport";
+
+/**
+ * Lunar resource operations
+ */
+export type LunarOperation =
+  | "phases"
+  | "voidOfCourse"
+  | "mansions"
+  | "events"
+  | "calendar";
+
+/**
+ * Vedic resource operations
+ */
+export type VedicOperation =
+  | "chart"
+  | "chartRender"
+  | "birthDetails"
+  | "vimshottariDasha"
+  | "charaDasha"
+  | "yoginiDasha"
+  | "nakshatra"
+  | "divisionalChart"
+  | "ashtakvarga"
+  | "shadbala"
+  | "yogaAnalysis"
+  | "kundliMatching"
+  | "manglikDosha"
+  | "kaalSarpaDosha"
+  | "sadeSati"
+  | "transit"
+  | "varshaphal"
+  | "panchang"
+  | "regionalPanchang"
+  | "festivalCalendar"
+  | "kpSystem"
+  | "remedies";
+
+/**
+ * Analysis resource operations
+ */
+export type AnalysisOperation =
+  | "natalReport"
+  | "synastryReport"
+  | "transitReport"
+  | "compositeReport"
+  | "solarReturnReport"
+  | "lunarReturnReport"
+  | "progressionReport"
+  | "directionReport"
+  | "natalTransitReport"
+  | "solarReturnTransitReport"
+  | "lunarReturnTransitReport"
+  | "lunarAnalysis"
+  | "compatibility"
+  | "compatibilityScore"
+  | "relationship"
+  | "relationshipScore"
+  | "career"
+  | "vocational"
+  | "health"
+  | "psychological"
+  | "spiritual"
+  | "karmic"
+  | "predictive"
+  | "relocation";
+
+/**
+ * Render resource operations
+ */
+export type RenderOperation = "natal" | "transit" | "synastry" | "composite";
 
 /**
  * Tarot tradition/interpretation style
@@ -322,3 +397,78 @@ export type Tradition = "western" | "vedic";
  * Text output format
  */
 export type TextFormat = "plain" | "markdown" | "html";
+
+/**
+ * DateTime location structure for Lunar API requests
+ */
+export interface IDateTimeLocation {
+  year: number;
+  month: number;
+  day: number;
+  hour: number;
+  minute: number;
+  second?: number;
+  city?: string;
+  country_code?: string;
+  latitude?: number;
+  longitude?: number;
+  timezone?: string;
+}
+
+/**
+ * Vedic chart style
+ */
+export type VedicChartStyle = "north_indian" | "south_indian";
+
+/**
+ * Vedic ayanamsa types
+ */
+export type VedicAyanamsa =
+  | "lahiri"
+  | "krishnamurti"
+  | "raman"
+  | "yukteshwar"
+  | "jn_bhasin"
+  | "fagan_bradley"
+  | "true_citra"
+  | "true_revati"
+  | "true_pushya"
+  | "galactic_center_0_sag"
+  | "sassanian"
+  | "ushashashi";
+
+/**
+ * Vedic divisional chart types
+ */
+export type VedicDivisionalChart =
+  | "D1"
+  | "D2"
+  | "D3"
+  | "D4"
+  | "D7"
+  | "D9"
+  | "D10"
+  | "D12"
+  | "D16"
+  | "D20"
+  | "D24"
+  | "D27"
+  | "D30"
+  | "D40"
+  | "D45"
+  | "D60";
+
+/**
+ * Render output format
+ */
+export type RenderFormat = "svg" | "png" | "jpg" | "webp" | "pdf";
+
+/**
+ * Render theme
+ */
+export type RenderTheme =
+  | "light"
+  | "dark"
+  | "classic"
+  | "modern_light"
+  | "traditional";
