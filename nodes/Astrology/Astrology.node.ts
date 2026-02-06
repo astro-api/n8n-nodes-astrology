@@ -150,7 +150,7 @@ export class Astrology implements INodeType {
 
   async execute(this: IExecuteFunctions): Promise<INodeExecutionData[][]> {
     const items = this.getInputData();
-    const returnData: IDataObject[] = [];
+    const returnData: INodeExecutionData[] = [];
 
     const credentials = await this.getCredentials("astrologyApi");
     const baseUrl = getBaseUrl(credentials as IDataObject);
@@ -186,12 +186,15 @@ export class Astrology implements INodeType {
         }
 
         const responseData = await handler(context, operation);
-        returnData.push(responseData);
+        returnData.push({
+          json: responseData,
+          pairedItem: { item: itemIndex },
+        });
       } catch (error) {
         if (this.continueOnFail()) {
           returnData.push({
-            error: (error as Error).message,
-            itemIndex,
+            json: { error: (error as Error).message },
+            pairedItem: { item: itemIndex },
           });
           continue;
         }
@@ -199,6 +202,6 @@ export class Astrology implements INodeType {
       }
     }
 
-    return [this.helpers.returnJsonArray(returnData)];
+    return [returnData];
   }
 }
