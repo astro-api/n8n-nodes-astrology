@@ -1,5 +1,11 @@
 # @astro-api/n8n-nodes-astrology
 
+## 0.8.1
+
+### Patch Changes
+
+- 56dcc68: Add pairedItem support to node execute method for proper item linking in n8n workflows
+
 ## 0.8.0
 
 ### Minor Changes
