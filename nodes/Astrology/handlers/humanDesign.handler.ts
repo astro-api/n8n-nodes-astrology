@@ -1,3 +1,4 @@
+import { NodeOperationError } from "n8n-workflow";
 import type { IDataObject } from "n8n-workflow";
 import type {
   IHandlerContext,
@@ -55,8 +56,10 @@ export async function handleHumanDesignResource(
     case "typeOnly":
       return handleTypeOnly(context);
     default:
-      throw new Error(
+      throw new NodeOperationError(
+        context.executeFunctions.getNode(),
         `The operation '${operation}' is not supported for the humanDesign resource`,
+        { itemIndex: context.itemIndex },
       );
   }
 }

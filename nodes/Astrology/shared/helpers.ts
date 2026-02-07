@@ -1,7 +1,9 @@
+import { NodeApiError } from "n8n-workflow";
 import type {
   IDataObject,
   IExecuteFunctions,
   IHttpRequestOptions,
+  JsonObject,
 } from "n8n-workflow";
 import type {
   IBirthData,
@@ -90,14 +92,18 @@ export async function makeApiRequest(
     options.body = body;
   }
 
-  const response = await executeFunctions.helpers.httpRequest(options);
+  try {
+    const response = await executeFunctions.helpers.httpRequest(options);
 
-  // Ensure we return only serializable data (no circular references)
-  if (typeof response === "object" && response !== null) {
-    return JSON.parse(JSON.stringify(response)) as IDataObject;
+    // Ensure we return only serializable data (no circular references)
+    if (typeof response === "object" && response !== null) {
+      return JSON.parse(JSON.stringify(response)) as IDataObject;
+    }
+
+    return response as IDataObject;
+  } catch (error) {
+    throw new NodeApiError(executeFunctions.getNode(), error as JsonObject);
   }
-
-  return response as IDataObject;
 }
 
 /**

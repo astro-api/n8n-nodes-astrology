@@ -1,3 +1,4 @@
+import { NodeOperationError } from "n8n-workflow";
 import type { IDataObject } from "n8n-workflow";
 import type { IHandlerContext, NumerologyOperation } from "../interfaces/types";
 import {
@@ -36,8 +37,10 @@ export async function handleNumerologyResource(
     case "compatibility":
       return handleCompatibility(context);
     default:
-      throw new Error(
+      throw new NodeOperationError(
+        context.executeFunctions.getNode(),
         `The operation '${operation}' is not supported for the numerology resource`,
+        { itemIndex: context.itemIndex },
       );
   }
 }
