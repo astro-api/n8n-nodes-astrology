@@ -1,5 +1,11 @@
 # @astro-api/n8n-nodes-astrology
 
+## 0.8.3
+
+### Patch Changes
+
+- e8c0349: Replace generic Error with n8n error classes (NodeOperationError, NodeApiError) for better error handling and user feedback
+
 ## 0.8.2
 
 ### Patch Changes
