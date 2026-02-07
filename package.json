@@ -70,7 +70,7 @@
     ]
   },
   "peerDependencies": {
-    "n8n-workflow": "1.120.7"
+    "n8n-workflow": "*"
   },
   "devDependencies": {
     "@changesets/cli": "^2.29.8",
