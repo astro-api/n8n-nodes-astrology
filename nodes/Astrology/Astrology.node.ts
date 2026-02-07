@@ -198,7 +198,10 @@ export class Astrology implements INodeType {
           });
           continue;
         }
-        throw error;
+        throw new NodeOperationError(this.getNode(), error as Error, {
+          itemIndex,
+          description: (error as Error).message,
+        });
       }
     }
 

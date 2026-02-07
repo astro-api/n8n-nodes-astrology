@@ -1,3 +1,4 @@
+import { NodeOperationError } from "n8n-workflow";
 import type { IDataObject } from "n8n-workflow";
 import type { IHandlerContext } from "../interfaces/types";
 import {
@@ -32,8 +33,10 @@ export async function handleHoroscopeResource(
     return await handleChineseBaziOperation(context);
   }
 
-  throw new Error(
+  throw new NodeOperationError(
+    context.executeFunctions.getNode(),
     `The operation '${operation}' is not supported for the horoscope resource`,
+    { itemIndex: context.itemIndex },
   );
 }
 

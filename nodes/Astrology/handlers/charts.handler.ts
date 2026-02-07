@@ -1,3 +1,4 @@
+import { NodeOperationError } from "n8n-workflow";
 import type { IDataObject, IExecuteFunctions } from "n8n-workflow";
 import type { IHandlerContext, ChartsOperation } from "../interfaces/types";
 import {
@@ -172,8 +173,10 @@ export async function handleChartsResource(
     case "directions":
       return handleDirectionsChart(context);
     default:
-      throw new Error(
+      throw new NodeOperationError(
+        context.executeFunctions.getNode(),
         `The operation '${operation}' is not supported for the charts resource`,
+        { itemIndex: context.itemIndex },
       );
   }
 }
