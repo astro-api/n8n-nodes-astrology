@@ -1,5 +1,11 @@
 # @astro-api/n8n-nodes-astrology
 
+## 0.8.4
+
+### Patch Changes
+
+- 5d5e8a5: Update README badges: add CTA badges (Get API Key, API Documentation, Postman Collection) and project info badges (npm downloads, CI status, TypeScript, Prettier)
+
 ## 0.8.3
 
 ### Patch Changes
