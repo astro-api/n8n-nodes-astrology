@@ -1,11 +1,18 @@
 # @astro-api/n8n-nodes-astrology
 
-[![npm version](https://badge.fury.io/js/@astro-api%2Fn8n-nodes-astrology.svg)](https://www.npmjs.com/package/@astro-api/n8n-nodes-astrology)
+[![Get API Key](https://img.shields.io/badge/Get%20API%20Key-6C63FF?style=for-the-badge&logoColor=white)](https://dashboard.astrology-api.io/)
+[![API Documentation](https://img.shields.io/badge/API%20Documentation-FCC624?style=for-the-badge&logoColor=black)](https://api.astrology-api.io/rapidoc)
+[![Postman Collection](https://img.shields.io/badge/Postman%20Collection-FF6C37?style=for-the-badge&logo=postman&logoColor=white)](https://api.astrology-api.io/best-astrology-api-postman.json)
+
+[![npm version](https://img.shields.io/npm/v/@astro-api/n8n-nodes-astrology)](https://www.npmjs.com/package/@astro-api/n8n-nodes-astrology)
+[![npm downloads](https://img.shields.io/npm/dm/@astro-api/n8n-nodes-astrology)](https://www.npmjs.com/package/@astro-api/n8n-nodes-astrology)
+[![CI](https://github.com/astro-api/n8n-nodes-astrology/actions/workflows/ci.yml/badge.svg)](https://github.com/astro-api/n8n-nodes-astrology/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.5-blue?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
+![n8n community node](https://img.shields.io/badge/n8n-community--node-ff6d5a)
 
 Official n8n community node for [Astrology API](https://astrology-api.io) — professional astrological calculations powered by Swiss Ephemeris.
-
-![Astrology Node](https://img.shields.io/badge/n8n-community--node-ff6d5a)
 
 ## Features
 
