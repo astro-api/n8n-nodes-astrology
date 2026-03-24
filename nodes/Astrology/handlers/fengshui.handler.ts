@@ -23,7 +23,7 @@ export async function handleFengshuiResource(
   context: IHandlerContext,
   operation: string,
 ): Promise<IDataObject> {
-  const { executeFunctions, itemIndex, baseUrl, apiKey } = context;
+  const { executeFunctions, itemIndex, baseUrl } = context;
   const op = operation as FengshuiOperation;
 
   // Handle glossary stars (GET with language)
@@ -41,7 +41,6 @@ export async function handleFengshuiResource(
       "GET",
       baseUrl,
       endpoint,
-      apiKey,
     );
 
     return applySimplifyIfEnabled(executeFunctions, itemIndex, responseData);
@@ -68,7 +67,6 @@ export async function handleFengshuiResource(
       "GET",
       baseUrl,
       endpoint,
-      apiKey,
     );
 
     return applySimplifyIfEnabled(executeFunctions, itemIndex, responseData);
@@ -129,7 +127,6 @@ export async function handleFengshuiResource(
       "POST",
       baseUrl,
       FENGSHUI_ENDPOINTS.flyingStarsChart,
-      apiKey,
       body,
     );
 
@@ -142,7 +139,6 @@ export async function handleFengshuiResource(
     "GET",
     baseUrl,
     FENGSHUI_ENDPOINTS.glossaryStars,
-    apiKey,
   );
 
   return applySimplifyIfEnabled(executeFunctions, itemIndex, responseData);

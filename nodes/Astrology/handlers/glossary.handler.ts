@@ -53,7 +53,7 @@ export async function handleGlossaryResource(
   context: IHandlerContext,
   operation: string,
 ): Promise<IDataObject> {
-  const { executeFunctions, itemIndex, baseUrl, apiKey } = context;
+  const { executeFunctions, itemIndex, baseUrl } = context;
   const op = operation as GlossaryOperation;
 
   const endpoint = GLOSSARY_ENDPOINTS[op] || GLOSSARY_ENDPOINTS.cities;
@@ -137,7 +137,6 @@ export async function handleGlossaryResource(
     "GET",
     baseUrl,
     finalEndpoint,
-    apiKey,
   );
 
   return applySimplifyIfEnabled(executeFunctions, itemIndex, responseData);

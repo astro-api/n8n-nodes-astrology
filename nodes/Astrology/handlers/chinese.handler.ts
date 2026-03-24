@@ -51,7 +51,7 @@ export async function handleChineseResource(
   context: IHandlerContext,
   operation: string,
 ): Promise<IDataObject> {
-  const { executeFunctions, itemIndex, baseUrl, apiKey } = context;
+  const { executeFunctions, itemIndex, baseUrl } = context;
   const op = operation as ChineseOperation;
 
   // GET operations with path parameters
@@ -79,7 +79,6 @@ export async function handleChineseResource(
       "GET",
       baseUrl,
       endpoint,
-      apiKey,
     );
 
     return applySimplifyIfEnabled(executeFunctions, itemIndex, responseData);
@@ -114,7 +113,6 @@ export async function handleChineseResource(
       "POST",
       baseUrl,
       CHINESE_ENDPOINTS[op],
-      apiKey,
       body,
     );
 
@@ -210,7 +208,6 @@ export async function handleChineseResource(
       "POST",
       baseUrl,
       CHINESE_ENDPOINTS[op],
-      apiKey,
       body,
     );
 
@@ -223,7 +220,6 @@ export async function handleChineseResource(
     "POST",
     baseUrl,
     CHINESE_ENDPOINTS[op] || CHINESE_ENDPOINTS.bazi,
-    apiKey,
     {},
   );
 

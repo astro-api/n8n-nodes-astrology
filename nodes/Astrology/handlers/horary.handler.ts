@@ -99,7 +99,7 @@ export async function handleHoraryResource(
   context: IHandlerContext,
   operation: string,
 ): Promise<IDataObject> {
-  const { executeFunctions, itemIndex, baseUrl, apiKey } = context;
+  const { executeFunctions, itemIndex, baseUrl } = context;
   const op = operation as HoraryOperation;
 
   const endpoint = HORARY_ENDPOINTS[op] || HORARY_ENDPOINTS.analyze;
@@ -119,7 +119,6 @@ export async function handleHoraryResource(
       "GET",
       baseUrl,
       finalEndpoint,
-      apiKey,
     );
 
     return applySimplifyIfEnabled(executeFunctions, itemIndex, responseData);
@@ -174,7 +173,6 @@ export async function handleHoraryResource(
       "POST",
       baseUrl,
       endpoint,
-      apiKey,
       body,
     );
 
@@ -187,7 +185,6 @@ export async function handleHoraryResource(
     "GET",
     baseUrl,
     endpoint,
-    apiKey,
   );
 
   return applySimplifyIfEnabled(executeFunctions, itemIndex, responseData);

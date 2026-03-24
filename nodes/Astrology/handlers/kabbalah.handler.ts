@@ -48,7 +48,7 @@ export async function handleKabbalahResource(
   context: IHandlerContext,
   operation: string,
 ): Promise<IDataObject> {
-  const { executeFunctions, itemIndex, baseUrl, apiKey } = context;
+  const { executeFunctions, itemIndex, baseUrl } = context;
   const op = operation as KabbalahOperation;
 
   const endpoint = KABBALAH_ENDPOINTS[op] || KABBALAH_ENDPOINTS.treeOfLifeChart;
@@ -60,7 +60,6 @@ export async function handleKabbalahResource(
       "GET",
       baseUrl,
       endpoint,
-      apiKey,
     );
 
     return applySimplifyIfEnabled(executeFunctions, itemIndex, responseData);
@@ -104,7 +103,6 @@ export async function handleKabbalahResource(
       "POST",
       baseUrl,
       endpoint,
-      apiKey,
       body,
     );
 
@@ -158,7 +156,6 @@ export async function handleKabbalahResource(
       "POST",
       baseUrl,
       endpoint,
-      apiKey,
       body,
     );
 
@@ -171,7 +168,6 @@ export async function handleKabbalahResource(
     "POST",
     baseUrl,
     endpoint,
-    apiKey,
     {},
   );
 

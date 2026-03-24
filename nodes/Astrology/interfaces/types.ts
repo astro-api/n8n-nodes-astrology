@@ -544,7 +544,6 @@ export interface IHandlerContext {
   executeFunctions: IExecuteFunctions;
   itemIndex: number;
   baseUrl: string;
-  apiKey: string;
 }
 
 /**

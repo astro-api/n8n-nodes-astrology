@@ -181,7 +181,7 @@ export async function handleInsightsResource(
   context: IHandlerContext,
   operation: string,
 ): Promise<IDataObject> {
-  const { executeFunctions, itemIndex, baseUrl, apiKey } = context;
+  const { executeFunctions, itemIndex, baseUrl } = context;
   const op = operation as InsightsOperation;
 
   const endpoint =
@@ -194,7 +194,6 @@ export async function handleInsightsResource(
       "GET",
       baseUrl,
       endpoint,
-      apiKey,
     );
 
     return applySimplifyIfEnabled(executeFunctions, itemIndex, responseData);
@@ -251,7 +250,6 @@ export async function handleInsightsResource(
       "POST",
       baseUrl,
       endpoint,
-      apiKey,
       body,
     );
 
@@ -340,7 +338,6 @@ export async function handleInsightsResource(
     "POST",
     baseUrl,
     endpoint,
-    apiKey,
     body,
   );
 

@@ -65,7 +65,6 @@ export function buildBirthData(
  * @param method - HTTP method
  * @param baseUrl - API base URL
  * @param endpoint - API endpoint path
- * @param apiKey - API authentication key
  * @param body - Optional request body
  * @returns API response data
  */
@@ -74,14 +73,12 @@ export async function makeApiRequest(
   method: "GET" | "POST",
   baseUrl: string,
   endpoint: string,
-  apiKey: string,
   body?: IDataObject,
 ): Promise<IDataObject> {
   const options: IHttpRequestOptions = {
     method,
     url: `${baseUrl}${endpoint}`,
     headers: {
-      Authorization: `Bearer ${apiKey}`,
       "Content-Type": "application/json",
     },
     json: true,
@@ -93,7 +90,12 @@ export async function makeApiRequest(
   }
 
   try {
-    const response = await executeFunctions.helpers.httpRequest(options);
+    const response =
+      await executeFunctions.helpers.httpRequestWithAuthentication.call(
+        executeFunctions,
+        "astrologyApi",
+        options,
+      );
 
     // Ensure we return only serializable data (no circular references)
     if (typeof response === "object" && response !== null) {

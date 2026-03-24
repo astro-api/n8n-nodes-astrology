@@ -28,7 +28,7 @@ export async function handleLunarResource(
   context: IHandlerContext,
   operation: string,
 ): Promise<IDataObject> {
-  const { executeFunctions, itemIndex, baseUrl, apiKey } = context;
+  const { executeFunctions, itemIndex, baseUrl } = context;
   const op = operation as LunarOperation;
 
   // "calendar" operation uses GET with year parameter
@@ -43,7 +43,6 @@ export async function handleLunarResource(
       "GET",
       baseUrl,
       `${LUNAR_ENDPOINTS.calendar}/${year}`,
-      apiKey,
     );
 
     return applySimplifyIfEnabled(executeFunctions, itemIndex, responseData);
@@ -83,7 +82,6 @@ export async function handleLunarResource(
     "POST",
     baseUrl,
     endpoint,
-    apiKey,
     body,
   );
 

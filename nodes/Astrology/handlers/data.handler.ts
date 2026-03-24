@@ -33,7 +33,7 @@ export async function handleDataResource(
   context: IHandlerContext,
   operation: string,
 ): Promise<IDataObject> {
-  const { executeFunctions, itemIndex, baseUrl, apiKey } = context;
+  const { executeFunctions, itemIndex, baseUrl } = context;
   const op = operation as DataOperation;
 
   // "now" operation doesn't require birth data
@@ -43,7 +43,6 @@ export async function handleDataResource(
       "GET",
       baseUrl,
       DATA_ENDPOINTS.now,
-      apiKey,
     );
   }
 
@@ -72,7 +71,6 @@ export async function handleDataResource(
       "POST",
       baseUrl,
       DATA_ENDPOINTS.globalPositions,
-      apiKey,
       body,
     );
 
@@ -89,7 +87,6 @@ export async function handleDataResource(
     "POST",
     baseUrl,
     endpoint,
-    apiKey,
     body,
   );
 

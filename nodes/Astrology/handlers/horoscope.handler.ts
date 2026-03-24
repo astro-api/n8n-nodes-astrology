@@ -47,7 +47,7 @@ async function handleSignOperation(
   context: IHandlerContext,
   operation: string,
 ): Promise<IDataObject> {
-  const { executeFunctions, itemIndex, baseUrl, apiKey } = context;
+  const { executeFunctions, itemIndex, baseUrl } = context;
 
   const sign = executeFunctions.getNodeParameter("sign", itemIndex) as string;
   const language = executeFunctions.getNodeParameter(
@@ -102,7 +102,6 @@ async function handleSignOperation(
     "POST",
     baseUrl,
     endpoint,
-    apiKey,
     body,
   );
 }
@@ -114,7 +113,7 @@ async function handlePersonalOperation(
   context: IHandlerContext,
   operation: string,
 ): Promise<IDataObject> {
-  const { executeFunctions, itemIndex, baseUrl, apiKey } = context;
+  const { executeFunctions, itemIndex, baseUrl } = context;
 
   const birthData = buildBirthData(executeFunctions, itemIndex);
   const language = executeFunctions.getNodeParameter(
@@ -170,7 +169,6 @@ async function handlePersonalOperation(
     "POST",
     baseUrl,
     endpoint,
-    apiKey,
     body,
   );
 }
@@ -181,7 +179,7 @@ async function handlePersonalOperation(
 async function handleChineseBaziOperation(
   context: IHandlerContext,
 ): Promise<IDataObject> {
-  const { executeFunctions, itemIndex, baseUrl, apiKey } = context;
+  const { executeFunctions, itemIndex, baseUrl } = context;
 
   const birthData = buildBirthData(executeFunctions, itemIndex);
   const baziYear = executeFunctions.getNodeParameter(
@@ -203,7 +201,6 @@ async function handleChineseBaziOperation(
     "POST",
     baseUrl,
     "/api/v3/horoscope/chinese/bazi",
-    apiKey,
     body,
   );
 }

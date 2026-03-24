@@ -153,7 +153,7 @@ function buildTarotOptions(
 async function handleGlossaryCards(
   context: IHandlerContext,
 ): Promise<IDataObject> {
-  const { executeFunctions, itemIndex, baseUrl, apiKey } = context;
+  const { executeFunctions, itemIndex, baseUrl } = context;
 
   // Build query parameters from filters
   const params: string[] = [];
@@ -203,13 +203,7 @@ async function handleGlossaryCards(
   const queryString = params.length > 0 ? `?${params.join("&")}` : "";
   const endpoint = `${TAROT_ENDPOINTS.glossaryCards}${queryString}`;
 
-  return await makeApiRequest(
-    executeFunctions,
-    "GET",
-    baseUrl,
-    endpoint,
-    apiKey,
-  );
+  return await makeApiRequest(executeFunctions, "GET", baseUrl, endpoint);
 }
 
 /**
@@ -218,14 +212,13 @@ async function handleGlossaryCards(
 async function handleGlossarySpreads(
   context: IHandlerContext,
 ): Promise<IDataObject> {
-  const { executeFunctions, baseUrl, apiKey } = context;
+  const { executeFunctions, baseUrl } = context;
 
   return await makeApiRequest(
     executeFunctions,
     "GET",
     baseUrl,
     TAROT_ENDPOINTS.glossarySpreads,
-    apiKey,
   );
 }
 
@@ -235,7 +228,7 @@ async function handleGlossarySpreads(
 async function handleGlossaryCardDetail(
   context: IHandlerContext,
 ): Promise<IDataObject> {
-  const { executeFunctions, itemIndex, baseUrl, apiKey } = context;
+  const { executeFunctions, itemIndex, baseUrl } = context;
 
   const cardId = executeFunctions.getNodeParameter(
     "cardId",
@@ -248,13 +241,7 @@ async function handleGlossaryCardDetail(
     encodeURIComponent(cardId),
   );
 
-  return await makeApiRequest(
-    executeFunctions,
-    "GET",
-    baseUrl,
-    endpoint,
-    apiKey,
-  );
+  return await makeApiRequest(executeFunctions, "GET", baseUrl, endpoint);
 }
 
 /**
@@ -263,7 +250,7 @@ async function handleGlossaryCardDetail(
 async function handleSearchCards(
   context: IHandlerContext,
 ): Promise<IDataObject> {
-  const { executeFunctions, itemIndex, baseUrl, apiKey } = context;
+  const { executeFunctions, itemIndex, baseUrl } = context;
 
   // Build query parameters
   const params: string[] = [];
@@ -334,20 +321,14 @@ async function handleSearchCards(
   const queryString = params.length > 0 ? `?${params.join("&")}` : "";
   const endpoint = `${TAROT_ENDPOINTS.searchCards}${queryString}`;
 
-  return await makeApiRequest(
-    executeFunctions,
-    "GET",
-    baseUrl,
-    endpoint,
-    apiKey,
-  );
+  return await makeApiRequest(executeFunctions, "GET", baseUrl, endpoint);
 }
 
 /**
  * Handles daily card request (GET with user_id)
  */
 async function handleDailyCard(context: IHandlerContext): Promise<IDataObject> {
-  const { executeFunctions, itemIndex, baseUrl, apiKey } = context;
+  const { executeFunctions, itemIndex, baseUrl } = context;
 
   const userId = executeFunctions.getNodeParameter(
     "userId",
@@ -404,20 +385,14 @@ async function handleDailyCard(context: IHandlerContext): Promise<IDataObject> {
   const queryString = `?${params.join("&")}`;
   const endpoint = `${TAROT_ENDPOINTS.dailyCard}${queryString}`;
 
-  return await makeApiRequest(
-    executeFunctions,
-    "GET",
-    baseUrl,
-    endpoint,
-    apiKey,
-  );
+  return await makeApiRequest(executeFunctions, "GET", baseUrl, endpoint);
 }
 
 /**
  * Handles draw cards request (POST)
  */
 async function handleDrawCards(context: IHandlerContext): Promise<IDataObject> {
-  const { executeFunctions, itemIndex, baseUrl, apiKey } = context;
+  const { executeFunctions, itemIndex, baseUrl } = context;
 
   const count = executeFunctions.getNodeParameter(
     "drawCount",
@@ -461,7 +436,6 @@ async function handleDrawCards(context: IHandlerContext): Promise<IDataObject> {
     "POST",
     baseUrl,
     TAROT_ENDPOINTS.drawCards,
-    apiKey,
     body,
   );
 
@@ -475,7 +449,7 @@ async function handleReport(
   context: IHandlerContext,
   op: TarotOperation,
 ): Promise<IDataObject> {
-  const { executeFunctions, itemIndex, baseUrl, apiKey } = context;
+  const { executeFunctions, itemIndex, baseUrl } = context;
 
   // Build birth data
   const birthData = buildBirthData(executeFunctions, itemIndex);
@@ -502,7 +476,6 @@ async function handleReport(
     "POST",
     baseUrl,
     TAROT_ENDPOINTS[op],
-    apiKey,
     body,
   );
 
@@ -515,7 +488,7 @@ async function handleReport(
 async function handleReportSynastry(
   context: IHandlerContext,
 ): Promise<IDataObject> {
-  const { executeFunctions, itemIndex, baseUrl, apiKey } = context;
+  const { executeFunctions, itemIndex, baseUrl } = context;
 
   // Build subject 1 birth data
   const birthData1 = buildBirthData(executeFunctions, itemIndex);
@@ -546,7 +519,6 @@ async function handleReportSynastry(
     "POST",
     baseUrl,
     TAROT_ENDPOINTS.reportSynastry,
-    apiKey,
     body,
   );
 
@@ -560,7 +532,7 @@ async function handleAnalysisWithCards(
   context: IHandlerContext,
   op: TarotOperation,
 ): Promise<IDataObject> {
-  const { executeFunctions, itemIndex, baseUrl, apiKey } = context;
+  const { executeFunctions, itemIndex, baseUrl } = context;
 
   // Parse card IDs from comma-separated string
   const cardIdsStr = executeFunctions.getNodeParameter(
@@ -585,7 +557,6 @@ async function handleAnalysisWithCards(
     "POST",
     baseUrl,
     TAROT_ENDPOINTS[op],
-    apiKey,
     body,
   );
 
@@ -598,7 +569,7 @@ async function handleAnalysisWithCards(
 async function handleAnalysisBirthCards(
   context: IHandlerContext,
 ): Promise<IDataObject> {
-  const { executeFunctions, itemIndex, baseUrl, apiKey } = context;
+  const { executeFunctions, itemIndex, baseUrl } = context;
 
   // Build birth data
   const birthData = buildBirthData(executeFunctions, itemIndex);
@@ -616,7 +587,6 @@ async function handleAnalysisBirthCards(
     "POST",
     baseUrl,
     TAROT_ENDPOINTS.analysisBirthCards,
-    apiKey,
     body,
   );
 
@@ -629,7 +599,7 @@ async function handleAnalysisBirthCards(
 async function handleAnalysisOptimalTimes(
   context: IHandlerContext,
 ): Promise<IDataObject> {
-  const { executeFunctions, itemIndex, baseUrl, apiKey } = context;
+  const { executeFunctions, itemIndex, baseUrl } = context;
 
   // Get options
   const options = buildTarotOptions(executeFunctions, itemIndex);
@@ -643,7 +613,6 @@ async function handleAnalysisOptimalTimes(
     "POST",
     baseUrl,
     TAROT_ENDPOINTS.analysisOptimalTimes,
-    apiKey,
     body,
   );
 
@@ -656,7 +625,7 @@ async function handleAnalysisOptimalTimes(
 async function handleAnalysisTransitReport(
   context: IHandlerContext,
 ): Promise<IDataObject> {
-  const { executeFunctions, itemIndex, baseUrl, apiKey } = context;
+  const { executeFunctions, itemIndex, baseUrl } = context;
 
   // Build birth data
   const birthData = buildBirthData(executeFunctions, itemIndex);
@@ -674,7 +643,6 @@ async function handleAnalysisTransitReport(
     "POST",
     baseUrl,
     TAROT_ENDPOINTS.analysisTransitReport,
-    apiKey,
     body,
   );
 
@@ -687,7 +655,7 @@ async function handleAnalysisTransitReport(
 async function handleAnalysisNatalReport(
   context: IHandlerContext,
 ): Promise<IDataObject> {
-  const { executeFunctions, itemIndex, baseUrl, apiKey } = context;
+  const { executeFunctions, itemIndex, baseUrl } = context;
 
   // Build birth data
   const birthData = buildBirthData(executeFunctions, itemIndex);
@@ -705,7 +673,6 @@ async function handleAnalysisNatalReport(
     "POST",
     baseUrl,
     TAROT_ENDPOINTS.analysisNatalReport,
-    apiKey,
     body,
   );
 

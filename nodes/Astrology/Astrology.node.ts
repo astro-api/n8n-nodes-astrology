@@ -154,7 +154,6 @@ export class Astrology implements INodeType {
 
     const credentials = await this.getCredentials("astrologyApi");
     const baseUrl = getBaseUrl(credentials as IDataObject);
-    const apiKey = credentials.apiKey as string;
 
     for (let itemIndex = 0; itemIndex < items.length; itemIndex += 1) {
       try {
@@ -172,7 +171,6 @@ export class Astrology implements INodeType {
           executeFunctions: this,
           itemIndex,
           baseUrl,
-          apiKey,
         };
 
         // Route to appropriate handler

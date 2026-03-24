@@ -103,7 +103,7 @@ export async function handleAnalysisResource(
   context: IHandlerContext,
   operation: string,
 ): Promise<IDataObject> {
-  const { executeFunctions, itemIndex, baseUrl, apiKey } = context;
+  const { executeFunctions, itemIndex, baseUrl } = context;
   const op = operation as AnalysisOperation;
 
   const birthData = buildBirthData(executeFunctions, itemIndex);
@@ -186,7 +186,6 @@ export async function handleAnalysisResource(
     "POST",
     baseUrl,
     endpoint,
-    apiKey,
     body,
   );
 

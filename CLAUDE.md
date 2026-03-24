@@ -194,7 +194,7 @@ See `examples/ai-astrologer-assistant.json` for a complete working example.
 | `buildSecondSubjectBirthData(execFns, itemIndex, dateOnly?)` | Extract second subject's birth data | `IBirthData` |
 | `buildTransitTime(execFns, itemIndex)` | Extract transit time from params | `ITransitTime` |
 | `buildReturnLocation(execFns, itemIndex)` | Extract return location (if enabled) | `IDataObject \| undefined` |
-| `makeApiRequest(execFns, method, baseUrl, endpoint, apiKey, body?)` | Make authenticated API call | `Promise<IDataObject>` |
+| `makeApiRequest(execFns, method, baseUrl, endpoint, body?)` | Make authenticated API call | `Promise<IDataObject>` |
 | `applySimplifyIfEnabled(execFns, itemIndex, responseData)` | Conditionally simplify response | `IDataObject` |
 | `createSubjectRequest(birthData, additionalFields?)` | Wrap birth data in subject object | `IDataObject` |
 
