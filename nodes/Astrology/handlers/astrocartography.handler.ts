@@ -198,7 +198,7 @@ export async function handleAstrocartographyResource(
   context: IHandlerContext,
   operation: string,
 ): Promise<IDataObject> {
-  const { executeFunctions, itemIndex, baseUrl, apiKey } = context;
+  const { executeFunctions, itemIndex, baseUrl } = context;
   const op = operation as AstrocartographyOperation;
 
   const endpoint =
@@ -211,7 +211,6 @@ export async function handleAstrocartographyResource(
       "GET",
       baseUrl,
       endpoint,
-      apiKey,
     );
 
     return applySimplifyIfEnabled(executeFunctions, itemIndex, responseData);
@@ -267,7 +266,6 @@ export async function handleAstrocartographyResource(
     "POST",
     baseUrl,
     endpoint,
-    apiKey,
     body,
   );
 

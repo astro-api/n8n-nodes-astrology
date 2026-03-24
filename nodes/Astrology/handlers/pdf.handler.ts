@@ -150,7 +150,7 @@ export async function handlePdfResource(
   context: IHandlerContext,
   operation: string,
 ): Promise<IDataObject> {
-  const { executeFunctions, itemIndex, baseUrl, apiKey } = context;
+  const { executeFunctions, itemIndex, baseUrl } = context;
   const op = operation as PdfOperation;
 
   // Handle horoscope data (GET - returns JSON, not PDF)
@@ -175,7 +175,6 @@ export async function handlePdfResource(
       "GET",
       baseUrl,
       endpoint,
-      apiKey,
     );
 
     return applySimplifyIfEnabled(executeFunctions, itemIndex, responseData);
@@ -262,7 +261,6 @@ export async function handlePdfResource(
       "POST",
       baseUrl,
       PDF_ENDPOINTS[op],
-      apiKey,
       body,
     );
 
@@ -297,7 +295,6 @@ export async function handlePdfResource(
       "POST",
       baseUrl,
       PDF_ENDPOINTS.natalReport,
-      apiKey,
       body,
     );
 
@@ -310,7 +307,6 @@ export async function handlePdfResource(
     "GET",
     baseUrl,
     PDF_ENDPOINTS.horoscopeData,
-    apiKey,
   );
 
   return responseData;

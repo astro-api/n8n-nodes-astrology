@@ -43,7 +43,7 @@ export async function handleEnhancedResource(
   context: IHandlerContext,
   operation: string,
 ): Promise<IDataObject> {
-  const { executeFunctions, itemIndex, baseUrl, apiKey } = context;
+  const { executeFunctions, itemIndex, baseUrl } = context;
   const op = operation as EnhancedOperation;
 
   const endpoint =
@@ -58,7 +58,6 @@ export async function handleEnhancedResource(
       "POST",
       baseUrl,
       endpoint,
-      apiKey,
       body,
     );
 
@@ -119,7 +118,6 @@ export async function handleEnhancedResource(
       "POST",
       baseUrl,
       endpoint,
-      apiKey,
       body,
     );
 
@@ -132,7 +130,6 @@ export async function handleEnhancedResource(
     "POST",
     baseUrl,
     endpoint,
-    apiKey,
     {},
   );
 

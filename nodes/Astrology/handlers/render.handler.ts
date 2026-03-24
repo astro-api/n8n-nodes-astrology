@@ -79,7 +79,7 @@ export async function handleRenderResource(
   context: IHandlerContext,
   operation: string,
 ): Promise<IDataObject> {
-  const { executeFunctions, itemIndex, baseUrl, apiKey } = context;
+  const { executeFunctions, itemIndex, baseUrl } = context;
   const op = operation as RenderOperation;
 
   const birthData = buildBirthData(executeFunctions, itemIndex);
@@ -139,7 +139,6 @@ export async function handleRenderResource(
     "POST",
     baseUrl,
     endpoint,
-    apiKey,
     body,
   );
 

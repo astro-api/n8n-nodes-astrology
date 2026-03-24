@@ -64,7 +64,7 @@ function buildNumerologyBirthData(context: IHandlerContext): IDataObject {
 async function handleCoreNumbers(
   context: IHandlerContext,
 ): Promise<IDataObject> {
-  const { executeFunctions, itemIndex, baseUrl, apiKey } = context;
+  const { executeFunctions, itemIndex, baseUrl } = context;
 
   // Get subject data
   const subjectName = executeFunctions.getNodeParameter(
@@ -102,7 +102,6 @@ async function handleCoreNumbers(
     "POST",
     baseUrl,
     NUMEROLOGY_ENDPOINTS.coreNumbers,
-    apiKey,
     body,
   );
 
@@ -115,7 +114,7 @@ async function handleCoreNumbers(
 async function handleComprehensive(
   context: IHandlerContext,
 ): Promise<IDataObject> {
-  const { executeFunctions, itemIndex, baseUrl, apiKey } = context;
+  const { executeFunctions, itemIndex, baseUrl } = context;
 
   // Get subject data
   const subjectName = executeFunctions.getNodeParameter(
@@ -153,7 +152,6 @@ async function handleComprehensive(
     "POST",
     baseUrl,
     NUMEROLOGY_ENDPOINTS.comprehensive,
-    apiKey,
     body,
   );
 
@@ -166,7 +164,7 @@ async function handleComprehensive(
 async function handleCompatibility(
   context: IHandlerContext,
 ): Promise<IDataObject> {
-  const { executeFunctions, itemIndex, baseUrl, apiKey } = context;
+  const { executeFunctions, itemIndex, baseUrl } = context;
 
   // Get subject 1 data
   const subjectName1 = executeFunctions.getNodeParameter(
@@ -221,7 +219,6 @@ async function handleCompatibility(
     "POST",
     baseUrl,
     NUMEROLOGY_ENDPOINTS.compatibility,
-    apiKey,
     body,
   );
 

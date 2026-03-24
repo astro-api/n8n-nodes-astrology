@@ -70,7 +70,7 @@ export async function handleHumanDesignResource(
 async function handleGlossaryChannels(
   context: IHandlerContext,
 ): Promise<IDataObject> {
-  const { executeFunctions, itemIndex, baseUrl, apiKey } = context;
+  const { executeFunctions, itemIndex, baseUrl } = context;
 
   // Build query parameters
   const language = executeFunctions.getNodeParameter(
@@ -89,13 +89,7 @@ async function handleGlossaryChannels(
     endpoint += `&circuit=${circuit}`;
   }
 
-  return await makeApiRequest(
-    executeFunctions,
-    "GET",
-    baseUrl,
-    endpoint,
-    apiKey,
-  );
+  return await makeApiRequest(executeFunctions, "GET", baseUrl, endpoint);
 }
 
 /**
@@ -104,7 +98,7 @@ async function handleGlossaryChannels(
 async function handleGlossaryGates(
   context: IHandlerContext,
 ): Promise<IDataObject> {
-  const { executeFunctions, itemIndex, baseUrl, apiKey } = context;
+  const { executeFunctions, itemIndex, baseUrl } = context;
 
   // Build query parameters
   const language = executeFunctions.getNodeParameter(
@@ -123,13 +117,7 @@ async function handleGlossaryGates(
     endpoint += `&center=${center}`;
   }
 
-  return await makeApiRequest(
-    executeFunctions,
-    "GET",
-    baseUrl,
-    endpoint,
-    apiKey,
-  );
+  return await makeApiRequest(executeFunctions, "GET", baseUrl, endpoint);
 }
 
 /**
@@ -138,7 +126,7 @@ async function handleGlossaryGates(
 async function handleGlossaryTypes(
   context: IHandlerContext,
 ): Promise<IDataObject> {
-  const { executeFunctions, itemIndex, baseUrl, apiKey } = context;
+  const { executeFunctions, itemIndex, baseUrl } = context;
 
   const language = executeFunctions.getNodeParameter(
     "language",
@@ -148,20 +136,14 @@ async function handleGlossaryTypes(
 
   const endpoint = `${HD_ENDPOINTS.glossaryTypes}?language=${language}`;
 
-  return await makeApiRequest(
-    executeFunctions,
-    "GET",
-    baseUrl,
-    endpoint,
-    apiKey,
-  );
+  return await makeApiRequest(executeFunctions, "GET", baseUrl, endpoint);
 }
 
 /**
  * Handles bodygraph calculation (POST)
  */
 async function handleBodygraph(context: IHandlerContext): Promise<IDataObject> {
-  const { executeFunctions, itemIndex, baseUrl, apiKey } = context;
+  const { executeFunctions, itemIndex, baseUrl } = context;
 
   // Build birth data
   const birthData = buildBirthData(executeFunctions, itemIndex);
@@ -220,7 +202,6 @@ async function handleBodygraph(context: IHandlerContext): Promise<IDataObject> {
     "POST",
     baseUrl,
     HD_ENDPOINTS.bodygraph,
-    apiKey,
     body,
   );
 
@@ -233,7 +214,7 @@ async function handleBodygraph(context: IHandlerContext): Promise<IDataObject> {
 async function handleCompatibility(
   context: IHandlerContext,
 ): Promise<IDataObject> {
-  const { executeFunctions, itemIndex, baseUrl, apiKey } = context;
+  const { executeFunctions, itemIndex, baseUrl } = context;
 
   // Build subject 1
   const birthData1 = buildBirthData(executeFunctions, itemIndex);
@@ -294,7 +275,6 @@ async function handleCompatibility(
     "POST",
     baseUrl,
     HD_ENDPOINTS.compatibility,
-    apiKey,
     body,
   );
 
@@ -307,7 +287,7 @@ async function handleCompatibility(
 async function handleDesignDate(
   context: IHandlerContext,
 ): Promise<IDataObject> {
-  const { executeFunctions, itemIndex, baseUrl, apiKey } = context;
+  const { executeFunctions, itemIndex, baseUrl } = context;
 
   // Build birth data
   const birthData = buildBirthData(executeFunctions, itemIndex);
@@ -330,7 +310,6 @@ async function handleDesignDate(
     "POST",
     baseUrl,
     HD_ENDPOINTS.designDate,
-    apiKey,
     body,
   );
 
@@ -341,7 +320,7 @@ async function handleDesignDate(
  * Handles transits calculation (POST with transit datetime)
  */
 async function handleTransits(context: IHandlerContext): Promise<IDataObject> {
-  const { executeFunctions, itemIndex, baseUrl, apiKey } = context;
+  const { executeFunctions, itemIndex, baseUrl } = context;
 
   // Build birth data
   const birthData = buildBirthData(executeFunctions, itemIndex);
@@ -392,7 +371,6 @@ async function handleTransits(context: IHandlerContext): Promise<IDataObject> {
     "POST",
     baseUrl,
     HD_ENDPOINTS.transits,
-    apiKey,
     body,
   );
 
@@ -403,7 +381,7 @@ async function handleTransits(context: IHandlerContext): Promise<IDataObject> {
  * Handles type only calculation (POST - quick type determination)
  */
 async function handleTypeOnly(context: IHandlerContext): Promise<IDataObject> {
-  const { executeFunctions, itemIndex, baseUrl, apiKey } = context;
+  const { executeFunctions, itemIndex, baseUrl } = context;
 
   // Build birth data
   const birthData = buildBirthData(executeFunctions, itemIndex);
@@ -426,7 +404,6 @@ async function handleTypeOnly(context: IHandlerContext): Promise<IDataObject> {
     "POST",
     baseUrl,
     HD_ENDPOINTS.typeOnly,
-    apiKey,
     body,
   );
 

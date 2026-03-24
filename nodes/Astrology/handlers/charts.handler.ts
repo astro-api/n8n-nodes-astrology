@@ -190,7 +190,7 @@ export async function handleChartsResource(
 async function handleNatalChart(
   context: IHandlerContext,
 ): Promise<IDataObject> {
-  const { executeFunctions, itemIndex, baseUrl, apiKey } = context;
+  const { executeFunctions, itemIndex, baseUrl } = context;
 
   // Build birth data using shared helper
   const birthData = buildBirthData(executeFunctions, itemIndex);
@@ -323,7 +323,6 @@ async function handleNatalChart(
     "POST",
     baseUrl,
     "/api/v3/charts/natal",
-    apiKey,
     body,
   );
 
@@ -385,7 +384,7 @@ function getChartOptions(
 async function handleSynastryChart(
   context: IHandlerContext,
 ): Promise<IDataObject> {
-  const { executeFunctions, itemIndex, baseUrl, apiKey } = context;
+  const { executeFunctions, itemIndex, baseUrl } = context;
 
   // Build subject 1
   const birthData1 = buildBirthData(executeFunctions, itemIndex);
@@ -424,7 +423,6 @@ async function handleSynastryChart(
     "POST",
     baseUrl,
     CHARTS_ENDPOINTS.synastry,
-    apiKey,
     body,
   );
 
@@ -437,7 +435,7 @@ async function handleSynastryChart(
 async function handleTransitChart(
   context: IHandlerContext,
 ): Promise<IDataObject> {
-  const { executeFunctions, itemIndex, baseUrl, apiKey } = context;
+  const { executeFunctions, itemIndex, baseUrl } = context;
 
   // Build natal subject
   const birthData = buildBirthData(executeFunctions, itemIndex);
@@ -470,7 +468,6 @@ async function handleTransitChart(
     "POST",
     baseUrl,
     CHARTS_ENDPOINTS.transit,
-    apiKey,
     body,
   );
 
@@ -483,7 +480,7 @@ async function handleTransitChart(
 async function handleCompositeChart(
   context: IHandlerContext,
 ): Promise<IDataObject> {
-  const { executeFunctions, itemIndex, baseUrl, apiKey } = context;
+  const { executeFunctions, itemIndex, baseUrl } = context;
 
   // Build subject 1
   const birthData1 = buildBirthData(executeFunctions, itemIndex);
@@ -522,7 +519,6 @@ async function handleCompositeChart(
     "POST",
     baseUrl,
     CHARTS_ENDPOINTS.composite,
-    apiKey,
     body,
   );
 
@@ -535,7 +531,7 @@ async function handleCompositeChart(
 async function handleSolarReturnChart(
   context: IHandlerContext,
 ): Promise<IDataObject> {
-  const { executeFunctions, itemIndex, baseUrl, apiKey } = context;
+  const { executeFunctions, itemIndex, baseUrl } = context;
 
   // Build natal subject
   const birthData = buildBirthData(executeFunctions, itemIndex);
@@ -575,7 +571,6 @@ async function handleSolarReturnChart(
     "POST",
     baseUrl,
     CHARTS_ENDPOINTS.solarReturn,
-    apiKey,
     body,
   );
 
@@ -588,7 +583,7 @@ async function handleSolarReturnChart(
 async function handleLunarReturnChart(
   context: IHandlerContext,
 ): Promise<IDataObject> {
-  const { executeFunctions, itemIndex, baseUrl, apiKey } = context;
+  const { executeFunctions, itemIndex, baseUrl } = context;
 
   // Build natal subject
   const birthData = buildBirthData(executeFunctions, itemIndex);
@@ -626,7 +621,6 @@ async function handleLunarReturnChart(
     "POST",
     baseUrl,
     CHARTS_ENDPOINTS.lunarReturn,
-    apiKey,
     body,
   );
 
@@ -639,7 +633,7 @@ async function handleLunarReturnChart(
 async function handleProgressionsChart(
   context: IHandlerContext,
 ): Promise<IDataObject> {
-  const { executeFunctions, itemIndex, baseUrl, apiKey } = context;
+  const { executeFunctions, itemIndex, baseUrl } = context;
 
   // Build natal subject
   const birthData = buildBirthData(executeFunctions, itemIndex);
@@ -673,7 +667,6 @@ async function handleProgressionsChart(
     "POST",
     baseUrl,
     CHARTS_ENDPOINTS.progressions,
-    apiKey,
     body,
   );
 
@@ -686,7 +679,7 @@ async function handleProgressionsChart(
 async function handleNatalTransits(
   context: IHandlerContext,
 ): Promise<IDataObject> {
-  const { executeFunctions, itemIndex, baseUrl, apiKey } = context;
+  const { executeFunctions, itemIndex, baseUrl } = context;
 
   // Build natal subject
   const birthData = buildBirthData(executeFunctions, itemIndex);
@@ -721,7 +714,6 @@ async function handleNatalTransits(
     "POST",
     baseUrl,
     CHARTS_ENDPOINTS.natalTransits,
-    apiKey,
     body,
   );
 
@@ -734,7 +726,7 @@ async function handleNatalTransits(
 async function handleDirectionsChart(
   context: IHandlerContext,
 ): Promise<IDataObject> {
-  const { executeFunctions, itemIndex, baseUrl, apiKey } = context;
+  const { executeFunctions, itemIndex, baseUrl } = context;
 
   // Build natal subject
   const birthData = buildBirthData(executeFunctions, itemIndex);
@@ -768,7 +760,6 @@ async function handleDirectionsChart(
     "POST",
     baseUrl,
     CHARTS_ENDPOINTS.directions,
-    apiKey,
     body,
   );
 
@@ -781,7 +772,7 @@ async function handleDirectionsChart(
 async function handleSolarReturnTransits(
   context: IHandlerContext,
 ): Promise<IDataObject> {
-  const { executeFunctions, itemIndex, baseUrl, apiKey } = context;
+  const { executeFunctions, itemIndex, baseUrl } = context;
 
   // Build natal subject
   const birthData = buildBirthData(executeFunctions, itemIndex);
@@ -836,7 +827,6 @@ async function handleSolarReturnTransits(
     "POST",
     baseUrl,
     CHARTS_ENDPOINTS.solarReturnTransits,
-    apiKey,
     body,
   );
 
@@ -849,7 +839,7 @@ async function handleSolarReturnTransits(
 async function handleLunarReturnTransits(
   context: IHandlerContext,
 ): Promise<IDataObject> {
-  const { executeFunctions, itemIndex, baseUrl, apiKey } = context;
+  const { executeFunctions, itemIndex, baseUrl } = context;
 
   // Build natal subject
   const birthData = buildBirthData(executeFunctions, itemIndex);
@@ -902,7 +892,6 @@ async function handleLunarReturnTransits(
     "POST",
     baseUrl,
     CHARTS_ENDPOINTS.lunarReturnTransits,
-    apiKey,
     body,
   );
 

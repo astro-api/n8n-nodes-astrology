@@ -46,7 +46,7 @@ export async function handleFixedStarsResource(
   context: IHandlerContext,
   operation: string,
 ): Promise<IDataObject> {
-  const { executeFunctions, itemIndex, baseUrl, apiKey } = context;
+  const { executeFunctions, itemIndex, baseUrl } = context;
   const op = operation as FixedStarsOperation;
 
   const endpoint = FIXED_STARS_ENDPOINTS[op] || FIXED_STARS_ENDPOINTS.report;
@@ -58,7 +58,6 @@ export async function handleFixedStarsResource(
       "GET",
       baseUrl,
       endpoint,
-      apiKey,
     );
 
     return applySimplifyIfEnabled(executeFunctions, itemIndex, responseData);
@@ -130,7 +129,6 @@ export async function handleFixedStarsResource(
       "POST",
       baseUrl,
       endpoint,
-      apiKey,
       body,
     );
 
@@ -143,7 +141,6 @@ export async function handleFixedStarsResource(
     "GET",
     baseUrl,
     endpoint,
-    apiKey,
   );
 
   return applySimplifyIfEnabled(executeFunctions, itemIndex, responseData);

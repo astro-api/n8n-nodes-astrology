@@ -24,7 +24,7 @@ export async function handleZiweiResource(
   context: IHandlerContext,
   operation: string,
 ): Promise<IDataObject> {
-  const { executeFunctions, itemIndex, baseUrl, apiKey } = context;
+  const { executeFunctions, itemIndex, baseUrl } = context;
   const op = operation as ZiweiOperation;
 
   const endpoint = ZIWEI_ENDPOINTS[op] || ZIWEI_ENDPOINTS.chart;
@@ -67,7 +67,6 @@ export async function handleZiweiResource(
     "POST",
     baseUrl,
     endpoint,
-    apiKey,
     body,
   );
 

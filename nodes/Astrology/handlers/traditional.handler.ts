@@ -68,7 +68,7 @@ export async function handleTraditionalResource(
   context: IHandlerContext,
   operation: string,
 ): Promise<IDataObject> {
-  const { executeFunctions, itemIndex, baseUrl, apiKey } = context;
+  const { executeFunctions, itemIndex, baseUrl } = context;
   const op = operation as TraditionalOperation;
 
   const endpoint = TRADITIONAL_ENDPOINTS[op] || TRADITIONAL_ENDPOINTS.dignities;
@@ -80,7 +80,6 @@ export async function handleTraditionalResource(
       "GET",
       baseUrl,
       endpoint,
-      apiKey,
     );
 
     return applySimplifyIfEnabled(executeFunctions, itemIndex, responseData);
@@ -151,7 +150,6 @@ export async function handleTraditionalResource(
       "POST",
       baseUrl,
       endpoint,
-      apiKey,
       body,
     );
 
@@ -164,7 +162,6 @@ export async function handleTraditionalResource(
     "POST",
     baseUrl,
     endpoint,
-    apiKey,
     {},
   );
 

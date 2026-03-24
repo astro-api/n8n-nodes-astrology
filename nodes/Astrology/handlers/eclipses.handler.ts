@@ -26,7 +26,7 @@ export async function handleEclipsesResource(
   context: IHandlerContext,
   operation: string,
 ): Promise<IDataObject> {
-  const { executeFunctions, itemIndex, baseUrl, apiKey } = context;
+  const { executeFunctions, itemIndex, baseUrl } = context;
   const op = operation as EclipsesOperation;
 
   const endpoint = ECLIPSES_ENDPOINTS[op] || ECLIPSES_ENDPOINTS.upcoming;
@@ -46,7 +46,6 @@ export async function handleEclipsesResource(
       "GET",
       baseUrl,
       finalEndpoint,
-      apiKey,
     );
 
     return applySimplifyIfEnabled(executeFunctions, itemIndex, responseData);
@@ -110,7 +109,6 @@ export async function handleEclipsesResource(
       "POST",
       baseUrl,
       endpoint,
-      apiKey,
       body,
     );
 
@@ -189,7 +187,6 @@ export async function handleEclipsesResource(
       "POST",
       baseUrl,
       endpoint,
-      apiKey,
       body,
     );
 
@@ -202,7 +199,6 @@ export async function handleEclipsesResource(
     "GET",
     baseUrl,
     endpoint,
-    apiKey,
   );
 
   return applySimplifyIfEnabled(executeFunctions, itemIndex, responseData);

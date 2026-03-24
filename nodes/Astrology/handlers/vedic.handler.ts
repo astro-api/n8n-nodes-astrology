@@ -72,7 +72,7 @@ export async function handleVedicResource(
   context: IHandlerContext,
   operation: string,
 ): Promise<IDataObject> {
-  const { executeFunctions, itemIndex, baseUrl, apiKey } = context;
+  const { executeFunctions, itemIndex, baseUrl } = context;
   const op = operation as VedicOperation;
 
   const vedicOptions = buildVedicOptions(context);
@@ -96,7 +96,6 @@ export async function handleVedicResource(
         "POST",
         baseUrl,
         endpoint,
-        apiKey,
         body,
       );
       break;
@@ -124,7 +123,6 @@ export async function handleVedicResource(
         "POST",
         baseUrl,
         endpoint,
-        apiKey,
         body,
       );
       break;
@@ -150,7 +148,6 @@ export async function handleVedicResource(
         "POST",
         baseUrl,
         endpoint,
-        apiKey,
         body,
       );
       break;
@@ -175,7 +172,6 @@ export async function handleVedicResource(
         "POST",
         baseUrl,
         `${endpoint}/${format}`,
-        apiKey,
         body,
       );
       break;
@@ -198,7 +194,6 @@ export async function handleVedicResource(
         "POST",
         baseUrl,
         endpoint,
-        apiKey,
         body,
       );
       break;
@@ -221,7 +216,6 @@ export async function handleVedicResource(
         "POST",
         baseUrl,
         endpoint,
-        apiKey,
         body,
       );
       break;
@@ -246,7 +240,6 @@ export async function handleVedicResource(
         "POST",
         baseUrl,
         endpoint,
-        apiKey,
         body,
       );
       break;
@@ -268,7 +261,6 @@ export async function handleVedicResource(
         "POST",
         baseUrl,
         endpoint,
-        apiKey,
         body,
       );
       break;
@@ -293,7 +285,6 @@ export async function handleVedicResource(
         "POST",
         baseUrl,
         endpoint,
-        apiKey,
         body,
       );
       break;
@@ -311,7 +302,6 @@ export async function handleVedicResource(
         "POST",
         baseUrl,
         endpoint,
-        apiKey,
         body,
       );
     }
